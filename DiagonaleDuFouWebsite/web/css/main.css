@@ -1,0 +1,31 @@
+/* 
+    Created on : 24 avr. 2017, 16:46:46
+    Author     : Gauthier_LANTOINE
+*/
+
+body
+{
+    background-color: #bdc3c7;
+}
+
+@media (min-width: 1800px)
+{
+    .container 
+    {
+        width: 1600px;
+    }
+}
+
+@media (max-width: 992px)
+{
+    .banner
+    {
+        display: none;
+    }
+   
+}
+
+
+
+
+
