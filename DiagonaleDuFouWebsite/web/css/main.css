@@ -5,15 +5,17 @@
 
 body
 {
-    background-color: #bdc3c7;
+    background-color: #81CFE0;
 }
 
-@media (min-width: 1800px)
+.well
 {
-    .container 
-    {
-        width: 1600px;
-    }
+    background-color: white;
+}
+
+.menu
+{
+    max-width:4096px;
 }
 
 @media (max-width: 992px)
@@ -25,7 +27,82 @@ body
    
 }
 
+.modal-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+    }
+    
+
+    
+   
+
+    /*TEST*/
+    
+article
+{
+    padding-bottom: 20px;
+}
+.article-caption
+{
+    position: absolute;
+    bottom: 16px;
+    max-width: 90%;
+    text-align: center;
+    background-color: rgba(200,200,200,0.5);
+
+}
+
+.article-img
+{
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%; 
+    height: 300px;
+    object-fit: cover;
+}
+.zoom-effect-container
+{
+    padding:0;
+    overflow: hidden;
+}
 
 
 
+.article-img:hover
+{
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+    -webkit-transition: 0.4s ease;
+    transition: 0.4s ease;
+}
+
+
+@media screen and (max-width: 768px) { 
+    .article-title
+    {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 500px) { 
+    .article-title
+    {
+        font-size: 20px;
+    }
+}
+
+.article-caption a
+{
+    color: white;
+    margin: 5px;
+}
+
+article p
+{
+    background-color: white;
+    padding: 19px;
+    /*border-radius:0px 0px 10px 10px;*/
+}
 

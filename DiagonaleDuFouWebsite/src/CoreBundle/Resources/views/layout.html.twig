@@ -4,30 +4,137 @@
 {% block title %}{{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <header class="row banner">
-            <div class="col-lg-12">
-                <img src="http://placehold.it/1600x150" class="img-responsive center-block">  
-            </div>         
-        </header>
-        <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="row">
+            <header class="banner">   
+                    <img src="http://placehold.it/4096x300" class="img-responsive center-block">
+            </header>
             
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Diagonale du fou</a>
-              </div>
-              <div id="navbar" class="navbar-collapse collapse">
+        </div>
+        <div class="row">
+            <nav class="navbar navbar-inverse menu center-block">
+
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Diagonale du fou</a>
+                  </div>
+                  <div id="navbar" class="navbar-collapse collapse">
+                      <ul class="nav navbar-nav">
+                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vie du club <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Compétition</a></li>
+                              <li><a href="#">Loisir</a></li>
+                              <li><a href="#">Info pratique</a></li>
+                              <li><a href="#">Info légales</a></li>
+                            </ul>
+                          </li>
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actualité échiquéenne <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Compétition Internationnale</a></li>
+                              <li><a href="#">Les échecs dans le monde</a></li>
+                            </ul>
+                          </li>
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Apprentissage <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Règles du jeu</a></li>
+                              <li><a href="#">Exercices</a></li>
+                              
+                            </ul>
+                          </li> 
+                          <li><a href="#">Jeu en différé</a></li>
+                          <li><a href="#">Administration</a></li>
+                      </ul>
+                      <ul class="nav navbar-nav navbar-right">
+                        <!-- Lien ouvrant la fenêtre de login -->
+                        <li class="navbar-form"><button data-toggle="modal" data-target="#myModal" class="btn btn-info">Connexion</button></li>
+                        <!-- Fenêtre de login -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                              <div class="modal-content">
+                                <div class="modal-body">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <form class="form-signin">
+                                    <h2 class="form-signin-heading">Authentification</h2>
+                                    <label for="inputLogin" class="sr-only">Login</label>
+                                    <input type="text" id="inputLogin" class="form-control" placeholder="Login" required="true" autofocus="">
+                                    <label for="inputPassword" class="sr-only">Mot de passe</label>
+                                    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required="true">
+                                    <div class="checkbox">
+                                      <label>
+                                        <input type="checkbox" value="remember-me"> Se souvenir de moi
+                                      </label>
+                                    </div>
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                         </div>
+                      </ul>
+                  </div>
+
+            </nav>
+        </div>
+        <div  class="row">
+            <aside class="col-lg-3">
+                <section class="well">
+                    <h3 class="text-center">Agenda</h3>
+                    <hr/>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>info</td>
+                                <td>club fermé ce lundi 26 pingouin</td>
+                            </tr>
+                            <tr>
+                                <td>salut</td>
+                                <td>salut</td>
+                            </tr>
+                            <tr>
+                                <td>salut</td>
+                                <td>salut</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
                 
-              </div>
-            
-        </nav>
-    
-        {% block core_body %}
-        {% endblock %}
+                <section class="well">
+                    
+                       <iframe class="center-block" width="256" scrolling="no" height="293" frameborder="0" src="http://www.shredderchess.com/online/playshredder/
+gdailytactics.php?mylang=en&mysize=26"></iframe>
+                    
+                </section>
+                
+                <section class="well">
+                    
+                       <a href="http://www.2700chess.com" target="_blank"><img class="img img-responsive center-block" border="0" src="http://www.2700chess.com/files/topten.png" alt= "2700chess.com for more details and full list" title="2700chess.com for more details and full list"/></a>
+                    
+                </section>
+                
+            </aside>
+            <section class="col-lg-7">
+                {% block core_body %}                  
+                {% endblock %}
+            </section>
+            <aside class="col-lg-2">
+                <section class="well">
+                    <h3 class="text-center">Liens</h3>
+                    <hr/>
+                    <a href="http://www.villedeteteghem.fr/"><img class="img img-responsive" alt="" src="{{asset('img/mairie_de_teteghem_cdk_village.jpg')}}"></a>
+                    <a href="http://www.echecs.asso.fr/"><img class="img img-responsive" alt="" src="{{asset('img/Logo_FFE_texte_horizontal.jpg')}}"></a>
+                    <a href="http://ehdf.fr/"><img class="img img-responsive" alt="" src="{{asset('img/ligue_hdf.png')}}"></a>
+                        
+                </section>
+                
+            </aside>
+        </div>
     </div>
 {% endblock %}
