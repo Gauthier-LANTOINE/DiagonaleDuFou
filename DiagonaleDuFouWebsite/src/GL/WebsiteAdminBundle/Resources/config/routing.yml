@@ -1,0 +1,26 @@
+gl_website_admin_homepage:
+    path:     /admin
+    defaults: { _controller: GLWebsiteAdminBundle:Admin:index }
+    
+gl_website_article_list:
+    path:     /admin/articles/list/{action}
+    defaults:  
+        _controller: GLWebsiteAdminBundle:Article:list
+    requirements:
+        action: '(edit|validate|remove)'
+
+gl_website_user_list:
+    path:     /admin/user/list/{action}
+    defaults:  
+        _controller: GLWebsiteAdminBundle:User:list
+    requirements:
+        action: '(edit|validate|remove)'
+        
+gl_website_calendar_list:
+    path:     /admin/calendar/list/{action}
+    defaults:  
+        _controller: GLWebsiteAdminBundle:Calendar:list
+    requirements:
+        action: '(edit|remove)'
+        
+

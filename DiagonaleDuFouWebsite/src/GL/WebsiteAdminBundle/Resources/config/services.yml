@@ -1,0 +1,4 @@
+services:
+#    gl_website_admin.example:
+#        class: GL\WebsiteAdminBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

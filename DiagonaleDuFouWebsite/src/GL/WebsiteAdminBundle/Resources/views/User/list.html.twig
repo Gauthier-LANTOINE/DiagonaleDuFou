@@ -1,0 +1,45 @@
+{# Page listant les utilisateurs et proposant l'action adéquate à effectuer en fonction du paramêtre de requête #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Utilisateurs{% endblock %}
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+        
+        {% if action == 'edit' %}
+            <h2 class="text-center">Modification utilisateurs</h2>
+        {% elseif action == 'remove' %}
+            <h2 class="text-center">Suppression utilisateurs</h2>
+        {% elseif action == 'validate' %}
+            <h2 class="text-center">Utilisateurs en attente de validation</h2>
+        {% else %}
+        {% endif %}
+        <table class="table table-bordered table-striped text-center table-admin ">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Nom</th>
+                    <th class="text-center">Prénom</th>
+                    <th class="text-center">Date d'inscription</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td >1</td>
+                    <td>Dupond</td>
+                    <td>Paul</td>
+                    <td>18/12/2017</td>
+                    {% if action == 'edit' %}
+                        <td><button class="btn btn-warning">Modifier</button></td>
+                    {% elseif action == 'remove' %}
+                        <td><button class="btn btn-danger">Supprimer</button></td>
+                    {% elseif action == 'validate' %}
+                        <td><button class="btn btn-success">Valider</button></td> 
+                    {% else %}
+                    {% endif %}  
+                </tr>
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

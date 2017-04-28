@@ -1,0 +1,139 @@
+{# Layout du WebsiteAdminBundle #}
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Administration{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <header class="banner">   
+                <img src="http://placehold.it/4096x300" class="img-responsive center-block">
+            </header>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 col-md-3">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-chevron-down pull-right">
+                                    </span ><span class="glyphicon glyphicon-paperclip"></span> Espace Rédaction</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-pencil "></span><a href="#"> Rédiger nouvel article</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-edit "></span><a href="{{ path('gl_website_article_list', { 'action': 'edit' }) }}"> Modifier article</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-ok"></span><a href="{{ path('gl_website_article_list', { 'action': 'validate' }) }}"> Valider article</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-trash "></span><a href="{{ path('gl_website_article_list', { 'action': 'remove' }) }}"> Supprimer article</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
+                                    </span> Gestion des utilisateurs</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-plus"><a href="#"></span> Ajouter utilisateur</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-ok"></span><a href="{{ path('gl_website_user_list', { 'action': 'validate' }) }}"> Valider utilisateur</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-edit"></span><a href="{{ path('gl_website_user_list', { 'action': 'edit' }) }}"> Modifier utilisateur</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-lock"></span><a href="#"> Gestion des droits</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-trash"></span><a href="{{ path('gl_website_user_list', { 'action': 'remove' }) }}">
+                                                Supprimer utilisateur</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-list-alt">
+                                    </span> Agenda</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-plus"></span><a href="#"> Ajouter événement</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-edit"></span><a href="{{ path('gl_website_calendar_list', { 'action': 'edit' }) }}"> Modifier événement</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-trash"></span><a href="{{ path('gl_website_calendar_list', { 'action': 'remove' }) }}"> Supprimer événement</a>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a href="{{ path('core_homepage') }}"><span class="glyphicon glyphicon-chevron-left">
+                                    </span> Retour au site</a>
+                            </h4>
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-9">
+                {% block glwebsiteadmin_body %}
+
+                {% endblock %}
+            </div>
+        </div>
+        
+    {% endblock %}
