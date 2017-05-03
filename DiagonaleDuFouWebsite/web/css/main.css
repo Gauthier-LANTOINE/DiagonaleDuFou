@@ -22,6 +22,7 @@ footer
 .navbar
 {
     border-radius: 0;
+    font-size: 18px;
 }
 .navbar-inverse .navbar-nav>li>a
 {
@@ -49,9 +50,23 @@ footer
     max-width:4096px;
 }
 
+.dropdown-menu
+{
+    font-size: 17px;
+}
+
 @media (max-width: 992px)
 {
     .banner
+    {
+        display: none;
+    }
+   
+}
+
+@media (max-width: 500px)
+{
+    .chess-puzzle
     {
         display: none;
     }
@@ -93,6 +108,7 @@ article
     height: 300px;
     object-fit: cover;
 }
+
 .zoom-effect-container
 {
     padding:0;
@@ -130,12 +146,25 @@ article
     margin: 5px;
 }
 
-article p
+.text-article
 {
     background-color: white;
     padding: 19px;
-    /*border-radius:0px 0px 10px 10px;*/
+    padding-bottom: 35px;
+
 }
+.article-info
+{
+    float: right;
+    margin-top: -50px;
+    
+}
+small
+{
+    
+    margin-right: 20px;
+}
+
 
 
 /*ADMIN*/

@@ -27,7 +27,7 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-pencil "></span><a href="#"> Rédiger nouvel article</a>
+                                            <span class="glyphicon glyphicon-pencil "></span><a href="{{ path('gl_website_article_write') }}"> Rédiger nouvel article</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -59,6 +59,11 @@
                         <div id="collapseThree" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <table class="table">
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-list "></span><a href="{{ path('gl_website_user_list', { 'action': 'read' }) }}"> Voir utilisateur</a>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <span class="glyphicon glyphicon-plus"><a href="#"></span> Ajouter utilisateur</a>

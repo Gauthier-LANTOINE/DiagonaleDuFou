@@ -36,6 +36,8 @@
                         <td><button class="btn btn-danger">Supprimer</button></td>
                     {% elseif action == 'validate' %}
                         <td><button class="btn btn-success">Valider</button></td> 
+                    {% elseif action == 'read' %}
+                        <td><button class="btn btn-info">Voir</button></td> 
                     {% else %}
                     {% endif %}  
                 </tr>

@@ -9,12 +9,17 @@ gl_website_article_list:
     requirements:
         action: '(edit|validate|remove)'
 
+gl_website_article_write:
+    path: /admin/articles/write
+    defaults:  
+        _controller: GLWebsiteAdminBundle:Article:write
+
 gl_website_user_list:
     path:     /admin/user/list/{action}
     defaults:  
         _controller: GLWebsiteAdminBundle:User:list
     requirements:
-        action: '(edit|validate|remove)'
+        action: '(edit|validate|remove|read)'
         
 gl_website_calendar_list:
     path:     /admin/calendar/list/{action}
