@@ -14,6 +14,30 @@ gl_website_article_write:
     defaults:  
         _controller: GLWebsiteAdminBundle:Article:write
 
+gl_website_article_edit:
+    
+    path: /admin/articles/edit/{id}
+    defaults:
+        _controller: GLWebsiteAdminBundle:Article:edit
+    requirements:
+        id: \d+
+
+gl_website_article_remove:
+    
+    path: /admin/articles/remove/{id}
+    defaults:
+        _controller: GLWebsiteAdminBundle:Article:remove
+    requirements:
+        id: \d+
+        
+gl_website_article_validate:
+    
+    path: /admin/articles/validate/{id}
+    defaults:
+        _controller: GLWebsiteAdminBundle:Article:validate
+    requirements:
+        id: \d+
+
 gl_website_user_list:
     path:     /admin/user/list/{action}
     defaults:  

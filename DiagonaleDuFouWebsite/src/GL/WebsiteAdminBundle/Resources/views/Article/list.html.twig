@@ -18,7 +18,6 @@
             <thead>
                 <tr>
                     <th class="text-center">Id</th>
-                    <th class="text-center">Date</th>
                     <th class="text-center">Titre</th>
                     <th class="text-center">Catégorie</th>
                     <th class="text-center">Sous catégorie</th>
@@ -26,21 +25,37 @@
                 </tr>
             </thead>
             <tbody>
+                {% for article in listArticles %}
                 <tr>
-                    <td >1</td>
-                    <td>18/12/2017</td>
-                    <td>Un grand maitre au club</td>
-                    <td>Vie du club</td>
-                    <td>Actualité</td>
+                    <td >{{ article.id }}</td>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.subCategory.category.name }}</td>
+                    <td>{{ article.subCategory.name }}</td>
                     {% if action == 'edit' %}
-                        <td><button class="btn btn-warning">Modifier</button></td>
+                        <td>
+                            <a href="{{ path('gl_website_article_edit', {'id': article.id}) }}">
+                                <button class="btn btn-warning">Modifier
+                                </button>
+                            </a>
+                        </td>
                     {% elseif action == 'remove' %}
-                        <td><button class="btn btn-danger">Supprimer</button></td>
+                        <td>
+                            <a href="{{ path('gl_website_article_remove', {'id': article.id}) }}">
+                                <button class="btn btn-danger">Supprimer
+                                </button>
+                            </a>
+                        </td>
                     {% elseif action == 'validate' %}
-                        <td><button class="btn btn-success">Valider</button></td> 
+                        <td>
+                            <a href="{{ path('gl_website_article_validate', {'id': article.id}) }}">
+                                <button class="btn btn-info">Voir
+                                </button>
+                            </a>
+                        </td>
                     {% else %}
                     {% endif %}       
                 </tr>
+                {% endfor %}
 
             </tbody>
         </table>

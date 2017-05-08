@@ -1,0 +1,46 @@
+{# Page servant à visualiser les articles avant validation #}
+{% extends "GLWebsiteAdminBundle:Article:articleLayout.html.twig" %}
+
+{% block title %}{{ parent() }} - Valider{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+        <h2>Valider un article</h2>
+        
+        <h3>Titre</h3>
+        <p>
+          {{ article.title }}
+        </p>
+        <h3>Sous-titre</h3>
+        <p>
+          {{ article.title }}
+        </p>
+        <h3>Catégorie</h3>
+        <p>
+          {{ article.subCategory.name }}
+        </p>
+        <h3>Contenu</h3>
+        <p>
+          {{ article.content|purify('custom') }}
+        </p>
+        
+
+
+        <form action="{{ path('gl_website_article_validate', {'id': article.id}) }}" method="post">
+          <a href="{{ path('gl_website_article_list', {'action': 'validate'}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour
+          </a>
+
+          <input type="submit" value="Valider" class="btn btn-success" />
+
+          {{ form_rest(form) }}
+        </form>
+        
+    </section>
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{ asset('js/summernoteDisabledArticle.js') }}"></script>
+{% endblock %}

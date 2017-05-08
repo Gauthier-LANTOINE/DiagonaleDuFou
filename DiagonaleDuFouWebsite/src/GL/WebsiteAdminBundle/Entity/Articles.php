@@ -10,9 +10,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="articles")
  * @ORM\Entity(repositoryClass="GL\WebsiteAdminBundle\Repository\ArticlesRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
-class Articles
-{
+class Articles {
+
     /**
      * @var int
      *
@@ -54,7 +55,7 @@ class Articles
     /**
      * @var bool
      *
-     * @ORM\Column(name="published", type="boolean")
+     * @ORM\Column(name="published", type="boolean", nullable=true)
      * 
      */
     private $published;
@@ -76,19 +77,23 @@ class Articles
      * @Assert\DateTime()
      */
     private $dateLastModified;
-    
-    public function __construct() {
-        $this->published=FALSE;
-    }
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GL\WebsiteAdminBundle\Entity\SubCategoryArticle")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $subCategory;
+
+    public function __construct() {
+        $this->published=false;
+    }
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -99,8 +104,7 @@ class Articles
      *
      * @return Articles
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
 
         return $this;
@@ -111,8 +115,7 @@ class Articles
      *
      * @return string
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -123,8 +126,7 @@ class Articles
      *
      * @return Articles
      */
-    public function setSubtitle($subtitle)
-    {
+    public function setSubtitle($subtitle) {
         $this->subtitle = $subtitle;
 
         return $this;
@@ -135,8 +137,7 @@ class Articles
      *
      * @return string
      */
-    public function getSubtitle()
-    {
+    public function getSubtitle() {
         return $this->subtitle;
     }
 
@@ -147,8 +148,7 @@ class Articles
      *
      * @return Articles
      */
-    public function setContent($content)
-    {
+    public function setContent($content) {
         $this->content = $content;
 
         return $this;
@@ -159,8 +159,7 @@ class Articles
      *
      * @return string
      */
-    public function getContent()
-    {
+    public function getContent() {
         return $this->content;
     }
 
@@ -171,8 +170,7 @@ class Articles
      *
      * @return Articles
      */
-    public function setPublished($published)
-    {
+    public function setPublished($published) {
         $this->published = $published;
 
         return $this;
@@ -183,8 +181,7 @@ class Articles
      *
      * @return bool
      */
-    public function getPublished()
-    {
+    public function getPublished() {
         return $this->published;
     }
 
@@ -195,8 +192,7 @@ class Articles
      *
      * @return Articles
      */
-    public function setPublicationDate($publicationDate)
-    {
+    public function setPublicationDate($publicationDate) {
         $this->publicationDate = $publicationDate;
 
         return $this;
@@ -207,8 +203,7 @@ class Articles
      *
      * @return \DateTime
      */
-    public function getPublicationDate()
-    {
+    public function getPublicationDate() {
         return $this->publicationDate;
     }
 
@@ -219,8 +214,7 @@ class Articles
      *
      * @return Articles
      */
-    public function setDateLastModified($dateLastModified)
-    {
+    public function setDateLastModified($dateLastModified) {
         $this->dateLastModified = $dateLastModified;
 
         return $this;
@@ -231,9 +225,41 @@ class Articles
      *
      * @return \DateTime
      */
-    public function getDateLastModified()
-    {
+    public function getDateLastModified() {
         return $this->dateLastModified;
     }
-}
 
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDateLastModified() {
+        if ($this->published == TRUE) {
+            $this->setDateLastModified(new \Datetime());
+        }
+    }
+
+
+    /**
+     * Set subCategory
+     *
+     * @param \GL\WebsiteAdminBundle\Entity\SubCategoryArticle $subCategory
+     *
+     * @return Articles
+     */
+    public function setSubCategory(\GL\WebsiteAdminBundle\Entity\SubCategoryArticle $subCategory)
+    {
+        $this->subCategory = $subCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get subCategory
+     *
+     * @return \GL\WebsiteAdminBundle\Entity\SubCategoryArticle
+     */
+    public function getSubCategory()
+    {
+        return $this->subCategory;
+    }
+}

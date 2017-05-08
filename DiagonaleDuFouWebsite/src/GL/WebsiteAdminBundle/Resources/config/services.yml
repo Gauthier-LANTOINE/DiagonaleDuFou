@@ -1,5 +1,12 @@
 services:
     gl_website_admin.form.summernote:
         class: GL\WebsiteAdminBundle\Form\SummernoteType
+        arguments:
+            - "@gl_website_admin.form.transformer.html_purifier"
         tags:
-          - { name: form.type, alias: summernote }
+            - { name: form.type, alias: summernote }
+          
+    gl_website_admin.form.transformer.html_purifier:
+        class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
+        arguments: 
+            - "@exercise_html_purifier.custom"

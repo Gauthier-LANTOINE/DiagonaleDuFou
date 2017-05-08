@@ -17,7 +17,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new CoreBundle\CoreBundle(),
             new GL\WebsiteAdminBundle\GLWebsiteAdminBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle()
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

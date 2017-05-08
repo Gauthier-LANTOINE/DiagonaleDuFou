@@ -1,0 +1,19 @@
+
+        
+        {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+        
+        {{ form_errors(form) }}
+
+        {{ form_row(form.title, { 'label': 'Titre' }) }}
+        
+        {{ form_row(form.subtitle, { 'label': 'Sous-titre' }) }}
+        
+        {{ form_row(form.subCategory, { 'label': 'Catégorie' }) }}
+        
+        {{ form_row(form.content, { 'label': 'Contenu' }) }}
+        
+        {{ form_row(form.save, { 'label': 'Enregistrer' }) }}
+            
+        {{ form_end(form)}}
+        
+

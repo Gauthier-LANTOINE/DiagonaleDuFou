@@ -5,6 +5,7 @@ $(document).ready(function() {
             maxHeight: null,             
             focus: false,
             lang: 'fr-FR',
+            disableDragAndDrop: true,
             toolbar: [
 
             ['style', ['style']],
