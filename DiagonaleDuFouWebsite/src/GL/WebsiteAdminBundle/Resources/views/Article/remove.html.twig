@@ -16,6 +16,10 @@
     <p>
       {{ article.title }}
     </p>
+    <h3>Image</h3>
+    <p>
+        <img src="{{ vich_uploader_asset(article.image, 'imageFile') }}" alt="{{ article.image.imageName }}" class="img-responsive"/>
+    </p>
     <h3>Catégorie</h3>
     <p>
       {{ article.subCategory.name }}

@@ -41,6 +41,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'bootstrap_3_layout.html.twig'
+        - 'VichUploaderBundle/fields.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -78,3 +79,12 @@ exercise_html_purifier:
     custom:
         HTML.SafeIframe: true
         URI.SafeIframeRegexp: '%%^(https?:)?(\/\/www\.youtube(?:-nocookie)?\.com\/embed\/|\/\/player\.vimeo\.com\/|\/\/www\.dailymotion\.com\/embed\/video\/)%%'
+        
+vich_uploader:
+    db_driver: orm
+    
+    mappings:
+        image:
+            uri_prefix:         /DiagonaleDuFouRepository/DiagonaleDuFouWebsite/web/img
+            upload_destination: '%kernel.root_dir%/../web/img'
+            namer: vich_uploader.namer_origname

@@ -55,7 +55,7 @@ class Articles {
     /**
      * @var bool
      *
-     * @ORM\Column(name="published", type="boolean", nullable=true)
+     * @ORM\Column(name="published", type="boolean", nullable=false)
      * 
      */
     private $published;
@@ -84,8 +84,15 @@ class Articles {
      */
     private $subCategory;
 
+    /**
+     * @ORM\OneToOne(targetEntity="GL\WebsiteAdminBundle\Entity\Image", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true)
+     * @Assert\Valid()
+     */
+    private $image;
+
     public function __construct() {
-        $this->published=false;
+        $this->published = false;
     }
 
     /**
@@ -238,7 +245,6 @@ class Articles {
         }
     }
 
-
     /**
      * Set subCategory
      *
@@ -246,8 +252,7 @@ class Articles {
      *
      * @return Articles
      */
-    public function setSubCategory(\GL\WebsiteAdminBundle\Entity\SubCategoryArticle $subCategory)
-    {
+    public function setSubCategory(\GL\WebsiteAdminBundle\Entity\SubCategoryArticle $subCategory) {
         $this->subCategory = $subCategory;
 
         return $this;
@@ -258,8 +263,32 @@ class Articles {
      *
      * @return \GL\WebsiteAdminBundle\Entity\SubCategoryArticle
      */
-    public function getSubCategory()
-    {
+    public function getSubCategory() {
         return $this->subCategory;
+    }
+
+
+    /**
+     * Set image
+     *
+     * @param \GL\WebsiteAdminBundle\Entity\Image $image
+     *
+     * @return Articles
+     */
+    public function setImage(\GL\WebsiteAdminBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \GL\WebsiteAdminBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

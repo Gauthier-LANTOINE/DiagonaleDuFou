@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             new CoreBundle\CoreBundle(),
             new GL\WebsiteAdminBundle\GLWebsiteAdminBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle()
+            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

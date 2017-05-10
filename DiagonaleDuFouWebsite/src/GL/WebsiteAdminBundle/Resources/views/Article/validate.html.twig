@@ -7,37 +7,41 @@
 {% block glwebsiteadmin_body %}
     <section class="well">
         <h2>Valider un article</h2>
-        
+
         <h3>Titre</h3>
         <p>
-          {{ article.title }}
+            {{ article.title }}
         </p>
         <h3>Sous-titre</h3>
         <p>
-          {{ article.title }}
+            {{ article.title }}
         </p>
         <h3>Catégorie</h3>
         <p>
-          {{ article.subCategory.name }}
+            {{ article.subCategory.name }}
+        </p>
+        <h3>Image</h3>
+        <p>
+            <img src="{{ vich_uploader_asset(article.image, 'imageFile') }}" alt="{{ article.image.imageName }}" class="img-responsive"/>
         </p>
         <h3>Contenu</h3>
         <p>
-          {{ article.content|purify('custom') }}
+            {{ article.content|purify('custom') }}
         </p>
-        
+
 
 
         <form action="{{ path('gl_website_article_validate', {'id': article.id}) }}" method="post">
-          <a href="{{ path('gl_website_article_list', {'action': 'validate'}) }}" class="btn btn-default">
-            <i class="glyphicon glyphicon-chevron-left"></i>
-            Retour
-          </a>
+            <a href="{{ path('gl_website_article_list', {'action': 'validate'}) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour
+            </a>
 
-          <input type="submit" value="Valider" class="btn btn-success" />
+            <input type="submit" value="Valider" class="btn btn-success" />
 
-          {{ form_rest(form) }}
+            {{ form_rest(form) }}
         </form>
-        
+
     </section>
 {% endblock %}
 {% block javascripts %}

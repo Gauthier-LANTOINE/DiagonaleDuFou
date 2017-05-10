@@ -24,10 +24,13 @@ class ArticlesType extends AbstractType
                       'class'        => 'GLWebsiteAdminBundle:SubCategoryArticle',
                       'choice_label' => 'name',
                       'multiple'     => false,
-                      'placeholder' => '-- Séléctionner une catégorie',
+                      'placeholder' => '-- Sélectionner une catégorie',
                       'group_by' => function($val, $key, $index) {
                         return $val->getCategory()->getName();
                       }))
+                ->add('image', ImageType::class, array(
+                       'required'=> false
+                ))
                 ->add('content', SummernoteType::class)
                 ->add('save',SubmitType::class);
     }
