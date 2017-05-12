@@ -1,3 +1,10 @@
 core_homepage:
     path:     /
     defaults: { _controller: CoreBundle:Default:index }
+    
+core_article:
+    path: /{category}/{subCategory}/article/{slug}
+    defaults: 
+        _controller: CoreBundle:Default:article
+    requirements:
+        slug: '^[a-z0-9]+(?:-[a-z0-9]+)*$'

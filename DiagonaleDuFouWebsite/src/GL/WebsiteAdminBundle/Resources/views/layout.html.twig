@@ -27,22 +27,22 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-pencil "></span><a href="{{ path('gl_website_article_write') }}"> Rédiger nouvel article</a>
+                                            <span class="glyphicon glyphicon-pencil "></span><a href="{{ path('gl_website_article_write') }}"> Rédiger articles</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-edit "></span><a href="{{ path('gl_website_article_list', { 'action': 'edit' }) }}"> Modifier article</a>
+                                            <span class="glyphicon glyphicon-edit "></span><a href="{{ path('gl_website_article_list', { 'action': 'edit' }) }}"> Modifier articles</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-ok"></span><a href="{{ path('gl_website_article_list', { 'action': 'validate' }) }}"> Valider article</a>
+                                            <span class="glyphicon glyphicon-ok"></span><a href="{{ path('gl_website_article_list', { 'action': 'validate' }) }}"> Valider articles</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-trash "></span><a href="{{ path('gl_website_article_list', { 'action': 'remove' }) }}"> Supprimer article</a>
+                                            <span class="glyphicon glyphicon-trash "></span><a href="{{ path('gl_website_article_list', { 'action': 'remove' }) }}"> Supprimer articles</a>
                                         </td>
                                     </tr>
                                 </table>
@@ -61,22 +61,22 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-list "></span><a href="{{ path('gl_website_user_list', { 'action': 'read' }) }}"> Voir utilisateur</a>
+                                            <span class="glyphicon glyphicon-list "></span><a href="{{ path('gl_website_user_list', { 'action': 'read' }) }}"> Voir utilisateurs</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-plus"><a href="#"></span> Ajouter utilisateur</a>
+                                            <span class="glyphicon glyphicon-plus"><a href="#"></span> Ajouter utilisateurs</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-ok"></span><a href="{{ path('gl_website_user_list', { 'action': 'validate' }) }}"> Valider utilisateur</a>
+                                            <span class="glyphicon glyphicon-ok"></span><a href="{{ path('gl_website_user_list', { 'action': 'validate' }) }}"> Valider utilisateurs</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-edit"></span><a href="{{ path('gl_website_user_list', { 'action': 'edit' }) }}"> Modifier utilisateur</a>
+                                            <span class="glyphicon glyphicon-edit"></span><a href="{{ path('gl_website_user_list', { 'action': 'edit' }) }}"> Modifier utilisateurs</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -87,7 +87,7 @@
                                     <tr>
                                         <td>
                                             <span class="glyphicon glyphicon-trash"></span><a href="{{ path('gl_website_user_list', { 'action': 'remove' }) }}">
-                                                Supprimer utilisateur</a>
+                                                Supprimer utilisateurs</a>
                                         </td>
                                     </tr>
                                 </table>
@@ -106,17 +106,17 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-plus"></span><a href="#"> Ajouter événement</a>
+                                            <span class="glyphicon glyphicon-plus"></span><a href="#"> Ajouter événements</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-edit"></span><a href="{{ path('gl_website_calendar_list', { 'action': 'edit' }) }}"> Modifier événement</a>
+                                            <span class="glyphicon glyphicon-edit"></span><a href="{{ path('gl_website_calendar_list', { 'action': 'edit' }) }}"> Modifier événements</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-trash"></span><a href="{{ path('gl_website_calendar_list', { 'action': 'remove' }) }}"> Supprimer événement</a>
+                                            <span class="glyphicon glyphicon-trash"></span><a href="{{ path('gl_website_calendar_list', { 'action': 'remove' }) }}"> Supprimer événements</a>
                                         </td>
                                     </tr>
 
@@ -127,6 +127,66 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-chevron-down pull-right">
+                                    </span ><span class="glyphicon glyphicon-wrench"></span> Administration site</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-plus "></span><a href="{{ path('gl_website_category_article_add') }}"> Ajouter catégories</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-edit "></span><a href="{{ path('gl_website_category_article_list', { 'action': 'edit' }) }}"> Modifier catégories</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-trash "></span><a href="{{ path('gl_website_category_article_list', { 'action': 'remove' }) }}"> Supprimer catégories</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-plus "></span><a href=""> Ajouter sous catégories</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-edit "></span><a href=""> Modifier sous catégories</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-trash "></span><a href=""> Supprimer sous catégories</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-plus "></span><a href=""> Ajouter liens</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-edit "></span><a href=""> Modifier liens</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-trash "></span><a href=""> Supprimer liens</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
                                 <a href="{{ path('core_homepage') }}"><span class="glyphicon glyphicon-chevron-left">
                                     </span> Retour au site</a>
                             </h4>
@@ -134,11 +194,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-sm-9 col-md-9">
                 {% block glwebsiteadmin_body %}
 
                 {% endblock %}
             </div>
         </div>
+    </div>
 
-    {% endblock %}
+{% endblock %}

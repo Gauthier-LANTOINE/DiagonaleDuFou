@@ -4,6 +4,7 @@ namespace GL\WebsiteAdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Articles
@@ -90,6 +91,12 @@ class Articles {
      * @Assert\Valid()
      */
     private $image;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
 
     public function __construct() {
         $this->published = false;
@@ -267,7 +274,6 @@ class Articles {
         return $this->subCategory;
     }
 
-
     /**
      * Set image
      *
@@ -275,8 +281,7 @@ class Articles {
      *
      * @return Articles
      */
-    public function setImage(\GL\WebsiteAdminBundle\Entity\Image $image = null)
-    {
+    public function setImage(\GL\WebsiteAdminBundle\Entity\Image $image = null) {
         $this->image = $image;
 
         return $this;
@@ -287,8 +292,32 @@ class Articles {
      *
      * @return \GL\WebsiteAdminBundle\Entity\Image
      */
-    public function getImage()
-    {
+    public function getImage() {
         return $this->image;
+    }
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Articles
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

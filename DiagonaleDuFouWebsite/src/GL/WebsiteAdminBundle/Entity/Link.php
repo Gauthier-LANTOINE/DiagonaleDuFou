@@ -5,12 +5,12 @@ namespace GL\WebsiteAdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CategoryArticle
+ * Link
  *
- * @ORM\Table(name="category_article")
- * @ORM\Entity(repositoryClass="GL\WebsiteAdminBundle\Repository\CategoryArticleRepository")
+ * @ORM\Table(name="link")
+ * @ORM\Entity(repositoryClass="GL\WebsiteAdminBundle\Repository\LinkRepository")
  */
-class CategoryArticle
+class Link
 {
     /**
      * @var int
@@ -24,13 +24,20 @@ class CategoryArticle
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, unique=true)
+     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
-    
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=255)
+     */
+    private $url;
+
     /**
      * @ORM\OneToOne(targetEntity="GL\WebsiteAdminBundle\Entity\Image", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=false)
      */
     private $image;
 
@@ -50,7 +57,7 @@ class CategoryArticle
      *
      * @param string $name
      *
-     * @return CategoryArticle
+     * @return Link
      */
     public function setName($name)
     {
@@ -70,11 +77,37 @@ class CategoryArticle
     }
 
     /**
+     * Set url
+     *
+     * @param string $url
+     *
+     * @return Link
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+   
+
+    /**
      * Set image
      *
      * @param \GL\WebsiteAdminBundle\Entity\Image $image
      *
-     * @return CategoryArticle
+     * @return Link
      */
     public function setImage(\GL\WebsiteAdminBundle\Entity\Image $image)
     {

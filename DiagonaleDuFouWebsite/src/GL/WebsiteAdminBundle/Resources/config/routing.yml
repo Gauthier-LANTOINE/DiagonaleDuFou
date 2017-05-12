@@ -52,4 +52,30 @@ gl_website_calendar_list:
     requirements:
         action: '(edit|remove)'
         
-
+gl_website_category_article_add:
+    path: /admin/category-article/add
+    defaults:  
+        _controller: GLWebsiteAdminBundle:CategoryArticle:add
+        
+gl_website_category_article_edit:
+    
+    path: /admin/category-article/edit/{id}
+    defaults:
+        _controller: GLWebsiteAdminBundle:CategoryArticle:edit
+    requirements:
+        id: \d+
+        
+gl_website_category_article_list:
+    path:     /admin/category-article/list/{action}
+    defaults:  
+        _controller: GLWebsiteAdminBundle:CategoryArticle:list
+    requirements:
+        action: '(edit|remove)'
+        
+gl_website_category_article_remove:
+    
+    path: /admin/category-article/remove/{id}
+    defaults:
+        _controller: GLWebsiteAdminBundle:CategoryArticle:remove
+    requirements:
+        id: \d+

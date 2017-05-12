@@ -6,58 +6,7 @@
 {% block glwebsiteadmin_body %}
     <section class="well">
 
-        {% if action == 'edit' %}
-            <h2 class="text-center">Modification articles</h2>
-        {% elseif action == 'remove' %}
-            <h2 class="text-center">Suppression articles</h2>
-        {% elseif action == 'validate' %}
-            <h2 class="text-center">Articles en attente de validation</h2>
-        {% else %}
-        {% endif %}
-        <table class="table table-bordered table-striped text-center table-admin ">
-            <thead>
-                <tr>
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Titre</th>
-                    <th class="text-center">Catégorie</th>
-                    <th class="text-center">Sous catégorie</th>
-                    <th class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for article in listArticles %}
-                <tr>
-                    <td >{{ article.id }}</td>
-                    <td>{{ article.title }}</td>
-                    <td>{{ article.subCategory.category.name }}</td>
-                    <td>{{ article.subCategory.name }}</td>
-                    {% if action == 'edit' %}
-                        <td>
-                            <a href="{{ path('gl_website_article_edit', {'id': article.id}) }}">
-                                <button class="btn btn-warning">Modifier
-                                </button>
-                            </a>
-                        </td>
-                    {% elseif action == 'remove' %}
-                        <td>
-                            <a href="{{ path('gl_website_article_remove', {'id': article.id}) }}">
-                                <button class="btn btn-danger">Supprimer
-                                </button>
-                            </a>
-                        </td>
-                    {% elseif action == 'validate' %}
-                        <td>
-                            <a href="{{ path('gl_website_article_validate', {'id': article.id}) }}">
-                                <button class="btn btn-info">Voir
-                                </button>
-                            </a>
-                        </td>
-                    {% else %}
-                    {% endif %}       
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
+        {{ include("GLWebsiteAdminBundle:Article:table.html.twig") }}
+        
     </section>
 {% endblock %}

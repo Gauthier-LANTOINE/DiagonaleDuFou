@@ -1,0 +1,53 @@
+{# Page listant les catégories d'articles et proposant l'action adéquate à effectué en fonction du paramêtre de requête #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Catégories d'articles{% endblock %}
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+
+        {% if action == 'edit' %}
+            <h2 class="text-center">Modification catégories d'articles</h2>
+        {% elseif action == 'remove' %}
+            <h2 class="text-center">Suppression catégories d'articles</h2>
+        {% else %}
+        {% endif %}
+        <table class="table table-bordered table-striped text-center table-admin ">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Libellé</th>
+                    <th class="text-center">Image</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoryArticle in listCategoryArticles %}
+                    <tr>
+                        <td >{{ categoryArticle.id }}</td>
+                        <td>{{ categoryArticle.name }}</td>
+                        <td>{% if categoryArticle.image.imageName is defined %}{{ categoryArticle.image.imageName }}{% endif %}</td>
+                        {% if action == 'edit' %}
+                            <td>
+                                <a href="{{ path('gl_website_category_article_edit', {'id': categoryArticle.id}) }}">
+                                    <button class="btn btn-warning">Modifier
+                                    </button>
+                                </a>
+                            </td>
+                        {% elseif action == 'remove' %}
+                            <td>
+                                <a href="{{ path('gl_website_category_article_remove', {'id': categoryArticle.id}) }}">
+                                    <button class="btn btn-danger">Supprimer
+                                    </button>
+                                </a>
+                            </td>
+                        {% else %}
+                        {% endif %}       
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </section>
+{% endblock %}

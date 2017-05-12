@@ -2,11 +2,12 @@
 
 namespace GL\WebsiteAdminBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use GL\WebsiteAdminBundle\Entity\SubCategoryArticle;
 
-class LoadSubCategoryArticle implements FixtureInterface
+class LoadSubCategoryArticle extends AbstractFixture implements OrderedFixtureInterface
 {
 
   public function load(ObjectManager $manager)
@@ -23,7 +24,7 @@ class LoadSubCategoryArticle implements FixtureInterface
       
       $subCategoryArticle = new SubCategoryArticle();
       $subCategoryArticle->setName($name);
-
+      $subCategoryArticle->setCategory($this->getReference('Vie du club'));
       
       $manager->persist($subCategoryArticle);
     }
@@ -31,4 +32,9 @@ class LoadSubCategoryArticle implements FixtureInterface
     
     $manager->flush();
   }
+  
+  public function getOrder()
+    {
+        return 2;
+    }
 }

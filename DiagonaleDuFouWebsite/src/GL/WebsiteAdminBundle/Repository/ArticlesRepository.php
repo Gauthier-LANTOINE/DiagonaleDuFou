@@ -10,4 +10,14 @@ namespace GL\WebsiteAdminBundle\Repository;
  */
 class ArticlesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getLastFourArticles()
+    {
+        $result = $this->createQueryBuilder('a')
+                       ->where('a.publicationDate IS NOT NULL')
+                       ->orderBy('a.publicationDate', 'DESC')
+                       ->getQuery()
+                       ->getResult();
+        
+        return $result;
+    }
 }

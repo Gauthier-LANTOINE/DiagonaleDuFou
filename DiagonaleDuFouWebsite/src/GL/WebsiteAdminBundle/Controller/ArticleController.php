@@ -120,5 +120,15 @@ class ArticleController extends Controller {
       'form'   => $form->createView(),
     ));
     }
+    
+    public function listValidateAction() {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $listArticles = $em->getRepository('GLWebsiteAdminBundle:Articles')->findByPublished(FALSE);
+        
+        
+        return $this->render('GLWebsiteAdminBundle:Article:table.html.twig', array('action' => 'validate', 'listArticles' => $listArticles));
+    }
 
 }

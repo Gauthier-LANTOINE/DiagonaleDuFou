@@ -28,7 +28,6 @@
     <p>
       {{ article.content|purify('custom')}}
     </p>
-
   
   <form action="{{ path('gl_website_article_remove', {'id': article.id}) }}" method="post">
     <a href="{{ path('gl_website_article_list', {'action': 'remove'}) }}" class="btn btn-default">

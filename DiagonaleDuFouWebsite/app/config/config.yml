@@ -81,10 +81,14 @@ exercise_html_purifier:
         URI.SafeIframeRegexp: '%%^(https?:)?(\/\/www\.youtube(?:-nocookie)?\.com\/embed\/|\/\/player\.vimeo\.com\/|\/\/www\.dailymotion\.com\/embed\/video\/)%%'
         
 vich_uploader:
-    db_driver: orm
-    
+    db_driver: orm 
     mappings:
         image:
             uri_prefix:         /DiagonaleDuFouRepository/DiagonaleDuFouWebsite/web/img
             upload_destination: '%kernel.root_dir%/../web/img'
             namer: vich_uploader.namer_origname
+            
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true

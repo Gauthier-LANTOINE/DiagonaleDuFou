@@ -1,0 +1,20 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ article.title }}{% endblock %}
+
+{% block core_body %}
+    <article class="well">
+        
+
+        <h1 class="text-center">{{ article.title }}</h1>
+        
+        <p>
+            {{ article.subTitle }}
+        </p>
+        
+        <p>
+            {{ article.content|purify('custom') }}
+        </p>
+
+    </article>
+{% endblock %}

@@ -1,0 +1,13 @@
+{# template du formulaire d'ajout et de modification de Catégorie #}
+
+{{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+
+{{ form_errors(form) }}
+
+{{ form_row(form.name, { 'label': 'Libellé' }) }}
+
+{{ form_row(form.image, { 'label': 'Image'}) }}
+
+{{ form_row(form.save, { 'label': 'Enregistrer' }) }}
+
+{{ form_end(form)}}
