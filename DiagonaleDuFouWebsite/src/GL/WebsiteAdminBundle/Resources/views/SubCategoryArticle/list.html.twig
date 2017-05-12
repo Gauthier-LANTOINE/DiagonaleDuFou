@@ -1,0 +1,53 @@
+{# Page listant les sous catégories d'articles et proposant l'action adéquate à effectué en fonction du paramêtre de requête #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - sous catégories d'articles{% endblock %}
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+
+        {% if action == 'edit' %}
+            <h2 class="text-center">Modification sous catégories d'articles</h2>
+        {% elseif action == 'remove' %}
+            <h2 class="text-center">Suppression sous catégories d'articles</h2>
+        {% else %}
+        {% endif %}
+        <table class="table table-bordered table-striped text-center table-admin ">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Libellé</th>
+                    <th class="text-center">Catégorie</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subCategoryArticle in listSubCategoryArticles %}
+                    <tr>
+                        <td >{{ subCategoryArticle.id }}</td>
+                        <td>{{ subCategoryArticle.name }}</td>
+                        <td>{{ subCategoryArticle.category.name }}</td>
+                        {% if action == 'edit' %}
+                            <td>
+                                <a href="{{ path('gl_website_sub_category_article_edit', {'id': subCategoryArticle.id}) }}">
+                                    <button class="btn btn-warning">Modifier
+                                    </button>
+                                </a>
+                            </td>
+                        {% elseif action == 'remove' %}
+                            <td>
+                                <a href="{{ path('gl_website_sub_category_article_remove', {'id': subCategoryArticle.id}) }}">
+                                    <button class="btn btn-danger">Supprimer
+                                    </button>
+                                </a>
+                            </td>
+                        {% else %}
+                        {% endif %}       
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </section>
+{% endblock %}

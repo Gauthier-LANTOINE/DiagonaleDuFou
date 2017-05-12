@@ -1,0 +1,15 @@
+{# template du formulaire d'ajout et de modification d'événements #}
+
+{{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+
+{{ form_errors(form) }}
+
+{{ form_row(form.name, { 'label': 'Libellé' }) }}
+
+{{ form_row(form.date, { 'label': 'Date de l\'événement'}) }}
+
+{{ form_row(form.category, { 'label': 'Catégorie de l\'événement'}) }}
+
+{{ form_row(form.save, { 'label': 'Enregistrer' }) }}
+
+{{ form_end(form)}}

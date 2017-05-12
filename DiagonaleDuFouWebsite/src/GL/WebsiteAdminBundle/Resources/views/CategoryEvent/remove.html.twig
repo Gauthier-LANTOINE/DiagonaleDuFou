@@ -1,0 +1,27 @@
+{# Page servant à supprimer les liens #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Supprimer les liens{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+        <h1 class="text-center">Suppression de catégories d'événements</h1>
+
+        <h3>Nom de la catégorie d'événement</h3>
+        <p>
+            {{ categoryEvent.name }}
+        </p>
+        <form action="{{ path('gl_website_category_event_remove', {'id': categoryEvent.id}) }}" method="post">
+            <a href="{{ path('gl_website_category_event_list', {'action': 'remove'}) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour
+            </a>
+
+            <input type="submit" value="Supprimer" class="btn btn-danger" />
+
+            {{ form_rest(form) }}
+        </form>
+
+    </section>
+{% endblock %}

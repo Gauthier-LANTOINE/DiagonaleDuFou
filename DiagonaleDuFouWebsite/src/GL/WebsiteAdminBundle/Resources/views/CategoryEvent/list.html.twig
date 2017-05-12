@@ -1,0 +1,51 @@
+{# Page listant les sous catégories d'articles et proposant l'action adéquate à effectué en fonction du paramêtre de requête #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - catégorie d'événements{% endblock %}
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+
+        {% if action == 'edit' %}
+            <h2 class="text-center">Modification Catégories d'événements</h2>
+        {% elseif action == 'remove' %}
+            <h2 class="text-center">Suppression Catégories d'événements</h2>
+        {% else %}
+        {% endif %}
+        <table class="table table-bordered table-striped text-center table-admin ">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Libellé</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoryEvent in listCategoryEvents %}
+                    <tr>
+                        <td >{{ categoryEvent.id }}</td>
+                        <td>{{ categoryEvent.name }}</td>
+                        {% if action == 'edit' %}
+                            <td>
+                                <a href="{{ path('gl_website_category_event_edit', {'id': categoryEvent.id}) }}">
+                                    <button class="btn btn-warning">Modifier
+                                    </button>
+                                </a>
+                            </td>
+                        {% elseif action == 'remove' %}
+                            <td>
+                                <a href="{{ path('gl_website_category_event_remove', {'id': categoryEvent.id}) }}">
+                                    <button class="btn btn-danger">Supprimer
+                                    </button>
+                                </a>
+                            </td>
+                        {% else %}
+                        {% endif %}       
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </section>
+{% endblock %}

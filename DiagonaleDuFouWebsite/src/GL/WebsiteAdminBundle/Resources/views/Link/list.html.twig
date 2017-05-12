@@ -1,0 +1,55 @@
+{# Page listant les sous catégories d'articles et proposant l'action adéquate à effectué en fonction du paramêtre de requête #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - sous catégories d'articles{% endblock %}
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+
+        {% if action == 'edit' %}
+            <h2 class="text-center">Modification Liens</h2>
+        {% elseif action == 'remove' %}
+            <h2 class="text-center">Suppression Liens</h2>
+        {% else %}
+        {% endif %}
+        <table class="table table-bordered table-striped text-center table-admin ">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Libellé</th>
+                    <th class="text-center">URL</th>
+                    <th class="text-center">Image</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for link in listLinks %}
+                    <tr>
+                        <td >{{ link.id }}</td>
+                        <td>{{ link.name }}</td>
+                        <td>{{ link.url }}</td>
+                        <td>{{ link.image.imageName }}</td>
+                        {% if action == 'edit' %}
+                            <td>
+                                <a href="{{ path('gl_website_link_edit', {'id': link.id}) }}">
+                                    <button class="btn btn-warning">Modifier
+                                    </button>
+                                </a>
+                            </td>
+                        {% elseif action == 'remove' %}
+                            <td>
+                                <a href="{{ path('gl_website_link_remove', {'id': link.id}) }}">
+                                    <button class="btn btn-danger">Supprimer
+                                    </button>
+                                </a>
+                            </td>
+                        {% else %}
+                        {% endif %}       
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </section>
+{% endblock %}

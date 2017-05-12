@@ -1,0 +1,32 @@
+{# Page servant à supprimer les sous catégories d'articles #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Supprimer sous catégories d'articles{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+        <h1 class="text-center">Suppression de sous catégories d'articles</h1>
+
+        <h3>Nom sous catégorie</h3>
+        <p>
+            {{ subCategoryArticle.name }}
+        </p>
+        <h3>Catégorie</h3>
+        <p>
+            {{ subCategoryArticle.category.name }}
+        </p>
+
+        <form action="{{ path('gl_website_sub_category_article_remove', {'id': subCategoryArticle.id}) }}" method="post">
+            <a href="{{ path('gl_website_sub_category_article_list', {'action': 'remove'}) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour
+            </a>
+
+            <input type="submit" value="Supprimer" class="btn btn-danger" />
+
+            {{ form_rest(form) }}
+        </form>
+
+    </section>
+{% endblock %}

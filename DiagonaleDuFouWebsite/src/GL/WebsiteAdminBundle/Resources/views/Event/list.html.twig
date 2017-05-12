@@ -1,7 +1,7 @@
 {# Page listant les articles et proposant l'action adéquate à effectué en fonction du paramêtre de requête #}
 {% extends "GLWebsiteAdminBundle::layout.html.twig" %}
 
-{% block title %}{{ parent() }} - Articles{% endblock %}
+{% block title %}{{ parent() }} - Evénements{% endblock %}
 
 {% block glwebsiteadmin_body %}
     <section class="well">
@@ -10,8 +10,6 @@
             <h2 class="text-center">Modification événements</h2>
         {% elseif action == 'remove' %}
             <h2 class="text-center">Suppression événements</h2>
-        {% elseif action == 'validate' %}
-            <h2 class="text-center">Evénements en attente de validation</h2>
         {% else %}
         {% endif %}
         <table class="table table-bordered table-striped text-center table-admin ">
@@ -25,21 +23,28 @@
                 </tr>
             </thead>
             <tbody>
+                {% for event in listEvents %}
                 <tr>
-                    <td >1</td>
-                    <td>Info</td>
-                    <td>galette des rois</td>
-                    <td>18/01/2018</td>
+                    <td >{{ event.id }}</td>
+                    <td>{{ event.category.name }}</td>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.date|date("d/m/Y") }}</td>
                     {% if action == 'edit' %}
-                        <td><button class="btn btn-warning">Modifier</button></td>
+                        <td>
+                            <a href="{{ path('gl_website_event_edit', {'id': event.id}) }}">
+                                <button class="btn btn-warning">Modifier</button>
+                            </a>
+                        </td>
                     {% elseif action == 'remove' %}
-                        <td><button class="btn btn-danger">Supprimer</button></td>
-                    {% elseif action == 'validate' %}
-                        <td><button class="btn btn-info">Voir</button></td> 
+                        <td>
+                            <a href="{{ path('gl_website_event_remove', {'id': event.id}) }}">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </a>
+                        </td>
                     {% else %}
                     {% endif %}       
                 </tr>
-
+                {%endfor %}
             </tbody>
         </table>
     </section>

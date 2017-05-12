@@ -1,0 +1,36 @@
+{# Page servant à supprimer les liens #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Supprimer les liens{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+        <h1 class="text-center">Suppression de liens</h1>
+
+        <h3>Nom du lien</h3>
+        <p>
+            {{ link.name }}
+        </p>
+        <h3>URL</h3>
+        <p>
+            {{ link.url }}
+        </p>
+        <h3>Image</h3>
+        <p>
+            <img src="{{ vich_uploader_asset(link.image, 'imageFile') }}" alt="{{ link.image.imageName }}" class="img-responsive"/>
+        </p>
+
+        <form action="{{ path('gl_website_link_remove', {'id': link.id}) }}" method="post">
+            <a href="{{ path('gl_website_link_list', {'action': 'remove'}) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour
+            </a>
+
+            <input type="submit" value="Supprimer" class="btn btn-danger" />
+
+            {{ form_rest(form) }}
+        </form>
+
+    </section>
+{% endblock %}

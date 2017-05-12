@@ -1,0 +1,12 @@
+{# Page permettant l'ajout d'événements #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Ajouter événements{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+    <h1 class="text-center">Ajout d'événements</h1>
+    {{ include("GLWebsiteAdminBundle:Event:form.html.twig") }}
+    </section>
+{% endblock %}

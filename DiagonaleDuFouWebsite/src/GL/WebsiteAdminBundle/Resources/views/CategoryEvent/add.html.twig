@@ -1,0 +1,12 @@
+{# Page permettant l'ajout de catégorie d'événements #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Ajouter catégorie d'événement{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+    <h1 class="text-center">Ajout de type d'événements</h1>
+    {{ include("GLWebsiteAdminBundle:CategoryEvent:form.html.twig") }}
+    </section>
+{% endblock %}

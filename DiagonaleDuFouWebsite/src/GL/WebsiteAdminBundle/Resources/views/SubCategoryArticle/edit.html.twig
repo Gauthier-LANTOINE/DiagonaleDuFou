@@ -1,0 +1,12 @@
+{# Page servant à éditer les articles #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Editer{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+    <h1 class="text-center">Edition de sous catégories d'articles</h1>
+    {{ include("GLWebsiteAdminBundle:SubCategoryArticle:form.html.twig") }}
+    </section>
+{% endblock %}

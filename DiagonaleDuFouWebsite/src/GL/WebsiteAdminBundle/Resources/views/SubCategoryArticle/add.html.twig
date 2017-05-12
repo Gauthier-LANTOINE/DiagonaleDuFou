@@ -1,0 +1,12 @@
+{# Page permettant l'ajout de catégorie #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Ajouter sous catégorie{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+    <h1 class="text-center">Ajout de sous catégories d'articles</h1>
+    {{ include("GLWebsiteAdminBundle:SubCategoryArticle:form.html.twig") }}
+    </section>
+{% endblock %}
