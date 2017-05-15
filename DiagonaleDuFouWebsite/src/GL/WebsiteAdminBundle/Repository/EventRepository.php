@@ -10,4 +10,18 @@ namespace GL\WebsiteAdminBundle\Repository;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getFutureFiveEvent()
+    {
+        $now=new \DateTime(date('Y-M-d'));
+        
+        $result = $this->createQueryBuilder('a')
+                       ->where('a.date >= :now')
+                       ->setParameter('now',$now)
+                       ->orderBy('a.date', 'ASC')
+                       ->setMaxResults(5)
+                       ->getQuery()
+                       ->getResult();
+        
+        return $result;
+    }
 }

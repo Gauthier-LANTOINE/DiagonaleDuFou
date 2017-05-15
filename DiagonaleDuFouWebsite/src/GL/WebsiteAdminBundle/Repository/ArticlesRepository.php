@@ -15,6 +15,7 @@ class ArticlesRepository extends \Doctrine\ORM\EntityRepository
         $result = $this->createQueryBuilder('a')
                        ->where('a.publicationDate IS NOT NULL')
                        ->orderBy('a.publicationDate', 'DESC')
+                       ->setMaxResults(4)
                        ->getQuery()
                        ->getResult();
         

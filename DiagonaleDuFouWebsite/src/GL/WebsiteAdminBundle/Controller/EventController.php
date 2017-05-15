@@ -88,4 +88,14 @@ class EventController extends Controller
                     'form' => $form->createView(),
         ));
     }
+    
+    public function listFutureEventIndexAction() {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $listEvents = $em->getRepository('GLWebsiteAdminBundle:Event')->getFutureFiveEvent();
+        
+        
+        return $this->render('GLWebsiteAdminBundle:Event:table.html.twig', array('listEvents' => $listEvents));
+    }
 }
