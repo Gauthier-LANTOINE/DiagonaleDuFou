@@ -7,9 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 use GL\WebsiteAdminBundle\Entity\Link;
 use GL\WebsiteAdminBundle\Form\LinkType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class LinkController extends Controller {
 
+    /**
+     * @Security("has_role('ROLE_MODERATOR')")
+     * 
+     * @param Request $request
+     */
     public function addAction(Request $request) {
 
         $link = new Link();
@@ -35,6 +41,7 @@ class LinkController extends Controller {
 
     /**
      * @ParamConverter("link", options={"mapping": {"id": "id"}})
+     * @Security("has_role('ROLE_MODERATOR')")
      */
     public function editAction(Link $link, Request $request) {
 
@@ -67,6 +74,7 @@ class LinkController extends Controller {
 
     /**
      * @ParamConverter("link", options={"mapping": {"id": "id"}})
+     * @Security("has_role('ROLE_SUPER_MODERATOR')")
      */
     public function removeAction(Link $link, Request $request) {
 

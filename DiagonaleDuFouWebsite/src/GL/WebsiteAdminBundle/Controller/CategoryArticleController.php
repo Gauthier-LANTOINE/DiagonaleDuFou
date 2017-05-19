@@ -7,9 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 use GL\WebsiteAdminBundle\Entity\CategoryArticle;
 use GL\WebsiteAdminBundle\Form\CategoryArticleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CategoryArticleController extends Controller {
 
+    /**
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * 
+     * @param Request $request
+     */
     public function addAction(Request $request) {
 
         $category = new CategoryArticle();
@@ -35,6 +41,7 @@ class CategoryArticleController extends Controller {
 
     /**
      * @ParamConverter("categoryArticle", options={"mapping": {"id": "id"}})
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function editAction(CategoryArticle $categoryArticle, Request $request) {
 
@@ -56,6 +63,11 @@ class CategoryArticleController extends Controller {
         ));
     }
 
+    /**
+     * 
+     * @param String $action
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     */
     public function listAction($action) {
 
         $em = $this->getDoctrine()->getManager();
@@ -67,6 +79,7 @@ class CategoryArticleController extends Controller {
 
     /**
      * @ParamConverter("categoryArticle", options={"mapping": {"id": "id"}})
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function removeAction(CategoryArticle $categoryArticle, Request $request) {
 

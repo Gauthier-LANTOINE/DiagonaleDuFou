@@ -8,8 +8,10 @@ class UserController extends Controller
 {
     public function listAction($action)
     {
-        //recherche de la liste des utilisateurs a réaliser
-        //retourne l'action et la liste des articles
-        return $this->render('GLWebsiteAdminBundle:User:list.html.twig',array('action'=>$action));
+        $em = $this->getDoctrine()->getManager();
+
+        $listUsers = $em->getRepository('GLUserBundle:User')->findByEnabled(FALSE);
+        
+        return $this->render('GLWebsiteAdminBundle:User:list.html.twig',array('action'=>$action,'listUsers'=>$listUsers));
     }
 }

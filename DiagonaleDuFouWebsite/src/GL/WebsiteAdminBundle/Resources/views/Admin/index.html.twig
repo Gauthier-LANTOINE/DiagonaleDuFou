@@ -4,58 +4,40 @@
 {% block title %}{{ parent() }} - Accueil{% endblock %}
 
 {% block glwebsiteadmin_body %}
-    <section class="well">
-        <h2 class="text-center">Inscrit en attente de validation</h2>
-        <table class="table table-bordered table-striped text-center table-admin ">
-            <thead>
-                <tr>
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Nom</th>
-                    <th class="text-center">Prénom</th>
-                    <th class="text-center">Date d'inscription</th>
-                    <th class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td >1</td>
-                    <td>Dupond</td>
-                    <td>Paul</td>
-                    <td>18/12/2017</td>
-                    <td><button class="btn btn-info">Voir</button></td>
-                </tr>
-                <tr>
-                    <td >1</td>
-                    <td>Dupond</td>
-                    <td>Paul</td>
-                    <td>18/12/2017</td>
-                    <td><button class="btn btn-info">Voir</button></td>
-                </tr>
-                <tr>
-                    <td >1</td>
-                    <td>Dupond</td>
-                    <td>Paul</td>
-                    <td>18/12/2017</td>
-                    <td><button class="btn btn-info">Voir</button></td>
-                </tr>
-                <tr>
-                    <td >1</td>
-                    <td>Dupond</td>
-                    <td>Paul</td>
-                    <td>18/12/2017</td>
-                    <td><button class="btn btn-info">Voir</button></td>
-                </tr>
-                <tr>
-                    <td >1</td>
-                    <td>Dupond</td>
-                    <td>Paul</td>
-                    <td>18/12/2017</td>
-                    <td><button class="btn btn-info">Voir</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    <section class="well">
-        {{ render(controller("GLWebsiteAdminBundle:Article:listValidate")) }}
-    </section>
+    {% if is_granted('ROLE_ADMIN') %}
+        <section class="well">
+            <h2 class="text-center">Inscrit en attente de validation</h2>
+            <table class="table table-bordered table-striped text-center table-admin ">
+                <thead>
+                    <tr>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Nom</th>
+                        <th class="text-center">Prénom</th>
+                        <th class="text-center">Date d'inscription</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in listUsers %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.firstName }}</td>
+                            <td>{{ user.registerDate|date("d/m/Y") }}</td>                       
+                            <td>
+                                <a href="">
+                                    <button class="btn btn-info">Voir</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    {% endif %}
+    {% if is_granted('ROLE_MODERATOR') %}
+        <section class="well">        
+            {{ render(controller("GLWebsiteAdminBundle:Article:listValidate")) }}       
+        </section>
+    {% endif %}    
 {% endblock %}

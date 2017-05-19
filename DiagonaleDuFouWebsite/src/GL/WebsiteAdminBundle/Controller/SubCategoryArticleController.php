@@ -7,9 +7,14 @@ use Symfony\Component\HttpFoundation\Request;
 use GL\WebsiteAdminBundle\Entity\SubCategoryArticle;
 use GL\WebsiteAdminBundle\Form\SubCategoryArticleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SubCategoryArticleController extends Controller {
 
+    /**
+     * @Security("has_role('ROLE_MODERATOR')")
+     * @param Request $request
+     */
     public function addAction(Request $request) {
 
         $subCategory = new SubCategoryArticle();
@@ -34,6 +39,7 @@ class SubCategoryArticleController extends Controller {
     }
 
     /**
+     * @Security("has_role('ROLE_MODERATOR')")
      * @ParamConverter("subCategoryArticle", options={"mapping": {"id": "id"}})
      */
     public function editAction(SubCategoryArticle $subCategoryArticle, Request $request) {
@@ -66,6 +72,7 @@ class SubCategoryArticleController extends Controller {
     }
 
     /**
+     * @Security("has_role('ROLE_SUPER_MODERATOR')")
      * @ParamConverter("subCategoryArticle", options={"mapping": {"id": "id"}})
      */
     public function removeAction(SubCategoryArticle $subCategoryArticle, Request $request) {

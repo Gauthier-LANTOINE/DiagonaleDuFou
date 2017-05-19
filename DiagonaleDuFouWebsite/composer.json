@@ -32,7 +32,8 @@
         "doctrine/doctrine-fixtures-bundle": "~2.3",
         "exercise/htmlpurifier-bundle": "*",
         "vich/uploader-bundle": "^1.4",
-        "stof/doctrine-extensions-bundle": "^1.2"
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "friendsofsymfony/user-bundle": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

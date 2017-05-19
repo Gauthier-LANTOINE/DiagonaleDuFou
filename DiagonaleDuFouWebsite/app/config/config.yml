@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -92,3 +92,14 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    user_class:    GL\UserBundle\Entity\User
+    from_email:
+        address: "noreply@yourcompany.com"
+        sender_name: "No Reply"
+    registration:
+        form:
+            type: GL\UserBundle\Form\UserType

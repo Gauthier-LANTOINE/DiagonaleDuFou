@@ -1,0 +1,27 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error is defined and error%}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+    {% if  csrf_token is defined and csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+    <h2 class="form-signin-heading">Authentification</h2>
+    <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
+    <input type="text" id="username" name="_username" {% if last_username is defined %} value="{{ last_username }}"{% endif %} class="form-control" placeholder="Adresse Email" required="required" />
+
+    <label for="password" class="sr-only">{{ 'security.login.password'|trans }}</label>
+    <input type="password" id="password" name="_password" required="required" class="form-control" placeholder="Mot de passe" />
+
+    <div class="checkbox">
+        <label for="remember_me">
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />{{ 'security.login.remember_me'|trans }}
+        </label>
+    </div>
+    <div class="form-group">
+        <input class="btn btn-lg btn-primary btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+    </div>
+</form>
+<a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a>

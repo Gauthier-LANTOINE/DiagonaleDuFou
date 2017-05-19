@@ -1,3 +1,7 @@
+gl_user:
+    resource: "@GLUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 gl_website_admin:
     resource: "@GLWebsiteAdminBundle/Resources/config/routing.yml"
     prefix:   /

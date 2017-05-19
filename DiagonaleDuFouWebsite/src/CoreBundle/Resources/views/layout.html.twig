@@ -48,36 +48,22 @@
                               <li><a href="#">Exercices</a></li>
                               
                             </ul>
-                          </li> 
+                          </li>
+                          {% if is_granted('ROLE_USER') %}
                           <li><a href="#">Jeu en différé</a></li>
+                          {% endif %}
+                          {% if is_granted('ROLE_AUTHOR') or is_granted('ROLE_MODERATOR') %}
                           <li><a href="{{ path('gl_website_admin_homepage') }}">Administration</a></li>
+                          {% endif %}
                       </ul>
                       <ul class="nav navbar-nav navbar-right">
-                        <!-- Lien ouvrant la fenêtre de login -->
-                        <li class="navbar-form"><button data-toggle="modal" data-target="#myModal" class="btn btn-info">Connexion</button></li>
-                        <!-- Fenêtre de login -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog modal-sm" role="document">
-                              <div class="modal-content">
-                                <div class="modal-body">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                  <form class="form-signin">
-                                    <h2 class="form-signin-heading">Authentification</h2>
-                                    <label for="inputLogin" class="sr-only">Login</label>
-                                    <input type="text" id="inputLogin" class="form-control" placeholder="Login" required="true" autofocus="">
-                                    <label for="inputPassword" class="sr-only">Mot de passe</label>
-                                    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required="true">
-                                    <div class="checkbox">
-                                      <label>
-                                        <input type="checkbox" value="remember-me"> Se souvenir de moi
-                                      </label>
-                                    </div>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-                         </div>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a>Bienvenue {{ app.user.username }}</a></li>
+                            <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_security_logout') }}"><button class="btn btn-danger">Déconnexion</button></a></li>
+                        {% else %}
+                            <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_registration_register') }}"><button  class="btn btn-success">S'inscrire</button></a></li>
+                            <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_security_login') }}"><button class="btn btn-info">Connexion</button></a></li>
+                        {% endif %}
                       </ul>
                   </div>
 

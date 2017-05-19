@@ -7,9 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 use GL\WebsiteAdminBundle\Entity\CategoryEvent;
 use GL\WebsiteAdminBundle\Form\CategoryEventType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CategoryEventController extends Controller {
-
+    
+     /**
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * 
+     * @param Request $request
+     */
     public function addAction(Request $request) {
 
         $category = new CategoryEvent();
@@ -35,6 +41,7 @@ class CategoryEventController extends Controller {
 
     /**
      * @ParamConverter("categoryEvent", options={"mapping": {"id": "id"}})
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function editAction(CategoryEvent $categoryEvent, Request $request) {
 
@@ -56,6 +63,11 @@ class CategoryEventController extends Controller {
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * 
+     * @param type $action
+     */
     public function listAction($action) {
 
         $em = $this->getDoctrine()->getManager();
@@ -67,6 +79,7 @@ class CategoryEventController extends Controller {
 
     /**
      * @ParamConverter("categoryEvent", options={"mapping": {"id": "id"}})
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function removeAction(CategoryEvent $categoryEvent, Request $request) {
 

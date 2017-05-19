@@ -7,9 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 use GL\WebsiteAdminBundle\Entity\Event;
 use GL\WebsiteAdminBundle\Form\EventType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class EventController extends Controller
 {
+    /**
+     * @Security("has_role('ROLE_AUTHOR')")
+     * 
+     * @param Request $request
+     */
     public function addAction(Request $request) {
 
         $event = new Event();
@@ -35,6 +41,7 @@ class EventController extends Controller
 
     /**
      * @ParamConverter("event", options={"mapping": {"id": "id"}})
+     * @Security("has_role('ROLE_AUTHOR')")
      */
     public function editAction(Event $event, Request $request) {
 
@@ -55,7 +62,11 @@ class EventController extends Controller
                     'form' => $form->createView(),
         ));
     }
-
+    /**
+     * @Security("has_role('ROLE_AUTHOR')")
+     * 
+     * @param String $action
+     */
     public function listAction($action) {
 
         $em = $this->getDoctrine()->getManager();
@@ -67,6 +78,7 @@ class EventController extends Controller
 
     /**
      * @ParamConverter("event", options={"mapping": {"id": "id"}})
+     * @Security("has_role('ROLE_AUTHOR')")
      */
     public function removeAction(CategoryEvent $event, Request $request) {
 

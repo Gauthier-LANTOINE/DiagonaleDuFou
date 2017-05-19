@@ -1,0 +1,5 @@
+services:
+    gl_user.form.registration:
+        class: GL\UserBundle\Form\UserType
+        tags:
+            - { name: form.type, alias: gl_userbundle_user_registration }

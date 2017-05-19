@@ -5,7 +5,7 @@
 
 {% block glwebsiteadmin_body %}
     <section class="well">
-        
+
         {% if action == 'edit' %}
             <h2 class="text-center">Modification utilisateurs</h2>
         {% elseif action == 'remove' %}
@@ -25,22 +25,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td >1</td>
-                    <td>Dupond</td>
-                    <td>Paul</td>
-                    <td>18/12/2017</td>
-                    {% if action == 'edit' %}
-                        <td><button class="btn btn-warning">Modifier</button></td>
-                    {% elseif action == 'remove' %}
-                        <td><button class="btn btn-danger">Supprimer</button></td>
-                    {% elseif action == 'validate' %}
-                        <td><button class="btn btn-success">Valider</button></td> 
-                    {% elseif action == 'read' %}
-                        <td><button class="btn btn-info">Voir</button></td> 
-                    {% else %}
-                    {% endif %}  
-                </tr>
+                {% for user in listUsers %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.registerDate|date("d/m/Y") }}</td> 
+                        {% if action == 'edit' %}
+                            <td><button class="btn btn-warning">Modifier</button></td>
+                        {% elseif action == 'remove' %}
+                            <td><button class="btn btn-danger">Supprimer</button></td>
+                        {% elseif action == 'validate' %}
+                            <td><button class="btn btn-success">Valider</button></td> 
+                        {% elseif action == 'read' %}
+                            <td><button class="btn btn-info">Voir</button></td> 
+                        {% else %}
+                        {% endif %}  
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </section>
