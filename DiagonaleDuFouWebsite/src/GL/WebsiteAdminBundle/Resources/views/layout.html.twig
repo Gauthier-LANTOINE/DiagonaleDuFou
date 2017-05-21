@@ -80,7 +80,7 @@
                                             {% if is_granted('ROLE_ADMIN')%}
                                             <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-plus"><a href="#"></span> Ajouter utilisateurs</a>
+                                                    <span class="glyphicon glyphicon-plus"><a href="{{ path('gl_website_user_add') }}"></span> Ajouter utilisateurs</a>
                                                 </td>
                                             </tr>
                                             {% endif %}

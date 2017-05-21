@@ -32,13 +32,29 @@
                         <td>{{ user.firstName }}</td>
                         <td>{{ user.registerDate|date("d/m/Y") }}</td> 
                         {% if action == 'edit' %}
-                            <td><button class="btn btn-warning">Modifier</button></td>
+                            <td>
+                                <a href="{{ path('gl_website_user_edit', {'id': user.id}) }}">
+                                    <button class="btn btn-warning">Modifier</button>
+                                </a>
+                            </td>
                         {% elseif action == 'remove' %}
-                            <td><button class="btn btn-danger">Supprimer</button></td>
+                            <td>
+                                <a href="{{ path('gl_website_user_remove', {'id': user.id}) }}">
+                                    <button class="btn btn-danger">Supprimer</button>
+                                </a>
+                            </td>
                         {% elseif action == 'validate' %}
-                            <td><button class="btn btn-success">Valider</button></td> 
+                            <td>
+                                <a href="{{ path('gl_website_user_validate', {'id': user.id}) }}">
+                                    <button class="btn btn-info">Voir</button>
+                                </a>
+                            </td> 
                         {% elseif action == 'read' %}
-                            <td><button class="btn btn-info">Voir</button></td> 
+                            <td>
+                                <a href="{{ path('gl_website_user_read', {'id': user.id}) }}">
+                                    <button class="btn btn-info">Voir</button>
+                                </a>
+                            </td> 
                         {% else %}
                         {% endif %}  
                     </tr>

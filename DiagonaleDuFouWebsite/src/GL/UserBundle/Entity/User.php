@@ -30,7 +30,7 @@ class User extends BaseUser {
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=50, nullable=false)
+     * @ORM\Column(name="first_name", type="string", length=50, nullable=false)
      * 
      * @Assert\Length(min=2, minMessage="Le prénom doit faire au moins 2 caractères")
      * @Assert\Length(max=50, maxMessage="Le prénom doit faire au maximum 50 caractères")
@@ -40,7 +40,7 @@ class User extends BaseUser {
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=50, nullable=false)
+     * @ORM\Column(name="last_name", type="string", length=50, nullable=false)
      * 
      * @Assert\Length(min=2, minMessage="Le titre doit faire au moins 5 caractères")
      * @Assert\Length(max=50, maxMessage="Le titre doit faire au maximum 50 caractères")
@@ -50,14 +50,14 @@ class User extends BaseUser {
     /**
      * @var \DateTime
      * @Assert\Date()
-     * @ORM\Column(name="birthDate", type="date", nullable=false)
+     * @ORM\Column(name="birth_date", type="date", nullable=false)
      */
     private $birthDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phoneHome", type="string", length=12, nullable=true)
+     * @ORM\Column(name="phone_home", type="string", length=12, nullable=true)
      * @Assert\Length(max=12, maxMessage="Le numéro doit faire au maximum 12 caractères")
      */
     private $phoneHome;
@@ -65,7 +65,7 @@ class User extends BaseUser {
     /**
      * @var string
      *
-     * @ORM\Column(name="mobilePhone", type="string", length=12, nullable=true)
+     * @ORM\Column(name="mobile_phone", type="string", length=12, nullable=true)
      * @Assert\Length(max=12, maxMessage="Le numéro doit faire au maximum 12 caractères")
      */
     private $mobilePhone;
@@ -73,7 +73,7 @@ class User extends BaseUser {
     /**
      * @var bool
      *
-     * @ORM\Column(name="allowImageRights", type="boolean", nullable=false)
+     * @ORM\Column(name="allow_image_rights", type="boolean", nullable=false)
      */
     private $allowImageRights;
 

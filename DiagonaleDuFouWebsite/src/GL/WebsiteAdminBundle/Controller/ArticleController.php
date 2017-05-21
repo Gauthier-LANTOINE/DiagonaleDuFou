@@ -74,7 +74,7 @@ class ArticleController extends Controller {
             return $this->redirectToRoute('gl_website_admin_homepage');
         }
 
-        return $this->render('GLWebsiteAdminBundle:Article:write.html.twig', array(
+        return $this->render('GLWebsiteAdminBundle:Article:edit.html.twig', array(
                     'article' => $article,
                     'form' => $form->createView(),
         ));

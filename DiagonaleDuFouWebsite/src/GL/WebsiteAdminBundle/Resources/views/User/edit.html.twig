@@ -1,12 +1,12 @@
-{# Page permettant l'ajout d'utilisateur par l'Admin #}
+{# Page servant à éditer les articles #}
 {% extends "GLWebsiteAdminBundle::layout.html.twig" %}
 
-{% block title %}{{ parent() }} - Ajouter Utilisateur{% endblock %}
+{% block title %}{{ parent() }} - Editer utilisateur{% endblock %}
 
 
 {% block glwebsiteadmin_body %}
     <section class="well">
-    <h1 class="text-center">Ajout d'Utilisateur</h1>
+    <h1 class="text-center">Edition d'utilisateurs</h1>
     {{ include("GLWebsiteAdminBundle:User:form.html.twig") }}
     </section>
 {% endblock %}

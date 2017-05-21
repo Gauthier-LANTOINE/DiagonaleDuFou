@@ -1,0 +1,24 @@
+{# Formulaire admin pour la création d'utilisateur #}
+
+{{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+
+{{ form_errors(form) }}
+
+{{ form_row(form.firstName, { 'label': 'Prénom *' }) }}
+
+{{ form_row(form.lastName, { 'label': 'Nom *' }) }}
+
+{{ form_row(form.birthDate, { 'label': 'Date de naissance *' }) }}
+
+{{ form_row(form.email, { 'label': 'Email *' }) }}
+
+{{ form_row(form.phoneHome, { 'label': 'Téléphone domicile' }) }}
+
+{{ form_row(form.mobilePhone, { 'label': 'Téléphone portable' }) }}
+
+{{ form_row(form.allowImageRights, { 'label': 'J\'autorise l\'association la diagonale du fou en vertu de l\'article 9 du code civil
+ la publication des photos éventuelles prise de moi-même et/ou de mon (mes) enfant(s), membre(s) de l\'association' }) }}
+
+{{ form_row(form.save, { 'label': 'Enregistrer' }) }}
+
+{{ form_end(form)}}
