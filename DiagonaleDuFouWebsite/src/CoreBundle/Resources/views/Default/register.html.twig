@@ -1,0 +1,39 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Enregistrement{% endblock %}
+
+{% block core_body %}
+<article class="well">
+    <h1 class="text-center">Pré Inscription</h1>
+    <div class="jumbotron">
+        <p>Ce formulaire n'est à remplir que si vous souhaitez vous inscrire réellement à l'association la diagonale du fou.</p>
+        <p>La validation du compte ce fait manuellement par un administrateur du site, vous recevrez un email de confirmation lors de sa validation.</p>
+    </div>
+    {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+    
+    {{ form_errors(form) }}
+
+    {{ form_row(form.firstName, { 'label': 'Prénom *' }) }}
+
+    {{ form_row(form.lastName, { 'label': 'Nom *' }) }}
+
+    {{ form_row(form.birthDate, { 'label': 'Date de naissance *' }) }}
+    
+    {{ form_row(form.email, { 'label': 'Email *' }) }}
+    
+    {{ form_row(form.user.plainPassword, { 'label': 'Mot de passe *' }) }}
+    
+    {{ form_row(form.phoneHome, { 'label': 'Téléphone domicile' }) }}
+    
+    {{ form_row(form.mobilePhone, { 'label': 'Téléphone portable' }) }}
+    
+    {{ form_row(form.allowImageRights, { 'label': 'J\'autorise l\'association la diagonale du fou en vertu de l\'article 9 du code civil
+ la publication des photos éventuelles prise de moi-même et/ou de mon (mes) enfant(s), membre(s) de l\'association' }) }}
+  
+    <div class="form-group">
+    {{ form_row(form.save, { 'label': 'Enregistrer' }) }} 
+    </div>
+    <p>Les champs avec une * sont obligatoire</p>
+    {{ form_end(form) }}
+</article>
+    {%endblock%}

@@ -1,0 +1,24 @@
+
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Zone jeu en différé{% endblock %}
+
+{% block core_body %}
+    <div class="well">
+        
+
+        <h1 class="text-center">Zone jeu en différé</h1>
+        
+        <div class="row">
+            <div>
+                <a href="{{ path('core_list_current_game') }}"><button class="btn btn-info col-lg-2 col-lg-offset-1">Partie en cours</button></a>
+                <a ><button class="btn btn-info col-lg-2 col-lg-offset-2">Partie terminés</button></a>
+                <a href="{{ path('core_challenge_game') }}"><button class="btn btn-info col-lg-2 col-lg-offset-2">Lancer un défi</button></a>
+            </div>
+        </div>
+
+        {% block chess_game %}
+        {% endblock %}
+        
+    </div>
+{% endblock %}

@@ -38,44 +38,45 @@ gl_website_article_validate:
     requirements:
         id: \d+
 
-gl_website_user_list:
-    path:     /admin/user/list/{action}
+gl_website_member_list:
+    path:     /admin/member/list/{action}
     defaults:  
-        _controller: GLWebsiteAdminBundle:User:list
+        _controller: GLWebsiteAdminBundle:Member:list
     requirements:
         action: '(edit|validate|remove|read)'
         
-gl_website_user_add:
-    path: /admin/user/add
+gl_website_member_add:
+    path: /admin/member/add
     defaults:  
-        _controller: GLWebsiteAdminBundle:User:add
+        _controller: GLWebsiteAdminBundle:Member:add
         
-gl_website_user_edit:
+gl_website_member_edit:
     
-    path: /admin/user/edit/{id}
+    path: /admin/member/edit/{id}
     defaults:
-        _controller: GLWebsiteAdminBundle:User:edit
+        _controller: GLWebsiteAdminBundle:Member:edit
     requirements:
         id: \d+
-gl_website_user_read:
+        
+gl_website_member_read:
     
-    path: /admin/user/read/{id}
+    path: /admin/member/read/{id}
     defaults:
-        _controller: GLWebsiteAdminBundle:User:read
-    requirements:
-        id: \d+
-
-gl_website_user_validate:
-    
-    path: /admin/user/validate/{id}
-    defaults:
-        _controller: GLWebsiteAdminBundle:User:validate
+        _controller: GLWebsiteAdminBundle:Member:read
     requirements:
         id: \d+
 
-gl_website_user_remove:
+gl_website_member_validate:
     
-    path: /admin/user/remove/{id}
+    path: /admin/member/validate/{id}
+    defaults:
+        _controller: GLWebsiteAdminBundle:Member:validate
+    requirements:
+        id: \d+
+
+gl_website_member_remove:
+    
+    path: /admin/member/remove/{id}
     defaults:
         _controller: GLWebsiteAdminBundle:User:remove
     requirements:

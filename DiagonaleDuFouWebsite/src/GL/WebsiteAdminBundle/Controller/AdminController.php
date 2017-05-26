@@ -14,8 +14,8 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $listUsers = $em->getRepository('GLUserBundle:User')->findByEnabled(FALSE);
+        $listMembers = $em->getRepository('GLWebsiteAdminBundle:Member')->getDisabledUsers();
         
-        return $this->render('GLWebsiteAdminBundle:Admin:index.html.twig',array('listUsers'=>$listUsers));
+        return $this->render('GLWebsiteAdminBundle:Admin:index.html.twig',array('listMembers'=>$listMembers));
     }
 }

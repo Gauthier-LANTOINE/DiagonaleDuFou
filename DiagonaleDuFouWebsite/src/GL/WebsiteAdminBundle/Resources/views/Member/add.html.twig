@@ -1,0 +1,12 @@
+{# Page permettant l'ajout d'un membre par l'Admin #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Ajouter Membre{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+    <h1 class="text-center">Ajout d'un membre</h1>
+    {{ include("GLWebsiteAdminBundle:Member:form.html.twig") }}
+    </section>
+{% endblock %}

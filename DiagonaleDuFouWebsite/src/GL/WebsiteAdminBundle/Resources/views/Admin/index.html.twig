@@ -18,14 +18,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for user in listUsers %}
+                    {% for member in listMembers %}
                         <tr>
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.lastName }}</td>
-                            <td>{{ user.firstName }}</td>
-                            <td>{{ user.registerDate|date("d/m/Y") }}</td>                       
+                            <td>{{ member.id }}</td>
+                            <td>{{ member.lastName }}</td>
+                            <td>{{ member.firstName }}</td>
+                            <td>{{ member.registerDate|date("d/m/Y") }}</td>                       
                             <td>
-                                <a href="">
+                                <a href="{{ path('gl_website_member_validate', {'id': member.id}) }}">
                                     <button class="btn btn-info">Voir</button>
                                 </a>
                             </td>

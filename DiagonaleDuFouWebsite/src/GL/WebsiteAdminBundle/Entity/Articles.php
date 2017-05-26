@@ -57,7 +57,7 @@ class Articles {
      * @var bool
      *
      * @ORM\Column(name="published", type="boolean", nullable=false)
-     * 
+     * @Assert\NotNull()
      */
     private $published;
 

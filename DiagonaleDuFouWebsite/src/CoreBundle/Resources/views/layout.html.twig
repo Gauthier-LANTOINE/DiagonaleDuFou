@@ -50,7 +50,7 @@
                             </ul>
                           </li>
                           {% if is_granted('ROLE_USER') %}
-                          <li><a href="#">Jeu en différé</a></li>
+                          <li><a href="{{ path('core_list_current_game') }}">Jeu en différé</a></li>
                           {% endif %}
                           {% if is_granted('ROLE_AUTHOR') or is_granted('ROLE_MODERATOR') %}
                           <li><a href="{{ path('gl_website_admin_homepage') }}">Administration</a></li>
@@ -61,7 +61,7 @@
                             <li><a>Bienvenue {{ app.user.username }}</a></li>
                             <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_security_logout') }}"><button class="btn btn-danger">Déconnexion</button></a></li>
                         {% else %}
-                            <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_registration_register') }}"><button  class="btn btn-success">S'inscrire</button></a></li>
+                            <li class="navbar-form"><a style="padding:0px" href="{{ path('core_register') }}"><button  class="btn btn-success">S'inscrire</button></a></li>
                             <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_security_login') }}"><button class="btn btn-info">Connexion</button></a></li>
                         {% endif %}
                       </ul>

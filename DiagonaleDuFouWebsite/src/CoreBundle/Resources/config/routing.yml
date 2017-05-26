@@ -8,3 +8,32 @@ core_article:
         _controller: CoreBundle:Default:article
     requirements:
         slug: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        
+core_register:
+    path: /website/register
+    defaults: 
+        _controller: CoreBundle:Default:register
+        
+core_list_current_game:
+    path: /chess-game/list-current-game
+    defaults: 
+        _controller: CoreBundle:Chess:listCurrentGame
+        
+core_challenge_game:
+    path: /chess-game/challenge
+    defaults: 
+        _controller: CoreBundle:Chess:challenge
+        
+core_challenge_decision_accept:
+    path: /chess-game/challenge/decision/accept/{id}
+    defaults: 
+        _controller: CoreBundle:Chess:acceptChallenge
+    requirements:
+        id: \d+
+
+core_challenge_decision_refuse:
+    path: /chess-game/challenge/decision/refuse/{id}
+    defaults: 
+        _controller: CoreBundle:Chess:refuseChallenge
+    requirements:
+        id: \d+

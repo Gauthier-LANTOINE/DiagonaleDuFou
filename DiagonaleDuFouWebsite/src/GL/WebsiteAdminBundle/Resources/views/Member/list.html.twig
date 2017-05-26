@@ -1,17 +1,17 @@
-{# Page listant les utilisateurs et proposant l'action adéquate à effectuer en fonction du paramêtre de requête #}
+{# Page listant les membres et proposant l'action adéquate à effectuer en fonction du paramêtre de requête #}
 {% extends "GLWebsiteAdminBundle::layout.html.twig" %}
 
-{% block title %}{{ parent() }} - Utilisateurs{% endblock %}
+{% block title %}{{ parent() }} - Membres{% endblock %}
 
 {% block glwebsiteadmin_body %}
     <section class="well">
 
         {% if action == 'edit' %}
-            <h2 class="text-center">Modification utilisateurs</h2>
+            <h2 class="text-center">Modification Membres</h2>
         {% elseif action == 'remove' %}
-            <h2 class="text-center">Suppression utilisateurs</h2>
+            <h2 class="text-center">Suppression Membres</h2>
         {% elseif action == 'validate' %}
-            <h2 class="text-center">Utilisateurs en attente de validation</h2>
+            <h2 class="text-center">Membres en attente de validation</h2>
         {% else %}
         {% endif %}
         <table class="table table-bordered table-striped text-center table-admin ">
@@ -25,34 +25,35 @@
                 </tr>
             </thead>
             <tbody>
-                {% for user in listUsers %}
+                {% for member in listMembers %}
                     <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.lastName }}</td>
-                        <td>{{ user.firstName }}</td>
-                        <td>{{ user.registerDate|date("d/m/Y") }}</td> 
+                        <td>{{ member.id }}</td>
+                        <td>{{ member.lastName }}</td>
+                        <td>{{ member.firstName }}</td>
+                        <td>{{ member.registerDate|date("d/m/Y") }}</td> 
                         {% if action == 'edit' %}
                             <td>
-                                <a href="{{ path('gl_website_user_edit', {'id': user.id}) }}">
+                                <a href="{{ path('gl_website_member_edit', {'id': member.id}) }}">
                                     <button class="btn btn-warning">Modifier</button>
                                 </a>
                             </td>
                         {% elseif action == 'remove' %}
                             <td>
-                                <a href="{{ path('gl_website_user_remove', {'id': user.id}) }}">
+                                <a href="{{ path('gl_website_member_remove', {'id': member.id}) }}">
                                     <button class="btn btn-danger">Supprimer</button>
                                 </a>
                             </td>
                         {% elseif action == 'validate' %}
                             <td>
-                                <a href="{{ path('gl_website_user_validate', {'id': user.id}) }}">
+                                <a href="{{ path('gl_website_member_validate', {'id': member.id}) }}">
                                     <button class="btn btn-info">Voir</button>
                                 </a>
                             </td> 
                         {% elseif action == 'read' %}
                             <td>
-                                <a href="{{ path('gl_website_user_read', {'id': user.id}) }}">
+                                <a href="{{ path('gl_website_member_read', {'id': member.id}) }}">
                                     <button class="btn btn-info">Voir</button>
+
                                 </a>
                             </td> 
                         {% else %}

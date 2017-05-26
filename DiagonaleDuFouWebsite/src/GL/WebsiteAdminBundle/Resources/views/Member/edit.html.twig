@@ -1,0 +1,12 @@
+{# Page servant à éditer les Membres #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Editer Membre{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+    <h1 class="text-center">Edition d'un membre</h1>
+    {{ include("GLWebsiteAdminBundle:Member:form.html.twig") }}
+    </section>
+{% endblock %}

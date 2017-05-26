@@ -64,7 +64,7 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-chevron-down pull-right">
-                                            </span ><span class="glyphicon glyphicon-user"></span> Gestion des utilisateurs</a>
+                                            </span ><span class="glyphicon glyphicon-user"></span> Gestion des membres</a>
                                     </h4>
                                 </div>
                                 <div id="collapseThree" class="panel-collapse collapse">
@@ -73,28 +73,28 @@
                                             {% if is_granted('ROLE_ADMIN')%}
                                             <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-list "></span><a href="{{ path('gl_website_user_list', { 'action': 'read' }) }}"> Voir utilisateurs</a>
+                                                    <span class="glyphicon glyphicon-list "></span><a href="{{ path('gl_website_member_list', { 'action': 'read' }) }}"> Voir membres</a>
                                                 </td>
                                             </tr>
                                             {% endif %}
                                             {% if is_granted('ROLE_ADMIN')%}
                                             <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-plus"><a href="{{ path('gl_website_user_add') }}"></span> Ajouter utilisateurs</a>
+                                                    <span class="glyphicon glyphicon-plus"><a href="{{ path('gl_website_member_add') }}"></span> Ajouter membres</a>
                                                 </td>
                                             </tr>
                                             {% endif %}
                                             {% if is_granted('ROLE_ADMIN')%}
                                             <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-ok"></span><a href="{{ path('gl_website_user_list', { 'action': 'validate' }) }}"> Valider utilisateurs</a>
+                                                    <span class="glyphicon glyphicon-ok"></span><a href="{{ path('gl_website_member_list', { 'action': 'validate' }) }}"> Valider membres</a>
                                                 </td>
                                             </tr>
                                             {% endif %}
                                             {% if is_granted('ROLE_ADMIN')%}
                                             <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-edit"></span><a href="{{ path('gl_website_user_list', { 'action': 'edit' }) }}"> Modifier utilisateurs</a>
+                                                    <span class="glyphicon glyphicon-edit"></span><a href="{{ path('gl_website_member_list', { 'action': 'edit' }) }}"> Modifier membres</a>
                                                 </td>
                                             </tr>
                                             {% endif %}
@@ -108,7 +108,7 @@
                                             {% if is_granted('ROLE_SUPER_ADMIN')%}
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-trash"></span><a href="{{ path('gl_website_user_list', { 'action': 'remove' }) }}">
+                                                        <span class="glyphicon glyphicon-trash"></span><a href="{{ path('gl_website_member_list', { 'action': 'remove' }) }}">
                                                             Supprimer utilisateurs</a>
                                                     </td>
                                                 </tr>

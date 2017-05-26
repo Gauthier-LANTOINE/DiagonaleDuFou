@@ -1,0 +1,60 @@
+{# Page servant à Voir les informations utilisateur #}
+{% extends "GLWebsiteAdminBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Voir membre{% endblock %}
+
+
+{% block glwebsiteadmin_body %}
+    <section class="well">
+        <h1 class="text-center">Membre</h1>
+
+        <h3>Prénom</h3>
+        <p>
+            {{ member.firstName }}
+        </p>
+        <h3>Nom</h3>
+        <p>
+            {{ member.lastName }}
+        </p>
+        <h3>Date de naissance</h3>
+        <p>
+            {{ member.birthDate|date("d/m/Y") }}
+        </p>
+        <h3>Email</h3>
+        <p>
+            {{ member.email }}
+        </p>
+        <h3>Téléphone domicile</h3>
+        <p>
+            {{ member.phoneHome }}
+        </p>
+        <h3>Téléphone portable</h3>
+        <p>
+            {{ member.mobilePhone }}
+        </p>
+        <h3>Autorise à utiliser son image</h3>
+        <p>
+            {% if member.allowImageRights %}oui{% else %}non{% endif%}
+        </p>
+        
+        <h1 class="text-center">Compte utilisateur site web</h1>
+        {%if member.user.username is defined %}
+        <h3>Login</h3>
+        <p>
+            {{ member.user.username }}
+        </p>
+        <h3>Date de création du compte</h3>
+        <p>
+            {{ member.user.registerDate|date("d/m/Y") }}
+        </p>
+        {%else%}
+            <p>Pas de compte</p>
+        {%endif%}
+        
+        <a href="{{ path('gl_website_member_list', {'action': 'read'}) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour
+        </a>
+
+    </section>
+{% endblock %}
