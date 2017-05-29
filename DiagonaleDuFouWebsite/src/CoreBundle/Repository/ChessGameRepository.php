@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Repository;
 
+use GL\WebsiteAdminBundle\Entity\Member;
 /**
  * ChessGameRepository
  *
@@ -10,4 +11,43 @@ namespace CoreBundle\Repository;
  */
 class ChessGameRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Obtiens la liste des parties du membre ou un coup est à jouer
+     * 
+     * @param Member $member
+     * @return array()
+     */
+    public function memberGameToPlay(Member $member)
+    {
+        $result = $this->createQueryBuilder('cg')
+                       ->innerJoin('cg.memberWhite', 'mw')
+                       ->addSelect('mw')
+                       ->innerJoin('cg.memberBlack', 'mb')
+                       ->addSelect('mb')
+                       ->where('cg.finished = false')
+                       ->andWhere("(mw.id = :memberId AND cg.turn = 'w') OR (mb.id = :memberId AND cg.turn = 'b')")
+                       ->setParameter('memberId',$member->getId())
+                       ->orderBy('cg.dateLastMove', 'ASC')
+                       ->getQuery()
+                       ->getResult();
+        
+        return $result;
+    }
+    
+    public function memberGameFinished(Member $member)
+    {
+        $result = $this->createQueryBuilder('cg')
+                       ->innerJoin('cg.memberWhite', 'mw')
+                       ->addSelect('mw')
+                       ->innerJoin('cg.memberBlack', 'mb')
+                       ->addSelect('mb')
+                       ->where('cg.finished = true')
+                       ->andWhere("mw.id = :memberId OR mb.id = :memberId")
+                       ->setParameter('memberId',$member->getId())
+                       ->orderBy('cg.dateEnd', 'ASC')
+                       ->getQuery()
+                       ->getResult();
+        
+        return $result;
+    }
 }

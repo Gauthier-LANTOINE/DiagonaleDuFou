@@ -2,6 +2,8 @@
 
 namespace GL\WebsiteAdminBundle\Repository;
 
+use GL\UserBundle\Entity\User;
+
 /**
  * MemberRepository
  *
@@ -10,6 +12,11 @@ namespace GL\WebsiteAdminBundle\Repository;
  */
 class MemberRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Obtiens la liste des utilisateurs qui ne sont pas activés
+     * 
+     * @return array()
+     */
     public function getDisabledUsers()
     {
         $result = $this->createQueryBuilder('m')
@@ -23,7 +30,14 @@ class MemberRepository extends \Doctrine\ORM\EntityRepository
         return $result;
     }
     
-    public function getOtherMemberWithUserAccountQueryBuilder($currentUser)
+    /**
+     * Retourne un QueryBuilder permettant d'obtenir la liste des membres
+     * qui ont un compte utilisateur à part celui passé en paramètre.
+     * 
+     * @param User $currentUser
+     * @return array()
+     */
+    public function getOtherMemberWithUserAccountQueryBuilder(User $currentUser)
     {
         $queryBuilder = $this->createQueryBuilder('m')
                       ->innerJoin('m.user', 'u')

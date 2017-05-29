@@ -10,6 +10,7 @@
                 <tr>
                     <th class="text-center">Numéro Défi</th>
                     <th class="text-center">Adversaire</th>
+                    <th class="text-center">Couleur</th>
                     <th class="text-center">Décision</th>
                 </tr>
             </thead>
@@ -18,6 +19,13 @@
                 <tr>
                     <td>{{ challenge.id }}</td>
                     <td>{{ challenge.memberChallenger.firstName }} {{ challenge.memberChallenger.lastName }}</td>
+                    <td>
+                        {% if challenge.challengerColor == 'blanc'%}
+                            noir
+                        {%else%}
+                            blanc
+                        {%endif%}
+                    </td>
                     <td>
                         <a href="{{ path('core_challenge_decision_accept', {'id': challenge.id}) }}">
                             <button class="btn btn-success">Accepter</button>
@@ -40,6 +48,8 @@
     {{ form_errors(form) }}
 
     {{ form_row(form.memberChallenged, { 'label': 'Membre à défier' }) }}
+    
+    {{ form_row(form.challengerColor, { 'label': 'Choix de la couleur' }) }}
 
     {{ form_row(form.save, { 'label': 'Lancer Défi' }) }}
 

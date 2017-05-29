@@ -59,10 +59,21 @@ class Challenge {
     private $date;
     
      /**
+     * Partie d'échecs
+     * @var ChessGame
+     * 
      * @ORM\OneToOne(targetEntity="CoreBundle\Entity\ChessGame", cascade={"persist"})
      * @ORM\JoinColumn(name="chess_game_id", referencedColumnName="id", nullable=true)
      */
     private $chessGame;
+   
+    /**
+     * Couleur choisi par la personne qui défi
+     * 
+     * @var string
+     * @ORM\Column(name="challenger_color", type="string", length=5, nullable=true)
+     */
+    private $challengerColor;
 
     /**
      * Get id
@@ -194,5 +205,29 @@ class Challenge {
     public function getChessGame()
     {
         return $this->chessGame;
+    }
+
+    /**
+     * Set challengerColor
+     *
+     * @param string $challengerColor
+     *
+     * @return Challenge
+     */
+    public function setChallengerColor($challengerColor)
+    {
+        $this->challengerColor = $challengerColor;
+
+        return $this;
+    }
+
+    /**
+     * Get challengerColor
+     *
+     * @return string
+     */
+    public function getChallengerColor()
+    {
+        return $this->challengerColor;
     }
 }

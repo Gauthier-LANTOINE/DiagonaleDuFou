@@ -1,1 +1,41 @@
-{# empty Twig template #}
+{% extends "CoreBundle:Chess:layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Zone jeu en différé{% endblock %}
+
+{% block chess_game %}
+    <h3 class="text-center">Parties terminées</h3>
+    
+    <table class="table table-bordered table-striped text-center table-admin ">
+            <thead>
+                <tr>
+                    <th class="text-center">Numéro Partie</th>
+                    <th class="text-center">Joueur Blanc</th>
+                    <th class="text-center">Joueur Noir</th>
+                    <th class="text-center">Débuté le</th>
+                    <th class="text-center">Fini le</th>
+                    <th class="text-center">Nombre de coup</th>
+                    <th class="text-center">Résultat</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chessGame in listFinishedGames %}
+                    <tr>
+                        <td>{{ chessGame.id }}</td>
+                        <td>{{ chessGame.memberWhite.firstName }} {{ chessGame.memberWhite.lastName }}</td>
+                        <td>{{ chessGame.memberBlack.firstName }} {{ chessGame.memberBlack.lastName }}</td>
+                        <td>{{ chessGame.dateStart|date("d/m/Y") }}</td>
+                        <td>{{ chessGame.dateEnd|date("d/m/Y") }}</td>
+                        <td>{{ chessGame.moveNumber }}</td>
+                        <td>{{ chessGame.result }}</td>
+                        <td>
+                            <a href="">
+                                <button class="btn btn-success">Voir</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+    </table>
+{% endblock %}

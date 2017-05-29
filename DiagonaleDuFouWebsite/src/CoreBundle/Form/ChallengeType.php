@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use GL\WebsiteAdminBundle\Repository\MemberRepository;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ChallengeType extends AbstractType
 {
@@ -30,6 +31,14 @@ class ChallengeType extends AbstractType
                           return $mr->getOtherMemberWithUserAccountQueryBuilder($currentUser);
                       }
         ))
+                ->add('challengerColor',ChoiceType::class, array(
+                    'choices' => array(
+                        'blanc'=> 'blanc',
+                        'noir' => 'noir'
+                    ),
+                    'multiple'     => false,
+                    'placeholder' => '-- Choix de la couleur',
+                ))
                 ->add('save',SubmitType::class);
     }
     

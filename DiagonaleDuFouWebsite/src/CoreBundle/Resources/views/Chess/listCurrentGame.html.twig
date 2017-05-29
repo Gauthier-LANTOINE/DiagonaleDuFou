@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }} - Zone jeu en différé{% endblock %}
 
 {% block chess_game %}
-    <h3 class="text-center">Parties en cours</h3>
+    <h3 class="text-center">Parties à jouer</h3>
     
     <table class="table table-bordered table-striped text-center table-admin ">
             <thead>
@@ -11,20 +11,26 @@
                     <th class="text-center">Numéro Partie</th>
                     <th class="text-center">Joueur Blanc</th>
                     <th class="text-center">Joueur Noir</th>
+                    <th class="text-center">Débuté le</th>
                     <th class="text-center">Nombre de coup</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
-                
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>Action</td>
-                </tr>
-                
+                {% for chessGame in listCurrentGames %}
+                    <tr>
+                        <td>{{ chessGame.id }}</td>
+                        <td>{{ chessGame.memberWhite.firstName }} {{ chessGame.memberWhite.lastName }}</td>
+                        <td>{{ chessGame.memberBlack.firstName }} {{ chessGame.memberBlack.lastName }}</td>
+                        <td>{{ chessGame.dateStart|date("d/m/Y") }}</td>
+                        <td>{{ chessGame.moveNumber }}</td>
+                        <td>
+                            <a href="{{path('core_play_game', { 'id': chessGame.id })}}">
+                                <button class="btn btn-success">Jouer</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
 
             </tbody>
     </table>
