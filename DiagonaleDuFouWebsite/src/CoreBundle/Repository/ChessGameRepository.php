@@ -25,9 +25,24 @@ class ChessGameRepository extends \Doctrine\ORM\EntityRepository
                        ->innerJoin('cg.memberBlack', 'mb')
                        ->addSelect('mb')
                        ->where('cg.finished = false')
-                       ->andWhere("(mw.id = :memberId AND cg.turn = 'w') OR (mb.id = :memberId AND cg.turn = 'b')")
+                       ->andWhere("(mw.id = :memberId AND cg.colorTurn = 'w') OR (mb.id = :memberId AND cg.colorTurn = 'b')")
                        ->setParameter('memberId',$member->getId())
-                       ->orderBy('cg.dateLastMove', 'ASC')
+                       ->getQuery()
+                       ->getResult();
+        
+        return $result;
+    }
+    
+    public function memberWaitingGame(Member $member)
+    {
+        $result = $this->createQueryBuilder('cg')
+                       ->innerJoin('cg.memberWhite', 'mw')
+                       ->addSelect('mw')
+                       ->innerJoin('cg.memberBlack', 'mb')
+                       ->addSelect('mb')
+                       ->where('cg.finished = false')
+                       ->andWhere("(mw.id = :memberId) OR (mb.id = :memberId)")
+                       ->setParameter('memberId',$member->getId())
                        ->getQuery()
                        ->getResult();
         

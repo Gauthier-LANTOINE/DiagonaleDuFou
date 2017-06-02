@@ -4,6 +4,11 @@
 {% block title %}{{ parent() }} - Accueil{% endblock %}
 
 {% block glwebsiteadmin_body %}
+    {% for message in app.session.flashbag.get('notice') %}
+        <div class="jumbotron">      
+            <p class="text-center">{{ message }}</p>
+        </div>    
+    {% endfor %}
     {% if is_granted('ROLE_ADMIN') %}
         <section class="well">
             <h2 class="text-center">Inscrit en attente de validation</h2>

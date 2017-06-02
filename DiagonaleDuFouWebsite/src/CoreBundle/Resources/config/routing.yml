@@ -24,6 +24,13 @@ core_list_finished_game:
     defaults: 
         _controller: CoreBundle:Chess:listFinishedGame
         
+core_view_game:
+    path: /chess-game/view-game/{id}
+    defaults: 
+        _controller: CoreBundle:Chess:viewGame
+    requirements:
+        id: \d+
+        
 core_challenge_game:
     path: /chess-game/challenge
     defaults: 
@@ -49,10 +56,10 @@ core_play_game:
         _controller: CoreBundle:Chess:playGame
     requirements:
         id: \d+
-        
-core_play_game_validate:
-    path: /chess-game/play-game/{id}/validate
+ 
+core_game_accept_draw:
+    path: /chess-game/play-game/{id}/draw
     defaults: 
-        _controller: CoreBundle:Chess:validateMove
+        _controller: CoreBundle:Chess:acceptDraw
     requirements:
         id: \d+

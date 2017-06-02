@@ -8,15 +8,15 @@
         
 
         <h1 class="text-center">Zone jeu en différé</h1>
-        
+        <hr>
         <div class="row">
             <div>
-                <a href="{{ path('core_list_current_game') }}"><button class="btn btn-info col-lg-2 col-lg-offset-1">Partie en cours</button></a>
-                <a href="{{ path('core_list_finished_game') }}"><button class="btn btn-info col-lg-2 col-lg-offset-2">Partie terminés</button></a>
-                <a href="{{ path('core_challenge_game') }}"><button class="btn btn-info col-lg-2 col-lg-offset-2">Défi</button></a>
+                <a href="{{ path('core_list_current_game') }}"><button class="btn btn-info col-lg-2 col-lg-offset-1">Parties en cours</button></a>
+                <a href="{{ path('core_list_finished_game') }}"><button class="btn btn-info col-lg-2 col-lg-offset-2">Parties terminées</button></a>
+                <a href="{{ path('core_challenge_game') }}"><button class="btn btn-info col-lg-2 col-lg-offset-2">Défis</button></a>
             </div>
         </div>
-
+        <hr>
         {% block chess_game %}
         {% endblock %}
         

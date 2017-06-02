@@ -92,7 +92,9 @@ footer
         transform: translate(-50%, -50%) !important;
     }
     
-
+    .jumbotron {
+        padding: 10px;
+    }
     
    
 
@@ -185,4 +187,40 @@ small
 {
     max-width: 600px;
     margin: auto;
+}
+
+/*Espace jeu en différé*/
+
+.list-chess
+{
+    overflow-y: scroll; 
+    height:300px;
+
+}
+
+.list-chess-finished-game
+{
+    overflow-y: scroll; 
+    height:600px;
+    margin-top: 50px;
+
+}
+
+#board
+{
+    margin:auto;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+.chess-history form
+{
+    display: inline-block;
+}
+
+.history-chess
+{
+    overflow-y: scroll; 
+    height:400px;
+    margin-top: 20px;
 }

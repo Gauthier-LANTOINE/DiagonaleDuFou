@@ -1,0 +1,93 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Revoir partie{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('chessboardjs-0.3.0/css/chessboard-0.3.0.css') }}" />
+{% endblock %}
+
+{% block core_body %}
+    <div class="row">
+        <div class="well col-lg-4">
+            <h3>Adversaire</h3>
+            <p>
+                Prénom: {{ opponent.firstName }} 
+            </p>
+            <p>
+                Nom: {{ opponent.lastName }}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-9 ">
+
+            {# Plateau d'échecs #}
+            <div id="board"></div>
+
+            <a href="{{ path('core_list_finished_game') }}" class="btn btn-primary">
+                Retour
+            </a>
+        </div>
+        <div class="col-lg-3 chess-history">
+
+            {# Historique de la partie #}
+            <div class="history-chess well">
+                <table class="table table-bordered text-center chess-history">
+                    <tbody>
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">Historique</th>
+                        </tr>
+                    </thead>
+                    {% for i in 1..chessGame.sanHistory.w|length %}
+                        <tr>
+                            <td>
+                                {% if chessGame.sanHistory.w[loop.index0].san is defined %}
+                                    <a id="{{chessGame.sanHistory.w[loop.index0].fen}}">
+                                        {{chessGame.sanHistory.w[loop.index0].san}}
+                                    </a>
+                                {%endif%}
+                            </td>
+                            <td>
+                                {% if chessGame.sanHistory.b[loop.index0].san is defined %}
+                                    <a id="{{chessGame.sanHistory.b[loop.index0].fen}}">
+                                        {{chessGame.sanHistory.b[loop.index0].san}}
+                                    </a>
+                                {%endif%}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{ asset('chessboardjs-0.3.0/js/chessboard-0.3.0.min.js') }}"></script>
+    <script>
+
+        $('.chess-history a').click(function () {
+            var id = $(this).attr('id');
+            board.position(id);
+        });
+        
+        var cfg = {
+            position: '{{ chessGame.fen }}',
+            pieceTheme: '{{ asset('chessboardjs-0.3.0/img/chesspieces/wikipedia/{piece}.png') }}',
+            draggable: false,
+            orientation: '{{ orientation }}'
+        };
+
+        var board = ChessBoard('board', cfg);
+
+        $(window).resize(board.resize);
+    </script>
+
+{% endblock %}

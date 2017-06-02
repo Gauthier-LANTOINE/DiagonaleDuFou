@@ -3,6 +3,7 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Ryanhs\Chess\Chess;
 
@@ -13,7 +14,7 @@ use Ryanhs\Chess\Chess;
  * @ORM\Entity(repositoryClass="CoreBundle\Repository\ChessGameRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class ChessGame extends Chess{
+class ChessGame extends Chess {
 
     /**
      * @var int
@@ -30,13 +31,6 @@ class ChessGame extends Chess{
      * @ORM\Column(name="finished", type="boolean", nullable=false)
      */
     private $finished;
-    
-     /**
-     * @var bool
-     *
-     * @ORM\Column(name="draw_offer", type="boolean", nullable=false)
-     */    
-    private $drawOffer;
 
     /**
      * @var string
@@ -52,12 +46,6 @@ class ChessGame extends Chess{
      */
     private $dateStart;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_last_move", type="datetime", nullable=true)
-     */
-    private $dateLastMove;
 
     /**
      * @var \DateTime
@@ -86,86 +74,27 @@ class ChessGame extends Chess{
      */
     private $memberBlack;
 
-
-
     /**
-     * @var array
-     *
-     * @ORM\Column(name="board", type="array", nullable=true)
+     * coups de la partie
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Move", mappedBy="chessGame")
+     * @var Move
      */
-    protected $board;
+    private $moves;
+    
+    private $sanHistory;
     
     /**
-     * @var array
-     *
-     * @ORM\Column(name="kings", type="array", nullable=true)
-     */
-    protected $kings;
-    
-    /**
-     * indique le camp pour lequel c'est le tour de jeu
-     * 
      * @var string
      *
-     * @ORM\Column(name="turn", type="string", length=1, options={"fixed" = true}, nullable=true)
+     * @ORM\Column(name="color_turn", type="string", length=1, nullable=false)
      */
-    protected $turn;
-    
-    /**
-     * indique si chaque camp peut roquer
-     * @var array
-     *
-     * @ORM\Column(name="castling", type="array", nullable=true)
-     */
-    protected $castling;
-    
-     /**
-     * @var int
-     *
-     * @ORM\Column(name="ep_square", type="integer", nullable=true)
-     */
-    protected $epSquare;
-    
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="half_moves", type="integer", nullable=false)
-     */
-    protected $halfMoves;
-    
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="move_number", type="integer", nullable=false)
-     */
-    protected $moveNumber;
-    
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="history", type="array", nullable=true)
-     */
-    protected $history;
-    
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="header", type="array", nullable=true)
-     */
-    protected $header;
-    
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="generate_move_cache", type="array", nullable=true)
-     */
-    protected $generateMovesCache;
-
+    protected $colorTurn;
 
     public function __construct() {
         parent::__construct("fen");
         $this->setFinished(false);
-        $this->setDrawOffer(false);
+        $this->colorTurn='w';
+        $this->moves = new ArrayCollection();
     }
 
     /**
@@ -197,28 +126,6 @@ class ChessGame extends Chess{
      */
     public function getFinished() {
         return $this->finished;
-    }
-    
-    /**
-     * Set drawOffer
-     *
-     * @param boolean $drawOffer
-     *
-     * @return ChessGame
-     */
-    public function setDrawOffer($drawOffer) {
-        $this->drawOffer = $drawOffer;
-
-        return $this;
-    }
-
-    /**
-     * Get drawOffer
-     *
-     * @return bool
-     */
-    public function getDrawOffer() {
-        return $this->drawOffer;
     }
 
     /**
@@ -266,16 +173,12 @@ class ChessGame extends Chess{
     }
 
     /**
-     * Set dateEnd
+     * Mutateur définisant la date de fin a a date à laquelle est appelé la méthode.
      *
      * @param \DateTime $dateEnd
-     *
-     * @return ChessGame
      */
-    public function setDateEnd($dateEnd) {
-        $this->dateEnd = $dateEnd;
-
-        return $this;
+    public function setDateEnd() {
+        $this->dateEnd = new \DateTime();
     }
 
     /**
@@ -332,21 +235,6 @@ class ChessGame extends Chess{
     }
 
     /**
-     * permet de changer la date du dernier coup 
-     * 
-     * géré par un événement Doctrine avant chaque mise à jour
-     *
-     * @param \DateTime $dateLastMove
-     * @ORM\PreUpdate
-     * @return ChessGame
-     */
-    public function setDateLastMove($dateLastMove) {
-        $this->dateLastMove = new \DateTime();
-
-        return $this;
-    }
-
-    /**
      * Get dateLastMove
      *
      * @return \DateTime
@@ -354,7 +242,6 @@ class ChessGame extends Chess{
     public function getDateLastMove() {
         return $this->dateLastMove;
     }
-
 
     /**
      * Get moveNumber
@@ -364,6 +251,116 @@ class ChessGame extends Chess{
     public function getMoveNumber() {
         return $this->moveNumber;
     }
+
+    /**
+     * initialise les attributs de la classe mère
+     * 
+     * @ORM\PostLoad
+     */
+    public function chessInit() {
+        //initialise les header pour la génération de pgn
+        $this->header('White', $this->memberWhite->getFirstName().' '.$this->memberWhite->getLastName());
+        $this->header('Black', $this->memberBlack->getFirstName().' '.$this->memberBlack->getLastName());
+        
+        //initialise le compteur de coup et applique la position par défaut
+        $this->clear();
+        $this->reset();
+        
+        $arrayW=null;
+        $arrayB=null;
+        
+        //récupère les coups pour remplir l'historique des positions
+        foreach ($this->moves as $move) {
+            $moveArray = array(
+                'from' => $move->getFromSquare(),
+                'to' => $move->getToSquare(),
+                'promotion' => $move->getPromotion()
+            );
+            
+            $moveResult=$this->move($moveArray);
+            
+            //si le tour est au noir je récupère le coup 
+            //et la position joué par les blancs
+            if($this->turn()==='b'){
+                $arrayW[]=array(
+                'fen'=>$this->fen(),
+                'san'=>$moveResult["san"]
+            );
+            }           
+            // et inversement
+            if($this->turn()==='w'){
+                $arrayB[]=array(
+                'fen'=>$this->fen(),
+                'san'=>$moveResult["san"]
+            );}  
+        }
+        //remplissage de la variable sanHistory
+        $this->sanHistory=array('w'=>$arrayW,'b'=>$arrayB);
+    }
+
+    /**
+     * Add move
+     *
+     * @param \CoreBundle\Entity\Move $move
+     *
+     * @return ChessGame
+     */
+    public function addMove(\CoreBundle\Entity\Move $move) {
+        $this->moves[] = $move;
+
+        return $this;
+    }
+
+    /**
+     * Remove move
+     *
+     * @param \CoreBundle\Entity\Move $move
+     */
+    public function removeMove(\CoreBundle\Entity\Move $move) {
+        $this->moves->removeElement($move);
+    }
+
+    /**
+     * Get moves
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMoves() {
+        return $this->moves;
+    }
     
+    /**
+     * Get sanHistory
+     *
+     * @return array
+     */
+    public function getSanHistory() {
+        return $this->sanHistory;
+    }
+
+
+    /**
+     * Set colorTurn
+     *
+     * @param string $colorTurn
+     *
+     * @return ChessGame
+     */
+    public function setColorTurn($colorTurn)
+    {
+        $this->colorTurn = $colorTurn;
+
+        return $this;
+    }
+
+    /**
+     * Get colorTurn
+     *
+     * @return string
+     */
+    public function getColorTurn()
+    {
+        return $this->colorTurn;
+    }
     
 }

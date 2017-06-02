@@ -8,28 +8,83 @@
 {% endblock %}
 
 {% block core_body %}
-    <h3 >Adversaire</h3>
-    <p>
-        {{ opponent.firstName }} {{ opponent.lastName }}
-    </p>
+    <div class="row">
+        <div class="well col-lg-4">
+            <h3>Adversaire</h3>
+            <p>
+                Prénom: {{ opponent.firstName }} 
+            </p>
+            <p>
+                Nom: {{ opponent.lastName }}
+            </p>
+        </div>
+    </div>
+    <div class="row">
 
-    <div id="board" style="width: 400px"></div>
-    <form action="{{ path('core_play_game_validate', {'id': chessGame.id}) }}" method="post">
-    
-    <input type="hidden" value="" id="from" name="from">
-    <input type="hidden" value="" id="to" name="to">
-    <input type="hidden" value="q" id="promotion" name="promotion">
-        
-    
-    <input type="submit" value="Valider" class="btn btn-success" />
-    
-    {{ form_rest(form) }}
-  </form>
-  
-  <button id="removeMove" class="btn btn-danger">Annuler</button>
-  
-  
+        <div class="col-lg-9 ">
 
+            {# Plateau d'échecs #}
+            <div id="board"></div>
+
+            {% if drawOffer == true %}
+                <div class="jumbotron">
+                    <p>Votre Adversaire vous a fait une offre de nulle.</p>
+                    <div>
+                        <a href="{{ path('core_game_accept_draw', {'id' : chessGame.id }) }}" id="acceptOffer" class="btn btn-success">
+                            Accepter
+                        </a>
+                        <a id="refuseOffer" class="btn btn-danger">
+                            Refuser
+                        </a>
+                    </div>
+                </div>
+            {%endif%}
+            <a href="{{ path('core_list_current_game') }}" class="btn btn-primary">
+                Retour
+            </a>
+        </div>
+        <div class="col-lg-3 chess-history">
+            {# Formulaire d'envoie des coups #}
+            {{ include("CoreBundle:Chess:moveForm.html.twig") }}
+
+            <button id="removeMove" class="btn btn-danger">Annuler</button>
+
+            {# Historique de la partie #}
+            <div class="history-chess well">
+                <table class="table table-bordered text-center chess-history">
+                    <tbody>
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">Historique</th>
+                        </tr>
+                    </thead>
+                    {% for i in 1..chessGame.sanHistory.w|length %}
+                        <tr>
+                            <td>
+                                {% if chessGame.sanHistory.w[loop.index0].san is defined %}
+                                    <a id="{{chessGame.sanHistory.w[loop.index0].fen}}">
+                                        {{chessGame.sanHistory.w[loop.index0].san}}
+                                    </a>
+                                {%endif%}
+                            </td>
+                            <td>
+                                {% if chessGame.sanHistory.b[loop.index0].san is defined %}
+                                    <a id="{{chessGame.sanHistory.b[loop.index0].fen}}">
+                                        {{chessGame.sanHistory.b[loop.index0].san}}
+                                    </a>
+                                {%endif%}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -47,10 +102,12 @@
                     (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
                     (game.turn() === 'b' && piece.search(/^w/) !== -1) ||
                     (game.turn() === 'w' && orientation === 'black') ||
-                    (game.turn() === 'b' && orientation === 'white')) {
+                    (game.turn() === 'b' && orientation === 'white') ||
+                    game.fen().split(" ", 1)[0] !== board.fen()) {
 
                 return false;
             }
+
         };
 
         var onDrop = function (source, target) {
@@ -60,9 +117,9 @@
                 to: target,
                 promotion: 'q'
             });
-            
-            $('#from').val(source);
-            $('#to').val(target);
+
+            $('#corebundle_move_fromSquare').val(source);
+            $('#corebundle_move_toSquare').val(target);
 
             // en cas de coup illégal
             if (move === null)
@@ -73,14 +130,24 @@
         var onSnapEnd = function () {
             board.position(game.fen());
         };
-        $( "#removeMove" ).click(function() {
-            
+        $("#removeMove").click(function () {
+
             $('#from').val('');
             $('#to').val('');
             game.undo();
             board.position(game.fen());
         });
-        
+
+        $('.chess-history a').click(function () {
+            var id = $(this).attr('id');
+            board.position(id);
+            if (game.fen() !== '{{ chessGame.fen }}')
+            {
+                game.undo();
+            }
+        });
+
+
         var cfg = {
             position: '{{ chessGame.fen }}',
             pieceTheme: '{{ asset('chessboardjs-0.3.0/img/chesspieces/wikipedia/{piece}.png') }}',
@@ -90,8 +157,10 @@
             onDrop: onDrop,
             onSnapEnd: onSnapEnd
         };
-        
+
         var board = ChessBoard('board', cfg);
+
+        $(window).resize(board.resize);
     </script>
 
 {% endblock %}

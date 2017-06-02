@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller {
 
+    /**
+     * Affiche l'accueil avec les 4 derniers articles
+     */
     public function indexAction() {
         $listArticles = $this
                 ->getDoctrine()
@@ -37,17 +40,16 @@ class DefaultController extends Controller {
         $form = $this->get('form.factory')->create(RegisterType::class, $member);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-
-              $email = $form->get('email')->getData();
-              $member->getUser()->setEmail($email);
                    
               $em = $this->getDoctrine()->getManager();
               $em->persist($member);
               $em->flush();              
 
-            $request->getSession()->getFlashBag()->add('notice', 'Membre bien enregistré.');
+            $request->getSession()->getFlashBag()
+                    ->add('notice', 'Votre compte à été créé ,'
+                    . ' vous recevrez un mail lorsque votre compte sera validé.');
 
-            return $this->redirectToRoute('gl_website_admin_homepage');
+            return $this->redirectToRoute('core_register');
         }
 
         return $this->render('CoreBundle:Default:register.html.twig', array(
