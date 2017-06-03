@@ -41,7 +41,7 @@ class ChessGameRepository extends \Doctrine\ORM\EntityRepository
                        ->innerJoin('cg.memberBlack', 'mb')
                        ->addSelect('mb')
                        ->where('cg.finished = false')
-                       ->andWhere("(mw.id = :memberId) OR (mb.id = :memberId)")
+                       ->andWhere("(mw.id = :memberId AND cg.colorTurn = 'b') OR (mb.id = :memberId AND cg.colorTurn = 'w')")
                        ->setParameter('memberId',$member->getId())
                        ->getQuery()
                        ->getResult();

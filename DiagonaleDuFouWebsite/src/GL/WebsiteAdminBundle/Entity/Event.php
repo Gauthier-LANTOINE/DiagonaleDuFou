@@ -3,6 +3,7 @@
 namespace GL\WebsiteAdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
@@ -22,6 +23,12 @@ class Event
     private $id;
 
     /**
+     * Libellé de l'événement
+     * 
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
+     * 
+     * @Assert\Length(max=60, maxMessage="L'intitulé de l'événement doit contenir au maximum 60 caractères")
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=60)
@@ -29,13 +36,19 @@ class Event
     private $name;
 
     /**
+     * Date à laquelle l'événement à lieu
+     * 
      * @var \DateTime
+     * @Assert\DateTime()
      *
      * @ORM\Column(name="date", type="date")
      */
     private $date;
     
     /**
+     * Catégorie de l'événement
+     * 
+     * @Assert\Valid
      * @ORM\ManyToOne(targetEntity="GL\WebsiteAdminBundle\Entity\CategoryEvent")
      * @ORM\JoinColumn(nullable=false)
      */

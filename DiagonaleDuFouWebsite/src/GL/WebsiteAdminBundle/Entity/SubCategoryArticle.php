@@ -3,6 +3,7 @@
 namespace GL\WebsiteAdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SubCategoryArticle
@@ -22,6 +23,12 @@ class SubCategoryArticle
     private $id;
 
     /**
+     * Libellé de la sous catégorie
+     * 
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=50, maxMessage="L'URL doit faire au maximum 50 caractères")
+     * 
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50, unique=true)
@@ -29,6 +36,8 @@ class SubCategoryArticle
     private $name;
     
     /**
+     * Catégorie à laquelle la sous catégorie est lié
+     * 
      * @ORM\ManyToOne(targetEntity="GL\WebsiteAdminBundle\Entity\CategoryArticle")
      * @ORM\JoinColumn(nullable=false)
      */

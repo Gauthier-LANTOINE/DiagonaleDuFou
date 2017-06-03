@@ -32,7 +32,7 @@ class MemberRepository extends \Doctrine\ORM\EntityRepository
     
     /**
      * Retourne un QueryBuilder permettant d'obtenir la liste des membres
-     * qui ont un compte utilisateur à part celui passé en paramètre.
+     * qui ont un compte utilisateur activé à part celui passé en paramètre.
      * 
      * @param User $currentUser
      * @return array()
@@ -42,7 +42,8 @@ class MemberRepository extends \Doctrine\ORM\EntityRepository
         $queryBuilder = $this->createQueryBuilder('m')
                       ->innerJoin('m.user', 'u')
                       ->where('u.id != :id')
-                      ->setParameter('id', $currentUser->getId());
+                      ->setParameter('id', $currentUser->getId())
+                      ->andWhere('u.enabled = true');
         return $queryBuilder;
     }
 }

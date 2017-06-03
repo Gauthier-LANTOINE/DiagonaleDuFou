@@ -3,6 +3,7 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Move
@@ -24,45 +25,51 @@ class Move
 
     /**
      * Case de départ
+     * 
      * @var string
-     *
+     * @Assert\Length(min = 2, max = 2)
      * @ORM\Column(name="fromSquare", type="string", length=2, options={"fixed" = true})
      */
     private $fromSquare;
 
     /**
      * Case d'arrivé
+     * 
      * @var string
-     *
+     * @Assert\Length(min = 2, max = 2)
      * @ORM\Column(name="toSquare", type="string", length=2, options={"fixed" = true})
      */
     private $toSquare;
 
     /**
      * Pièce choisie pour la promotion
+     * 
      * @var string
-     *
+     * @Assert\Length(min = 1, max = 1)
      * @ORM\Column(name="promotion", type="string", length=1, nullable=true, options={"fixed" = true})
      */
     private $promotion;
     /**
      * Offre de nulle
+     * 
      * @var bool
-     *
+     * @Assert\Type("bool")
      * @ORM\Column(name="draw_offer", type="boolean", nullable=false)
      */    
     private $drawOffer;
     
     /**
      * Date du coup
+     * 
      * @var \DateTime
-     *
+     * @Assert\DateTime()
      * @ORM\Column(name="date_move", type="datetime", nullable=true)
      */
     private $dateMove;
     
     /**
      * Partie d'échecs à laquelle le coup est lié
+     * 
      * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\ChessGame", inversedBy="moves")
      * @ORM\JoinColumn(nullable=false)
      */

@@ -28,14 +28,17 @@ class Image {
     private $id;
 
     /**
+     * URL de l'image
+     * 
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255)
      */
     private $url;
 
-    
     /**
+     * Fichier image
+     * 
      * @Assert\Image(
      *     maxSize="1M",
      *     maxSizeMessage="Le fichier est trop volumineux, il ne doit pas dépasser {{ limit }} {{ suffix }}",
@@ -47,8 +50,10 @@ class Image {
      * @var UploadedFile;
      */
     private $imageFile;
-    
-     /**
+
+    /**
+     * Nom de l'image
+     * 
      * @ORM\Column(name="name", type="string", length=255)
      *
      * @var string
@@ -56,19 +61,22 @@ class Image {
     private $imageName;
 
     /**
+     * Taille de l'image
+     * 
      * @ORM\Column(name="size", type="integer")
      *
      * @var integer
      */
     private $imageSize;
-    
-     /**
+
+    /**
+     * Date de la mise à jour de l'image
+     * 
      * @ORM\Column(name="updated_date", type="datetime")
      *
      * @var \DateTime
      */
     private $updatedAt;
-
 
     /**
      * Get id
@@ -101,7 +109,6 @@ class Image {
         return $this->url;
     }
 
-
     /**
      * Set imageName
      *
@@ -109,8 +116,7 @@ class Image {
      *
      * @return Image
      */
-    public function setImageName($imageName)
-    {
+    public function setImageName($imageName) {
         $this->imageName = $imageName;
 
         return $this;
@@ -121,8 +127,7 @@ class Image {
      *
      * @return string
      */
-    public function getImageName()
-    {
+    public function getImageName() {
         return $this->imageName;
     }
 
@@ -133,8 +138,7 @@ class Image {
      *
      * @return Image
      */
-    public function setImageSize($imageSize)
-    {
+    public function setImageSize($imageSize) {
         $this->imageSize = $imageSize;
 
         return $this;
@@ -145,8 +149,7 @@ class Image {
      *
      * @return integer
      */
-    public function getImageSize()
-    {
+    public function getImageSize() {
         return $this->imageSize;
     }
 
@@ -157,8 +160,7 @@ class Image {
      *
      * @return Image
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -169,27 +171,26 @@ class Image {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
-    
-     /**
-     *
+
+    /**
+     * setter enregistrant toute les infos de l'image
+     * 
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
      * @return Image
      */
-    public function setImageFile(File $image = null)
-    {
+    public function setImageFile(File $image = null) {
         $this->imageFile = $image;
 
         if ($image) {
-            $this->url = __DIR__.'/../../../../web/img';
+            $this->url = __DIR__ . '/../../../../web/img';
             $this->updatedAt = new \DateTimeImmutable();
-            $this->imageSize =0;
+            $this->imageSize = $image->getSize();
         }
-        
+
         return $this;
     }
 
@@ -197,8 +198,7 @@ class Image {
      * 
      * @return File|null
      */
-    public function getImageFile()
-    {
+    public function getImageFile() {
         return $this->imageFile;
     }
 

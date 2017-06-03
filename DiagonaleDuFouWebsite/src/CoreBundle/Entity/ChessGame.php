@@ -26,13 +26,15 @@ class ChessGame extends Chess {
     private $id;
 
     /**
+     * Valeur indiquant si la partie est terminé
      * @var bool
-     *
+     * 
      * @ORM\Column(name="finished", type="boolean", nullable=false)
      */
     private $finished;
 
     /**
+     * Résultat de la partie
      * @var string
      *
      * @ORM\Column(name="result", type="string", length=7, nullable=true)
@@ -40,6 +42,7 @@ class ChessGame extends Chess {
     private $result;
 
     /**
+     * Date de début de la partie
      * @var \DateTime
      *
      * @ORM\Column(name="date_start", type="datetime")
@@ -48,6 +51,7 @@ class ChessGame extends Chess {
 
 
     /**
+     * Date de fin de la partie
      * @var \DateTime
      *
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
@@ -81,15 +85,25 @@ class ChessGame extends Chess {
      */
     private $moves;
     
+    /**
+     * Historique contenant la représentation des coup au format SAN
+     * ainsi que la position au format fen.
+     * 
+     * @var array 
+     */
     private $sanHistory;
     
     /**
+     * Couleur au trait
      * @var string
      *
      * @ORM\Column(name="color_turn", type="string", length=1, nullable=false)
      */
     protected $colorTurn;
 
+    /**
+     * Constructeur initialisant les valeurs par défaut.
+     */
     public function __construct() {
         parent::__construct("fen");
         $this->setFinished(false);
@@ -253,7 +267,7 @@ class ChessGame extends Chess {
     }
 
     /**
-     * initialise les attributs de la classe mère
+     * initialise l'état de la partie
      * 
      * @ORM\PostLoad
      */

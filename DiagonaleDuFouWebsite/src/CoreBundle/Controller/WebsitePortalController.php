@@ -9,7 +9,7 @@ use GL\WebsiteAdminBundle\Entity\Member;
 use CoreBundle\Form\RegisterType;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller {
+class WebsitePortalController extends Controller {
 
     /**
      * Affiche l'accueil avec les 4 derniers articles
@@ -21,7 +21,7 @@ class DefaultController extends Controller {
                 ->getRepository('GLWebsiteAdminBundle:Articles')
                 ->getLastFourArticles();
 
-        return $this->render('CoreBundle:Default:index.html.twig', array('listArticles' => $listArticles));
+        return $this->render('CoreBundle:WebsitePortal:index.html.twig', array('listArticles' => $listArticles));
     }
 
     /**
@@ -29,7 +29,7 @@ class DefaultController extends Controller {
      */
     public function articleAction(Articles $article) {
         
-       return $this->render('CoreBundle:Default:article.html.twig', array('article' => $article)); 
+       return $this->render('CoreBundle:WebsitePortal:article.html.twig', array('article' => $article)); 
         
     }
     
@@ -52,7 +52,7 @@ class DefaultController extends Controller {
             return $this->redirectToRoute('core_register');
         }
 
-        return $this->render('CoreBundle:Default:register.html.twig', array(
+        return $this->render('CoreBundle:WebsitePortal:register.html.twig', array(
                     'form' => $form->createView(),
         ));
     }

@@ -25,43 +25,54 @@ class Articles {
     private $id;
 
     /**
+     * Titre de l'article
+     * 
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=80)
-     * 
+     * @Assert\Type("string")
      * @Assert\Length(min=5, minMessage="Le titre doit faire au moins 5 caractères")
      * @Assert\Length(max=80, maxMessage="Le titre doit faire au maximum 80 caractères")
      */
     private $title;
 
     /**
+     * Sous-titre de l'article
+     * 
      * @var string
      *
      * @ORM\Column(name="subtitle", type="string", length=200)
-     * 
+     * @Assert\Type("string")
      * @Assert\Length(min=10, minMessage="Le titre doit faire au moins 10 caractères")
      * @Assert\Length(max=200, maxMessage="Le titre doit faire au maximum 200 caractères")
      */
     private $subtitle;
 
     /**
+     * Contenu de l'article
+     * 
      * @var string
      *
      * @ORM\Column(name="content", type="text")
-     * 
+     * @Assert\Type("string")
      * @Assert\Length(min=10, minMessage="Le contenu de l'article doit faire au moins 10 caractères")
      */
     private $content;
 
     /**
+     * Valeur indiquant si l'article est publié
+     * 
      * @var bool
      *
      * @ORM\Column(name="published", type="boolean", nullable=false)
+     * @Assert\Type("bool")
      * @Assert\NotNull()
      */
     private $published;
 
     /**
+     * Date de publication
+     * 
      * @var \DateTime
      *
      * @ORM\Column(name="publication_date", type="datetime", nullable=true)
@@ -71,21 +82,31 @@ class Articles {
     private $publicationDate;
 
     /**
+     * Date de dernière modification
+     * 
      * @var \DateTime
      *
      * @ORM\Column(name="date_last_modified", type="datetime", nullable=true)
-     * 
      * @Assert\DateTime()
      */
     private $dateLastModified;
 
     /**
+     * Sous catégorie de l'article
+     * 
+     * @var SubCategoryArticle
+     * 
      * @ORM\ManyToOne(targetEntity="GL\WebsiteAdminBundle\Entity\SubCategoryArticle")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid
      */
     private $subCategory;
 
     /**
+     * Image associé à l'article
+     * 
+     * @var Image
+     * 
      * @ORM\OneToOne(targetEntity="GL\WebsiteAdminBundle\Entity\Image", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true)
      * @Assert\Valid()
@@ -93,6 +114,10 @@ class Articles {
     private $image;
 
     /**
+     * slug de l'article
+     * 
+     * @var string
+     * 
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
@@ -244,6 +269,9 @@ class Articles {
     }
 
     /**
+     * Mise à jour de la date de dernière modification 
+     * uniquement si l'article est publié
+     * 
      * @ORM\PreUpdate
      */
     public function updateDateLastModified() {

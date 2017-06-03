@@ -28,22 +28,26 @@ class User extends BaseUser {
     protected $id;
 
     /**
+     * Date d'enregistrement de l'utilisateur
+     * 
      * @var \DateTime
      * @Assert\DateTime()
      *
      * @ORM\Column(name="registerDate", type="datetime", nullable=false)
      */
     private $registerDate;
-    
+
     /**
-   * @ORM\OneToOne(targetEntity="GL\WebsiteAdminBundle\Entity\Member", mappedBy="user")
-   */
-  private $member;
-    
-    public function __construct()
-    {
+     * Membre relié a l'utilisateur
+     * 
+     * @ORM\OneToOne(targetEntity="GL\WebsiteAdminBundle\Entity\Member", mappedBy="user")
+     * @Assert\Valid
+     */
+    private $member;
+
+    public function __construct() {
         parent::__construct();
-        
+
         $this->addRole("ROLE_USER");
     }
 
@@ -56,9 +60,10 @@ class User extends BaseUser {
         return $this->id;
     }
 
-    //Force la désactivation du compte par défaut afin de pouvoir valider manuellement
-    //avec l'interface administrateur
     /**
+     * Force la désactivation du compte par défaut afin de pouvoir valider manuellement
+     * avec l'interface administrateur
+     * 
      * @ORM\PrePersist
      */
     public function setDisabledByDefault() {
@@ -88,18 +93,24 @@ class User extends BaseUser {
     }
 
     /**
+     * défini la date d'enregistrement à la date actuelle
+     * 
      * @ORM\PrePersist
      */
     public function addRegisterDate() {
         $this->setRegisterDate(new \Datetime());
     }
 
-    //copie l'adresse Email comme Pseudo pour l'identification
+    /**
+     * 
+     * 
+     * @param type $email
+     */
     public function setEmail($email) {
+        //Copie l'adresse Email comme Pseudo pour l'identification
         parent::setEmail($email);
         $this->setUsername($email);
     }
-
 
     /**
      * Set member
@@ -108,8 +119,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setMember(\GL\WebsiteAdminBundle\Entity\Member $member = null)
-    {
+    public function setMember(\GL\WebsiteAdminBundle\Entity\Member $member = null) {
         $this->member = $member;
 
         return $this;
@@ -120,8 +130,8 @@ class User extends BaseUser {
      *
      * @return \GL\WebsiteAdminBundle\Entity\Member
      */
-    public function getMember()
-    {
+    public function getMember() {
         return $this->member;
     }
+
 }

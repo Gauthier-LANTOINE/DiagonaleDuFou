@@ -3,6 +3,7 @@
 namespace GL\WebsiteAdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * CategoryEvent
@@ -22,9 +23,14 @@ class CategoryEvent
     private $id;
 
     /**
+     * Libellé de la catégorie
+     * 
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=50, unique=true)
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
+     * 
+     * @Assert\Length(max=25, maxMessage="La catégorie de l'événement au maximum 25 caractères")
+     * @ORM\Column(name="name", type="string", length=25, unique=true)
      */
     private $name;
 

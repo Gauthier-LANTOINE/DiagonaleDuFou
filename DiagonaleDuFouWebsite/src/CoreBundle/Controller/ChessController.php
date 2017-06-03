@@ -10,6 +10,7 @@ use CoreBundle\Entity\ChessGame;
 use CoreBundle\Entity\Move;
 use CoreBundle\Form\MoveType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Controlleur de la zone de jeu en différé
@@ -21,7 +22,7 @@ class ChessController extends Controller {
     /**
      * Action de la route /chess-game/list-current-game
      * retourne l'écran listant les parties en cours
-     * 
+     * @Security("has_role('ROLE_USER')")
      */
     public function listCurrentGameAction() {
 
@@ -37,7 +38,8 @@ class ChessController extends Controller {
     /**
      * Action de la route /chess-game/list-current-game
      * retourne l'écran listant les parties finies
-     * 
+     *
+     *  @Security("has_role('ROLE_USER')")
      */
     public function listFinishedGameAction() {
 
@@ -52,6 +54,7 @@ class ChessController extends Controller {
      * Action de la route /chess-game/challenge
      * retourne le formulaire proposant de défier les autres membres ayant un compte utilisateur
      * 
+     * @Security("has_role('ROLE_USER')")
      * @param Request $request
      */
     public function challengeAction(Request $request) {
@@ -92,6 +95,7 @@ class ChessController extends Controller {
      * permettant d'accepter un défi. créé une partie d'échecs en assignant les joueurs
      * blanc et noirs
      * 
+     * @Security("has_role('ROLE_USER')")
      * @ParamConverter("challenge", options={"mapping": {"id": "id"}})
      * @param Challenge $challenge
      */
@@ -126,6 +130,7 @@ class ChessController extends Controller {
      * Action de la route /chess-game/challenge/decision/refuse/{$id}
      * permettant de refuser un défi.
      * 
+     * @Security("has_role('ROLE_USER')")
      * @ParamConverter("challenge", options={"mapping": {"id": "id"}})
      * @param Challenge $challenge
      */
@@ -141,6 +146,7 @@ class ChessController extends Controller {
      * Action de la route /chess-game/game/{id}
      * permettant de jouer sa partie ou un coup est attendu.
      * 
+     * @Security("has_role('ROLE_USER')")
      * @ParamConverter("chessGame", options={"mapping": {"id": "id"}})
      * @param ChessGame $chessGame
      */
@@ -189,11 +195,12 @@ class ChessController extends Controller {
      * permettant d'accepter la proposition de partie nulle.
      * redirige vers la partie si il n'y avait pas.
      * 
+     * @Security("has_role('ROLE_USER')")
      * @ParamConverter("chessGame", options={"mapping": {"id": "id"}})
      * @param ChessGame $chessGame
      * 
      */
-    public function acceptDrawAction(ChessGame $chessGame, Request $request) {
+    public function acceptDrawAction(ChessGame $chessGame) {
 
         $chessService = $this->container->get('core.chess_service');
         //Contrôle si le dernier coup était accompagné d'une offre de nulle
@@ -211,9 +218,18 @@ class ChessController extends Controller {
 
         return $this->redirectToRoute('core_play_game', array('id' => $chessGame->getId()));
     }
+    
+    public function surrenderDrawAction(ChessGame $chessGame) {
+
+        
+
+    }
+    
     /**
      * Action de la route /chess-game/view-game/{id}
      * permettant de visualisé la partie passé en paramètre
+     * 
+     * @Security("has_role('ROLE_USER')")
      * 
      * @param ChessGame $chessGame
      * @param Request $request

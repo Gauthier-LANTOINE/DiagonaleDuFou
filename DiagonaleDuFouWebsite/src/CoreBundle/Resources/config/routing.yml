@@ -1,18 +1,18 @@
 core_homepage:
     path:     /
-    defaults: { _controller: CoreBundle:Default:index }
+    defaults: { _controller: CoreBundle:WebsitePortal:index }
     
 core_article:
     path: /{category}/{subCategory}/article/{slug}
     defaults: 
-        _controller: CoreBundle:Default:article
+        _controller: CoreBundle:WebsitePortal:article
     requirements:
         slug: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
         
 core_register:
     path: /website/register
     defaults: 
-        _controller: CoreBundle:Default:register
+        _controller: CoreBundle:WebsitePortal:register
         
 core_list_current_game:
     path: /chess-game/list-current-game

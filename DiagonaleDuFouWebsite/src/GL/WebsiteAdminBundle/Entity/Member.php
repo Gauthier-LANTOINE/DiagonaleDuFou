@@ -24,26 +24,34 @@ class Member {
     private $id;
 
     /**
+     * Prénom du membre
+     * 
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=50, nullable=false)
      * 
+     * @Assert\Type("string")
      * @Assert\Length(min=2, minMessage="Le prénom doit faire au moins 2 caractères")
      * @Assert\Length(max=50, maxMessage="Le prénom doit faire au maximum 50 caractères")
      */
     private $firstName;
 
     /**
+     * Nom du Membre
+     * 
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=50, nullable=false)
      * 
+     * @Assert\Type("string")
      * @Assert\Length(min=2, minMessage="Le titre doit faire au moins 5 caractères")
      * @Assert\Length(max=50, maxMessage="Le titre doit faire au maximum 50 caractères")
      */
     private $lastName;
 
     /**
+     * Date de naissance
+     * 
      * @var \DateTime
      * @Assert\Date()
      * @ORM\Column(name="birth_date", type="date", nullable=false)
@@ -51,6 +59,8 @@ class Member {
     private $birthDate;
 
     /**
+     * Email du membre
+     * 
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=254, nullable=true, unique=true)
@@ -62,29 +72,39 @@ class Member {
     private $email;
 
     /**
+     * Numéro de téléphone fixe
+     * 
      * @var string
-     *
+     * 
+     * @Assert\Type("string")
      * @ORM\Column(name="phone_home", type="string", length=12, nullable=true)
      * @Assert\Length(max=12, maxMessage="Le numéro de téléphone doit faire au maximum 12 caractères")
      */
     private $phoneHome;
 
     /**
+     * Numéro de téléphone portable
+     * 
      * @var string
      *
+     * @Assert\Type("string")
      * @ORM\Column(name="mobile_phone", type="string", length=12, nullable=true)
      * @Assert\Length(max=12, maxMessage="Le numéro de téléphone doit faire au maximum 12 caractères")
      */
     private $mobilePhone;
 
     /**
+     * Droit d'utiliser l'image du membre
+     * 
      * @var bool
-     *
+     * @Assert\Type("bool")
      * @ORM\Column(name="allow_image_rights", type="boolean")
      */
     private $allowImageRights;
 
     /**
+     * Date d'enregistrement
+     * 
      * @var \DateTime
      * @Assert\DateTime()
      *
@@ -93,6 +113,9 @@ class Member {
     private $registerDate;
 
     /**
+     * Compte utilisateur lié au membre
+     * 
+     * @Assert\Valid()
      * @ORM\OneToOne(targetEntity="GL\UserBundle\Entity\User", inversedBy="member", cascade={"persist","remove"})
      */
     private $user;

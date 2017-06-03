@@ -45,7 +45,7 @@ class Challenge {
     /**
      * décision de l'adversaire à la proposition de défi
      * @var bool
-     *
+     * @Assert\Type("bool")
      * @ORM\Column(name="challenge_accepted", type="boolean", nullable=true)
      */
     private $challengeAccepted;
@@ -53,7 +53,7 @@ class Challenge {
     /**
      * Date à laquelle le défi à été lançé
      * @var Datetime
-     *
+     * @Assert\DateTime()
      * @ORM\Column(name="date", type="datetime", nullable=true)
      */
     private $date;
@@ -69,7 +69,7 @@ class Challenge {
    
     /**
      * Couleur choisi par la personne qui défi
-     * 
+     * @Assert\Regex("/(blanc|noir)/")
      * @var string
      * @ORM\Column(name="challenger_color", type="string", length=5, nullable=true)
      */

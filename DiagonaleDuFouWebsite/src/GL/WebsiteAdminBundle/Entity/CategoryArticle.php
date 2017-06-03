@@ -3,6 +3,7 @@
 namespace GL\WebsiteAdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * CategoryArticle
@@ -22,13 +23,21 @@ class CategoryArticle
     private $id;
 
     /**
+     * Libellé de la catégorie d'article
+     * 
      * @var string
-     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=50, maxMessage="Le nom de la catégorie doit faire au maximum 50 caractères")
      * @ORM\Column(name="name", type="string", length=50, unique=true)
      */
     private $name;
     
     /**
+     * Objet image lié à la catégorie (image par défaut)
+     * 
+     * @var Image
+     * @Assert\Valid()
      * @ORM\OneToOne(targetEntity="GL\WebsiteAdminBundle\Entity\Image", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true)
      */
