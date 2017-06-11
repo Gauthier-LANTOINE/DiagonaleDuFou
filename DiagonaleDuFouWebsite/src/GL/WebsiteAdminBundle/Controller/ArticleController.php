@@ -40,7 +40,7 @@ class ArticleController extends Controller {
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-
+            $article->setMember($this->getUser()->getMember());
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();

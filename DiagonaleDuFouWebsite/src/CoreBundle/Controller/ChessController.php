@@ -219,11 +219,41 @@ class ChessController extends Controller {
         return $this->redirectToRoute('core_play_game', array('id' => $chessGame->getId()));
     }
     
-    public function surrenderDrawAction(ChessGame $chessGame) {
+    /**
+     * Action de la route /chess-game/play-game/{id}/surrender
+     * 
+     * 
+     * @Security("has_role('ROLE_USER')")
+     * @ParamConverter("chessGame", options={"mapping": {"id": "id"}})
+     * @param ChessGame $chessGame
+     */
+    public function surrenderAction(ChessGame $chessGame) {
 
-        
+        $chessService = $this->container->get('core.chess_service');
+                    
+            if($chessService->orientation($chessGame)==='white'){
+                
+                $chessGame->setResult(ChessGame::POSSIBLE_RESULTS[1]);
+                $chessGame->setFinished(true);
+                $chessGame->setDateEnd();
+                
+            }
+            
+            if($chessService->orientation($chessGame)==='black'){
+                
+                $chessGame->setResult(ChessGame::POSSIBLE_RESULTS[0]);
+                $chessGame->setFinished(true);
+                $chessGame->setDateEnd();
+                
+            }
+            
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
 
-    }
+            return $this->redirectToRoute('core_list_current_game');
+        }
+
     
     /**
      * Action de la route /chess-game/view-game/{id}

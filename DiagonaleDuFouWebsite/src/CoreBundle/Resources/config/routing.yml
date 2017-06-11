@@ -3,11 +3,23 @@ core_homepage:
     defaults: { _controller: CoreBundle:WebsitePortal:index }
     
 core_article:
-    path: /{category}/{subCategory}/article/{slug}
+    path: categorie/{category}/sous-categorie/{subCategory}/article/{slug}
     defaults: 
         _controller: CoreBundle:WebsitePortal:article
     requirements:
         slug: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        category: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        subCategory: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        
+core_sub_category_article:
+    path: categorie/{category}/sous-categorie/{subCategory}/{page}
+    defaults: 
+        _controller: CoreBundle:WebsitePortal:subCategoryArticle
+        page: 1
+    requirements:
+        category: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        subCategory: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        page: \d*
         
 core_register:
     path: /website/register
@@ -61,5 +73,12 @@ core_game_accept_draw:
     path: /chess-game/play-game/{id}/draw
     defaults: 
         _controller: CoreBundle:Chess:acceptDraw
+    requirements:
+        id: \d+
+        
+core_game_surrender:
+    path: /chess-game/play-game/{id}/surrender
+    defaults: 
+        _controller: CoreBundle:Chess:surrender
     requirements:
         id: \d+

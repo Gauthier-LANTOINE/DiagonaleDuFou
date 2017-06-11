@@ -24,4 +24,18 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
         
         return $result;
     }
+    
+    public function getAllFutureEvent()
+    {
+        $now=new \DateTime(date('Y-M-d'));
+        
+        $result = $this->createQueryBuilder('a')
+                       ->where('a.date >= :now')
+                       ->setParameter('now',$now)
+                       ->orderBy('a.date', 'ASC')
+                       ->getQuery()
+                       ->getResult();
+        
+        return $result;
+    }
 }

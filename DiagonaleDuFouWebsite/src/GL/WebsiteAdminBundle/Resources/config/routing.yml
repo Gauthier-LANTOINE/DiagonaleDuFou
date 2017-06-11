@@ -78,7 +78,7 @@ gl_website_member_remove:
     
     path: /admin/member/remove/{id}
     defaults:
-        _controller: GLWebsiteAdminBundle:User:remove
+        _controller: GLWebsiteAdminBundle:Member:remove
     requirements:
         id: \d+        
         

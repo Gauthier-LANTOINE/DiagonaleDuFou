@@ -9,11 +9,11 @@
         <table class="table table-bordered table-striped text-center table-admin ">
                 <thead>
                     <tr>
-                        <th class="text-center">Numéro Partie</th>
+                        <th class="text-center">Numéro de Partie</th>
                         <th class="text-center">Joueur Blanc</th>
                         <th class="text-center">Joueur Noir</th>
                         <th class="text-center">Débuté le</th>
-                        <th class="text-center">Nombre de coup</th>
+                        <th class="text-center">Nombre de coups</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -21,8 +21,8 @@
                     {% for chessGame in listCurrentGames %}
                         <tr>
                             <td>{{ chessGame.id }}</td>
-                            <td>{{ chessGame.memberWhite.firstName }} {{ chessGame.memberWhite.lastName }}</td>
-                            <td>{{ chessGame.memberBlack.firstName }} {{ chessGame.memberBlack.lastName }}</td>
+                            <td>{{ chessGame.memberWhite.firstName }}<br>{{ chessGame.memberWhite.lastName }}</td>
+                            <td>{{ chessGame.memberBlack.firstName }}<br>{{ chessGame.memberBlack.lastName }}</td>
                             <td>{{ chessGame.dateStart|date("d/m/Y") }}</td>
                             <td>{{ chessGame.moveNumber }}</td>
                             <td>
@@ -42,11 +42,11 @@
         <table class="table table-bordered table-striped text-center table-admin ">
                 <thead>
                     <tr>
-                        <th class="text-center">Numéro Partie</th>
+                        <th class="text-center">Numéro de Partie</th>
                         <th class="text-center">Joueur Blanc</th>
                         <th class="text-center">Joueur Noir</th>
                         <th class="text-center">Débuté le</th>
-                        <th class="text-center">Nombre de coup</th>
+                        <th class="text-center">Nombre de coups</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -54,8 +54,8 @@
                     {% for chessGame in listWaitingGames %}
                         <tr>
                             <td>{{ chessGame.id }}</td>
-                            <td>{{ chessGame.memberWhite.firstName }} {{ chessGame.memberWhite.lastName }}</td>
-                            <td>{{ chessGame.memberBlack.firstName }} {{ chessGame.memberBlack.lastName }}</td>
+                            <td>{{ chessGame.memberWhite.firstName }}<br>{{ chessGame.memberWhite.lastName }}</td>
+                            <td>{{ chessGame.memberBlack.firstName }}<br>{{ chessGame.memberBlack.lastName }}</td>
                             <td>{{ chessGame.dateStart|date("d/m/Y") }}</td>
                             <td>{{ chessGame.moveNumber }}</td>
                             <td>

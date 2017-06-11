@@ -16,9 +16,24 @@
 
 {{ form_row(form.mobilePhone, { 'label': 'Téléphone portable' }) }}
 
+{{ form_row(form.numLicence, { 'label': 'Numéro de licence FFE' }) }}
+
 {{ form_row(form.allowImageRights, { 'label': 'J\'autorise l\'association la diagonale du fou en vertu de l\'article 9 du code civil
  la publication des photos éventuelles prise de moi-même et/ou de mon (mes) enfant(s), membre(s) de l\'association' }) }}
 
+<h4>Adresse</h4>
+
+{{ form_row(form.wayNumber, { 'label': 'numéro de voie' }) }}
+
+{{ form_row(form.way, { 'label': 'Voie' }) }}
+
+{{ form_row(form.additionalAddress, { 'label': 'Complément d\'adresse' }) }}
+    
+{{ form_row(form.city, { 'label': 'Ville' }) }}
+    
+{{ form_row(form.postalCode, { 'label': 'Code Postal' }) }}
+    
+{{ form_row(form.country, { 'label': 'Pays' }) }}
  
 {{ form_row(form.save, { 'label': 'Enregistrer' }) }}
 

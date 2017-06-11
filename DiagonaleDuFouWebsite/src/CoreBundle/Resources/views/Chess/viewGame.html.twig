@@ -26,9 +26,16 @@
             {# Plateau d'échecs #}
             <div id="board"></div>
 
-            <a href="{{ path('core_list_finished_game') }}" class="btn btn-primary">
-                Retour
-            </a>
+            {% if chessGame.finished == true %}
+                <a href="{{ path('core_list_finished_game') }}" class="btn btn-primary">
+                    Retour
+                </a>
+            {%endif%}
+            {% if chessGame.finished == false %}
+                <a href="{{ path('core_list_current_game') }}" class="btn btn-primary">
+                    Retour
+                </a>
+            {%endif%}
         </div>
         <div class="col-lg-3 chess-history">
 
@@ -41,27 +48,35 @@
                             <th colspan="2" class="text-center">Historique</th>
                         </tr>
                     </thead>
-                    {% for i in 1..chessGame.sanHistory.w|length %}
-                        <tr>
-                            <td>
-                                {% if chessGame.sanHistory.w[loop.index0].san is defined %}
-                                    <a id="{{chessGame.sanHistory.w[loop.index0].fen}}">
-                                        {{chessGame.sanHistory.w[loop.index0].san}}
-                                    </a>
-                                {%endif%}
-                            </td>
-                            <td>
-                                {% if chessGame.sanHistory.b[loop.index0].san is defined %}
-                                    <a id="{{chessGame.sanHistory.b[loop.index0].fen}}">
-                                        {{chessGame.sanHistory.b[loop.index0].san}}
-                                    </a>
-                                {%endif%}
-                            </td>
+                    <tbody>
+                        {% for i in 1..chessGame.sanHistory.w|length %}
+                            <tr>
+                                <td>
+                                    {% if chessGame.sanHistory.w[loop.index0].san is defined %}
+                                        <a id="{{chessGame.sanHistory.w[loop.index0].fen}}">
+                                            {{chessGame.sanHistory.w[loop.index0].san}}
+                                        </a>
+                                    {%endif%}
+                                </td>
+                                <td>
+                                    {% if chessGame.sanHistory.b[loop.index0].san is defined %}
+                                        <a id="{{chessGame.sanHistory.b[loop.index0].fen}}">
+                                            {{chessGame.sanHistory.b[loop.index0].san}}
+                                        </a>
+                                    {%endif%}
+                                </td>
 
-                        </tr>
-                    {% endfor %}
+                            </tr>
+                        {% endfor %}
 
                     </tbody>
+                    {% if chessGame.finished == true %}
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="text-center">{{ chessGame.result }}</td>
+                            </tr>
+                        </tfoot>
+                    {% endif %}
                 </table>
             </div>
         </div>
@@ -77,7 +92,7 @@
             var id = $(this).attr('id');
             board.position(id);
         });
-        
+
         var cfg = {
             position: '{{ chessGame.fen }}',
             pieceTheme: '{{ asset('chessboardjs-0.3.0/img/chesspieces/wikipedia/{piece}.png') }}',

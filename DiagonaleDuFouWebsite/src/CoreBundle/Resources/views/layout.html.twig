@@ -7,67 +7,13 @@
     <div class="container-fluid">
         <div class="row">
             <header class="banner">   
-                    <img src="{{asset('img/chess-1483735.jpg')}}" class="img-responsive center-block bannerImg">
+                    <img src="http://via.placeholder.com/1920x100" class="img-responsive center-block bannerImg">
             </header>
             
         </div>
         <div class="row">
-            <nav class="navbar navbar-inverse menu center-block">
-
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ path('core_homepage') }}">Accueil</a>
-                  </div>
-                  <div id="navbar" class="navbar-collapse collapse">
-                      <ul class="nav navbar-nav">
-                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vie du club <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Compétition</a></li>
-                              <li><a href="#">Loisir</a></li>
-                              <li><a href="#">Info pratique</a></li>
-                              <li><a href="#">Info légales</a></li>
-                            </ul>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actualité échiquéenne <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Compétition Internationnale</a></li>
-                              <li><a href="#">Les échecs dans le monde</a></li>
-                            </ul>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Apprentissage <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Règles du jeu</a></li>
-                              <li><a href="#">Exercices</a></li>
-                              
-                            </ul>
-                          </li>
-                          {% if is_granted('ROLE_USER') %}
-                          <li><a href="{{ path('core_list_current_game') }}">Jeu en différé</a></li>
-                          {% endif %}
-                          {% if is_granted('ROLE_AUTHOR') or is_granted('ROLE_MODERATOR') %}
-                          <li><a href="{{ path('gl_website_admin_homepage') }}">Administration</a></li>
-                          {% endif %}
-                      </ul>
-                      <ul class="nav navbar-nav navbar-right">
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <li><a>Bienvenue {{ app.user.username }}</a></li>
-                            <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_security_logout') }}"><button class="btn btn-danger">Déconnexion</button></a></li>
-                        {% else %}
-                            <li class="navbar-form"><a style="padding:0px" href="{{ path('core_register') }}"><button  class="btn btn-success">S'inscrire</button></a></li>
-                            <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_security_login') }}"><button class="btn btn-info">Connexion</button></a></li>
-                        {% endif %}
-                      </ul>
-                  </div>
-
-            </nav>
+            {# affiche le menu #}
+            {{ render(controller("CoreBundle:WebsitePortal:menu")) }}
         </div>
         <div  class="row">
             <aside class="col-lg-3">
@@ -76,7 +22,8 @@
                     <hr/>
                     <table class="table table-striped">
                         <tbody>
-                             {{ render(controller("GLWebsiteAdminBundle:Event:listFutureEventIndex")) }}
+                            {# affiche l'agenda avec les 5 prochains événements #}
+                            {{ render(controller("GLWebsiteAdminBundle:Event:listFutureEventIndex")) }}
                         </tbody>
                     </table>
                 </section>
@@ -105,9 +52,9 @@ gdailytactics.php?mylang=en&mysize=26"></iframe>
                 <section class="well">
                     <h3 class="text-center">Liens</h3>
                     <hr/>
-                    <a href="http://www.villedeteteghem.fr/"><img class="img img-responsive" alt="" src="{{asset('img/mairie_de_teteghem_cdk_village.jpg')}}"></a>
-                    <a href="http://www.echecs.asso.fr/"><img class="img img-responsive" alt="" src="{{asset('img/Logo_FFE_texte_horizontal.jpg')}}"></a>
-                    <a href="http://ehdf.fr/"><img class="img img-responsive" alt="" src="{{asset('img/ligue_hdf.png')}}"></a>
+                    <a href="http://www.villedeteteghem.fr/"><img class="img img-responsive link" alt="" src="{{asset('img/mairie_de_teteghem_cdk_village.jpg')}}"></a>
+                    <a href="http://www.echecs.asso.fr/"><img class="img img-responsive link" alt="" src="{{asset('img/Logo_FFE_texte_horizontal.jpg')}}"></a>
+                    <a href="http://ehdf.fr/"><img class="img img-responsive link" alt="" src="{{asset('img/ligue_hdf.png')}}"></a>
                         
                 </section>
                 

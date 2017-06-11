@@ -1,0 +1,49 @@
+            <nav class="navbar navbar-inverse menu center-block">
+
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('core_homepage') }}">Accueil</a>
+                  </div>
+                  <div id="navbar" class="navbar-collapse collapse">
+                      <ul class="nav navbar-nav">
+                         {% for category in listCategories %}
+                            <li class="dropdown">
+                                <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{category.name}} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    {% for subCategory in category.subCategories %}
+                                        <li><a href="{{ path('core_sub_category_article', {'category': category.slug,'subCategory': subCategory.slug }) }}">{{subCategory.name}}</a></li>
+                                    {%endfor%}
+                                </ul>
+                            </li>
+                        {%endfor%}
+                          {% if is_granted('ROLE_USER') %}
+                          <li class="dropdown">
+                              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Jeu en différé <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="{{ path('core_list_current_game') }}">Parties en cours</a></li>
+                                <li><a href="{{ path('core_list_finished_game') }}">Parties terminées</a></li>
+                                <li><a href="{{ path('core_challenge_game') }}">Défis</a></li>
+                              </ul>
+                          </li>
+                          {% endif %}
+                          {% if is_granted('ROLE_AUTHOR') or is_granted('ROLE_MODERATOR') %}
+                          <li><a href="{{ path('gl_website_admin_homepage') }}">Administration</a></li>
+                          {% endif %}
+                      </ul>
+                      <ul class="nav navbar-nav navbar-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a>Bienvenue {{ app.user.username }}</a></li>
+                            <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_security_logout') }}"><button class="btn btn-danger">Déconnexion</button></a></li>
+                        {% else %}
+                            <li class="navbar-form"><a style="padding:0px" href="{{ path('core_register') }}"><button  class="btn btn-success">S'inscrire</button></a></li>
+                            <li class="navbar-form"><a style="padding:0px" href="{{ path('fos_user_security_login') }}"><button class="btn btn-info">Connexion</button></a></li>
+                        {% endif %}
+                      </ul>
+                  </div>
+
+            </nav>

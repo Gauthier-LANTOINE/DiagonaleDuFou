@@ -44,7 +44,7 @@ class Member {
      * @ORM\Column(name="last_name", type="string", length=50, nullable=false)
      * 
      * @Assert\Type("string")
-     * @Assert\Length(min=2, minMessage="Le titre doit faire au moins 5 caractères")
+     * @Assert\Length(min=2, minMessage="Le titre doit faire au moins 2 caractères")
      * @Assert\Length(max=50, maxMessage="Le titre doit faire au maximum 50 caractères")
      */
     private $lastName;
@@ -111,6 +111,75 @@ class Member {
      * @ORM\Column(name="registerDate", type="datetime", nullable=false)
      */
     private $registerDate;
+    
+    /**
+     * Numéro de license FFE
+     * 
+     * @Assert\Length(min=6, minMessage="Le numéro de licence doit faire au moins 6 caractères")
+     * @Assert\Length(max=6, maxMessage="Le numéro de licence doit faire au maximum 6 caractères")
+     * @ORM\Column(name="num_licence", type="string", length=6, nullable=true)
+     * @var string
+     */
+    private $numLicence;
+    
+    /**
+     * Numéro de la voie
+     * 
+     * @Assert\Type(
+     *     type="integer",
+     *     message="La valeur {{ value }} n'est pas du type {{ type }}."
+     * )
+     * @ORM\Column(name="way_number", type="integer", nullable=true)
+     * @var int 
+     */
+    private $wayNumber;
+    /**
+     * Libellé de la voie
+     * 
+     * @Assert\Regex("/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/")
+     * @Assert\Length(min=2, minMessage="La voie doit faire au moins 2 caractères")
+     * @Assert\Length(max=100, maxMessage="La voie ne peut pas faire plus de 100 caractères")
+     * @ORM\Column(name="voie", type="string", length=100, nullable=true)
+     * @var string
+     */
+    private $way;
+    
+    /**
+     * Complément d'adresse
+     *
+     * @ORM\Column(name="additional_address", type="string", length=100, nullable=true)
+     * @var string
+     */
+    private $additionalAddress;
+
+    /**
+     * Nom de la ville
+     * 
+     * @Assert\Regex("/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/")
+     * @Assert\Length(min=2, minMessage="La ville doit faire au moins 2 caractères")
+     * @Assert\Length(max=50, maxMessage="La ville ne peut pas faire plus de 50 caractères")
+     * @ORM\Column(name="city", type="string", length=50, nullable=true)
+     * @var type 
+     */
+    private $city;
+    
+     /**
+     * Code Postal
+     * @Assert\Regex("/^[0-9]{4,5}$/")
+     * 
+     * @ORM\Column(name="postal_code", type="string", length=5, nullable=true)
+     * @var type 
+     */
+    private $postalCode;
+    
+    /**
+     * Pays
+     * 
+     * @Assert\Choice({"France", "Belgique"}, message = "Choisissez un pays valide")
+     * @ORM\Column(name="country", type="string", length=8, nullable=true)
+     * @var type 
+     */
+    private $country;
 
     /**
      * Compte utilisateur lié au membre
@@ -335,5 +404,173 @@ class Member {
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set numLicence
+     *
+     * @param string $numLicence
+     *
+     * @return Member
+     */
+    public function setNumLicence($numLicence)
+    {
+        $this->numLicence = $numLicence;
+
+        return $this;
+    }
+
+    /**
+     * Get numLicence
+     *
+     * @return string
+     */
+    public function getNumLicence()
+    {
+        return $this->numLicence;
+    }
+
+    /**
+     * Set wayNumber
+     *
+     * @param integer $wayNumber
+     *
+     * @return Member
+     */
+    public function setWayNumber($wayNumber)
+    {
+        $this->wayNumber = $wayNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get wayNumber
+     *
+     * @return integer
+     */
+    public function getWayNumber()
+    {
+        return $this->wayNumber;
+    }
+
+    /**
+     * Set way
+     *
+     * @param string $way
+     *
+     * @return Member
+     */
+    public function setWay($way)
+    {
+        $this->way = $way;
+
+        return $this;
+    }
+
+    /**
+     * Get way
+     *
+     * @return string
+     */
+    public function getWay()
+    {
+        return $this->way;
+    }
+
+    /**
+     * Set additionalAddress
+     *
+     * @param string $additionalAddress
+     *
+     * @return Member
+     */
+    public function setAdditionalAddress($additionalAddress)
+    {
+        $this->additionalAddress = $additionalAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get additionalAddress
+     *
+     * @return string
+     */
+    public function getAdditionalAddress()
+    {
+        return $this->additionalAddress;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Member
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set postalCode
+     *
+     * @param string $postalCode
+     *
+     * @return Member
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postalCode
+     *
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return Member
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class CategoryEventController extends Controller {
     
      /**
-     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @Security("has_role('ROLE_ADMIN')")
      * 
      * @param Request $request
      */
@@ -41,7 +41,7 @@ class CategoryEventController extends Controller {
 
     /**
      * @ParamConverter("categoryEvent", options={"mapping": {"id": "id"}})
-     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(CategoryEvent $categoryEvent, Request $request) {
 
@@ -64,7 +64,7 @@ class CategoryEventController extends Controller {
     }
 
     /**
-     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @Security("has_role('ROLE_ADMIN')")
      * 
      * @param type $action
      */

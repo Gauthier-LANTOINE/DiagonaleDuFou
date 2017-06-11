@@ -122,6 +122,17 @@ class Articles {
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
+    
+    /**
+     * Membre ayant écrit l'article
+     * 
+     * @ORM\ManyToOne(targetEntity="GL\WebsiteAdminBundle\Entity\Member")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid
+     * 
+     * @var Member 
+     */
+    private $member;
 
     public function __construct() {
         $this->published = false;
@@ -347,5 +358,29 @@ class Articles {
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set member
+     *
+     * @param \GL\WebsiteAdminBundle\Entity\Member $member
+     *
+     * @return Articles
+     */
+    public function setMember(\GL\WebsiteAdminBundle\Entity\Member $member = null)
+    {
+        $this->member = $member;
+
+        return $this;
+    }
+
+    /**
+     * Get member
+     *
+     * @return \GL\WebsiteAdminBundle\Entity\Member
+     */
+    public function getMember()
+    {
+        return $this->member;
     }
 }

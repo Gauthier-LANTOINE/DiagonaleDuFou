@@ -71,7 +71,7 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $listEvents = $em->getRepository('GLWebsiteAdminBundle:Event')->findAll();
+        $listEvents = $em->getRepository('GLWebsiteAdminBundle:Event')->getAllFutureEvent();
 
         return $this->render('GLWebsiteAdminBundle:Event:list.html.twig', array('action' => $action, 'listEvents' => $listEvents));
     }

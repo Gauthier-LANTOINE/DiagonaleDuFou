@@ -32,9 +32,45 @@
         <p>
             {{ member.mobilePhone }}
         </p>
+        <h3>Numéro FFE</h3>
+        <p>
+            {{ member.numLicence }}
+        </p>
         <h3>Autorise à utiliser son image</h3>
         <p>
             {% if member.allowImageRights %}oui{% else %}non{% endif%}
+        </p>
+        
+        <h1 class="text-center">Adresse</h1>
+        
+        <h3>Numéro de voie</h3>
+        <p>
+            {{ member.wayNumber }}
+        </p>
+        
+        <h3>Libellé voie</h3>
+        <p>
+            {{ member.way }}
+        </p>
+        
+        <h3>Complément d'adresse</h3>
+        <p>
+            {{ member.additionalAddress }}
+        </p>
+        
+        <h3>Ville</h3>
+        <p>
+            {{ member.city }}
+        </p>
+        
+        <h3>Code Postal</h3>
+        <p>
+            {{ member.postalCode }}
+        </p>
+        
+        <h3>Pays</h3>
+        <p>
+            {{ member.country }}
         </p>
         
         <h1 class="text-center">Compte utilisateur site web</h1>

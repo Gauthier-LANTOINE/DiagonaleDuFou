@@ -48,7 +48,7 @@
             {{ include("CoreBundle:Chess:moveForm.html.twig") }}
 
             <button id="removeMove" class="btn btn-danger">Annuler</button>
-
+            
             {# Historique de la partie #}
             <div class="history-chess well">
                 <table class="table table-bordered text-center chess-history">
@@ -81,6 +81,9 @@
                     </tbody>
                 </table>
             </div>
+            <a href="{{ path('core_game_surrender', {'id' : chessGame.id }) }}" class="btn btn-danger">
+                Abandonner
+            </a>
 
         </div>
 

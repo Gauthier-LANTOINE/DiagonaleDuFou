@@ -5,12 +5,22 @@ namespace CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use GL\WebsiteAdminBundle\Entity\Articles;
+use GL\WebsiteAdminBundle\Entity\SubCategoryArticle;
 use GL\WebsiteAdminBundle\Entity\Member;
 use CoreBundle\Form\RegisterType;
 use Symfony\Component\HttpFoundation\Request;
 
 class WebsitePortalController extends Controller {
 
+    public function menuAction() {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $listCategories = $em->getRepository('GLWebsiteAdminBundle:CategoryArticle')->findAll();
+        
+        
+        return $this->render('CoreBundle:WebsitePortal:menu.html.twig', array('listCategories'=>$listCategories));
+    }
     /**
      * Affiche l'accueil avec les 4 derniers articles
      */
@@ -28,26 +38,63 @@ class WebsitePortalController extends Controller {
      * @ParamConverter("article", options={"mapping": {"slug": "slug"}})
      */
     public function articleAction(Articles $article) {
-        
-       return $this->render('CoreBundle:WebsitePortal:article.html.twig', array('article' => $article)); 
-        
+
+        return $this->render('CoreBundle:WebsitePortal:article.html.twig', array('article' => $article));
     }
-    
+
+    /**
+     * Affiche les articles de la sous catégorie
+     * 
+     * @ParamConverter("subCategoryArticle", options={"mapping": {"subCategory": "slug"}})
+     * @param SubCategoryArticle $subCategoryArticle
+     */
+    public function subCategoryArticleAction($page, SubCategoryArticle $subCategoryArticle) {
+
+        //aucune page n'existe en dessous de 1
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
+        }
+
+        $listArticles = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('GLWebsiteAdminBundle:Articles')
+                ->getArticlesBySubCategory($page, 4, $subCategoryArticle);
+
+        
+        $nbPages = ceil(count($listArticles) / 4);
+
+        
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
+        }
+
+       
+        return $this->render('CoreBundle:WebsitePortal:subCategory.html.twig', array(
+                    'listArticles' => $listArticles,
+                    'nbPages' => $nbPages,
+                    'page' => $page,
+                    'subCategoryArticle' => $subCategoryArticle
+        ));
+    }
+
     public function registerAction(Request $request) {
 
-        $member= new Member();
-        
+        $member = new Member();
+
         $form = $this->get('form.factory')->create(RegisterType::class, $member);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-                   
-              $em = $this->getDoctrine()->getManager();
-              $em->persist($member);
-              $em->flush();              
+
+            $member->getUser()->setEmail($form->get('email')->getData());
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($member);
+            $em->flush();
 
             $request->getSession()->getFlashBag()
                     ->add('notice', 'Votre compte à été créé ,'
-                    . ' vous recevrez un mail lorsque votre compte sera validé.');
+                            . ' vous recevrez un mail lorsque votre compte sera validé.');
 
             return $this->redirectToRoute('core_register');
         }

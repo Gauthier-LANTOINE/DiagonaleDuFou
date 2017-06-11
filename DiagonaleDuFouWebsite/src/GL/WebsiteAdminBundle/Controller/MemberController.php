@@ -110,7 +110,7 @@ class MemberController extends Controller
             return $this->redirectToRoute('gl_website_admin_homepage');
         }
 
-        return $this->render('GLWebsiteAdminBundle:User:remove.html.twig', array(
+        return $this->render('GLWebsiteAdminBundle:Member:remove.html.twig', array(
                     'member' => $member,
                     'form' => $form->createView(),
         ));

@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class LinkController extends Controller {
 
     /**
-     * @Security("has_role('ROLE_MODERATOR')")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      * 
      * @param Request $request
      */
@@ -41,7 +41,7 @@ class LinkController extends Controller {
 
     /**
      * @ParamConverter("link", options={"mapping": {"id": "id"}})
-     * @Security("has_role('ROLE_MODERATOR')")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function editAction(Link $link, Request $request) {
 
@@ -74,7 +74,7 @@ class LinkController extends Controller {
 
     /**
      * @ParamConverter("link", options={"mapping": {"id": "id"}})
-     * @Security("has_role('ROLE_SUPER_MODERATOR')")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function removeAction(Link $link, Request $request) {
 

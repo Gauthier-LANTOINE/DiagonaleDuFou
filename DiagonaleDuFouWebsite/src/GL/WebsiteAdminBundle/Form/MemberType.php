@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class MemberType extends AbstractType
@@ -28,6 +30,21 @@ class MemberType extends AbstractType
                 ->add('phoneHome', TextType::class,  array('required' => false))
                 ->add('mobilePhone', TextType::class, array('required' => false))
                 ->add('allowImageRights', CheckboxType::class, array('required' => false))
+                ->add('numLicence', TextType::class, array('required' => false))
+                ->add('wayNumber', IntegerType::class, array('required' => false))
+                ->add('way', TextType::class, array('required' => false))
+                ->add('additionalAddress', TextType::class, array('required' => false))
+                ->add('city', TextType::class, array('required' => false))
+                ->add('postalCode', TextType::class, array('required' => false))
+                ->add('country', ChoiceType::class, array(
+                    'choices' => array(
+                        'France'=> 'France',
+                        'Belgique' => 'Belgique'
+                    ),
+                    'multiple'     => false,
+                    'placeholder' => '-- Choix du Pays',
+                    'required'=> false
+                ))
                 ->add('save', SubmitType::class);
     }
     
