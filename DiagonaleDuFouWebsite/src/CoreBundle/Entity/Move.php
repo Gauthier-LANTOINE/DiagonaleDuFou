@@ -62,7 +62,6 @@ class Move
      * Date du coup
      * 
      * @var \DateTime
-     * @Assert\DateTime()
      * @ORM\Column(name="date_move", type="datetime", nullable=true)
      */
     private $dateMove;

@@ -12,15 +12,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class WebsitePortalController extends Controller {
 
+    /**
+     * Affiche le menu sur le portail web 
+     * 
+     * @return type
+     */
     public function menuAction() {
-        
+
         $em = $this->getDoctrine()->getManager();
-        
+
         $listCategories = $em->getRepository('GLWebsiteAdminBundle:CategoryArticle')->findAll();
-        
-        
-        return $this->render('CoreBundle:WebsitePortal:menu.html.twig', array('listCategories'=>$listCategories));
+
+
+        return $this->render('CoreBundle:WebsitePortal:menu.html.twig', array('listCategories' => $listCategories));
     }
+
     /**
      * Affiche l'accueil avec les 4 derniers articles
      */
@@ -35,6 +41,8 @@ class WebsitePortalController extends Controller {
     }
 
     /**
+     * Affiche les articles
+     * 
      * @ParamConverter("article", options={"mapping": {"slug": "slug"}})
      */
     public function articleAction(Articles $article) {
@@ -43,7 +51,7 @@ class WebsitePortalController extends Controller {
     }
 
     /**
-     * Affiche les articles de la sous catégorie
+     * Affiche une listes des articles de la sous catégorie
      * 
      * @ParamConverter("subCategoryArticle", options={"mapping": {"subCategory": "slug"}})
      * @param SubCategoryArticle $subCategoryArticle
@@ -61,15 +69,15 @@ class WebsitePortalController extends Controller {
                 ->getRepository('GLWebsiteAdminBundle:Articles')
                 ->getArticlesBySubCategory($page, 4, $subCategoryArticle);
 
-        
+
         $nbPages = ceil(count($listArticles) / 4);
 
-        
+
         if ($page > $nbPages) {
             throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
         }
 
-       
+
         return $this->render('CoreBundle:WebsitePortal:subCategory.html.twig', array(
                     'listArticles' => $listArticles,
                     'nbPages' => $nbPages,
@@ -78,6 +86,12 @@ class WebsitePortalController extends Controller {
         ));
     }
 
+    /**
+     * Affiche le formulaire d'inscription
+     * 
+     * @param Request $request
+     * @return type
+     */
     public function registerAction(Request $request) {
 
         $member = new Member();
@@ -87,7 +101,7 @@ class WebsitePortalController extends Controller {
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
             $member->getUser()->setEmail($form->get('email')->getData());
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($member);
             $em->flush();
@@ -102,6 +116,24 @@ class WebsitePortalController extends Controller {
         return $this->render('CoreBundle:WebsitePortal:register.html.twig', array(
                     'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * Affiche les liens sur le portail web
+     * 
+     * @return type
+     */
+    public function linkAction() {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $listLinks = $em->getRepository('GLWebsiteAdminBundle:Link')->findBy(
+                array(),
+                array('order' => 'asc')
+        );
+
+
+        return $this->render('CoreBundle:WebsitePortal:link.html.twig', array('listLinks' => $listLinks));
     }
 
 }

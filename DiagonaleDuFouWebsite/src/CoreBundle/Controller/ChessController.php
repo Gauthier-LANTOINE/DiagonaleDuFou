@@ -78,15 +78,18 @@ class ChessController extends Controller {
             return $this->redirectToRoute('core_challenge_game');
         }
 
-        $memberChallenged = $this->getUser()->getMember();
+        $curentMember = $this->getUser()->getMember();
 
-        $listChallenges = $em->getRepository('CoreBundle:Challenge')->getUnansweredChallenge($memberChallenged);
+        $listChallenges = $em->getRepository('CoreBundle:Challenge')->getUnansweredChallenge($curentMember);
+        
+        $listChallengesSend = $em->getRepository('CoreBundle:Challenge')->getSendChallenge($curentMember);
 
 
 
         return $this->render('CoreBundle:Chess:challenge.html.twig', array(
                     'form' => $form->createView(),
-                    'listChallenges' => $listChallenges
+                    'listChallenges' => $listChallenges,
+                    'listChallengesSend' => $listChallengesSend
         ));
     }
 
@@ -141,10 +144,27 @@ class ChessController extends Controller {
 
         return $this->redirectToRoute('core_challenge_game');
     }
+    
+    /**
+     * Action de la route /chess-game/challenge/drop/{$id}
+     * permettant de supprimer un défi lancé.
+     * 
+     * @Security("has_role('ROLE_USER')")
+     * @ParamConverter("challenge", options={"mapping": {"id": "id"}})
+     * @param Challenge $challenge
+     */
+    public function dropChallengeAction(Challenge $challenge) {
+       
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($challenge);
+        $em->flush();
+
+        return $this->redirectToRoute('core_challenge_game');
+    }
 
     /**
-     * Action de la route /chess-game/game/{id}
-     * permettant de jouer sa partie ou un coup est attendu.
+     * Validation et persistance des coups joués
+     * 
      * 
      * @Security("has_role('ROLE_USER')")
      * @ParamConverter("chessGame", options={"mapping": {"id": "id"}})
@@ -154,10 +174,9 @@ class ChessController extends Controller {
 
         $chessService = $this->container->get('core.chess_service');
         $move = new Move($chessGame);
-        $orientation = $chessService->orientation($move->getChessGame());
-        $opponent = $chessService->opponent($move->getChessGame());
-        $drawOffer = $chessService->isDrawOffer($move->getChessGame());
-
+        $orientation = $chessService->orientation($chessGame);
+        $opponent = $chessService->opponent($chessGame);
+        $drawOffer = $chessService->isDrawOffer($chessGame);
         $form = $this->get('form.factory')->create(MoveType::class, $move);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -181,8 +200,6 @@ class ChessController extends Controller {
 
             return $this->redirectToRoute('core_list_current_game');
         }
-
-
         return $this->render('CoreBundle:Chess:game.html.twig', array('orientation' => $orientation,
                     'chessGame' => $chessGame,
                     'opponent' => $opponent,
@@ -205,7 +222,7 @@ class ChessController extends Controller {
         $chessService = $this->container->get('core.chess_service');
         //Contrôle si le dernier coup était accompagné d'une offre de nulle
         // et enregistre le résultat
-        if ($chessService->isDrawOffer() && $chessService->orientation($chessGame) !== null) {
+        if ($chessService->isDrawOffer($chessGame) && $chessService->orientation($chessGame) !== null) {
 
             $chessGame->setDateEnd();
             $chessGame->setResult(ChessGame::POSSIBLE_RESULTS[2]);

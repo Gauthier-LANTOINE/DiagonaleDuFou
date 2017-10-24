@@ -34,6 +34,10 @@
 {{ form_row(form.postalCode, { 'label': 'Code Postal' }) }}
     
 {{ form_row(form.country, { 'label': 'Pays' }) }}
+
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    {{ form_row(form.user, { 'label': 'Droits de l\'utilisateur' }) }}
+{% endif %}
  
 {{ form_row(form.save, { 'label': 'Enregistrer' }) }}
 

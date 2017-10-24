@@ -4,6 +4,7 @@ namespace GL\WebsiteAdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Link
@@ -11,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  * @ORM\Table(name="link")
  * @ORM\Entity(repositoryClass="GL\WebsiteAdminBundle\Repository\LinkRepository")
+ * 
  */
 class Link
 {
@@ -40,9 +42,9 @@ class Link
      * URL du lien
      * @var string
      * 
-     * @Assert\Type("string")
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255, maxMessage="L'URL doit faire au maximum 255 caractères")
+     * @Assert\Url(
+     *    message = "l'url '{{ value }}' n'est pas une url valide.",
+     * )
      *
      * @ORM\Column(name="url", type="string", length=255)
      */
@@ -56,6 +58,16 @@ class Link
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=false)
      */
     private $image;
+    
+    /**
+     * Ordre d'affichage du lien
+     * @var int
+     * 
+     * @Assert\Type("int")
+     *
+     * @ORM\Column(name="number_order", type="integer", nullable=false, unique=false)
+     */
+    private $order;
 
 
     /**
@@ -140,5 +152,29 @@ class Link
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     *
+     * @return Link
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

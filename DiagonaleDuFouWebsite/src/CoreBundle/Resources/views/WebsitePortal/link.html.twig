@@ -1,0 +1,7 @@
+{# Template d'affichage des liens partenaires #}
+
+{% for link in listLinks %}
+    <a href="{{link.url}}">
+        <img class="img img-responsive link" alt="{{ link.name }}" src="{{asset('img/' ~ link.image.imageName)}}">
+    </a>
+{%endfor%}

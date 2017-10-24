@@ -153,4 +153,7 @@ class MemberController extends Controller
                     'member' => $member,
         ));
     }
+    
+    
+   
 }

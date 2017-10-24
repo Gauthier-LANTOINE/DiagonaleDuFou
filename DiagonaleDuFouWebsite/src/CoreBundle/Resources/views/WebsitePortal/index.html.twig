@@ -11,7 +11,8 @@
                     <figure class="col-lg-12">
                         <div class="zoom-effect-container">
                             <a href="{{ path('core_article', {'slug': article.slug,'category': article.subCategory.category.slug,'subCategory': article.subCategory.slug }) }}">
-                                <img class="img img-responsive article-img" src="{% if article.image.imageName is defined %}{{asset('img/'~article.image.imageName)}}{% endif %}">
+                                <img class="img img-responsive article-img" 
+                                     src="{% if article.image.imageName is defined %}{{asset('img/'~article.image.imageName)}}{% elseif article.subCategory.category.image.id is defined %}{{asset('img/'~article.subCategory.category.image.imageName)}}{% endif %}">
                             </a>
                             <figcaption class="article-caption">
                                 <h3 class="article-title"><a href="{{ path('core_article', {'slug': article.slug,'category': article.subCategory.category.slug,'subCategory': article.subCategory.slug }) }}">{{ article.title }}</a></h3>

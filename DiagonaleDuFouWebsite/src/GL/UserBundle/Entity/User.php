@@ -31,7 +31,7 @@ class User extends BaseUser {
      * Date d'enregistrement de l'utilisateur
      * 
      * @var \DateTime
-     * @Assert\DateTime()
+     *
      *
      * @ORM\Column(name="registerDate", type="datetime", nullable=false)
      */

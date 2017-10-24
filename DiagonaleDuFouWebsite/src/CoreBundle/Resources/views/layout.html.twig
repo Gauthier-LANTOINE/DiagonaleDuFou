@@ -52,10 +52,9 @@ gdailytactics.php?mylang=en&mysize=26"></iframe>
                 <section class="well">
                     <h3 class="text-center">Liens</h3>
                     <hr/>
-                    <a href="http://www.villedeteteghem.fr/"><img class="img img-responsive link" alt="" src="{{asset('img/mairie_de_teteghem_cdk_village.jpg')}}"></a>
-                    <a href="http://www.echecs.asso.fr/"><img class="img img-responsive link" alt="" src="{{asset('img/Logo_FFE_texte_horizontal.jpg')}}"></a>
-                    <a href="http://ehdf.fr/"><img class="img img-responsive link" alt="" src="{{asset('img/ligue_hdf.png')}}"></a>
-                        
+                    {# affiche les liens des partenaires #}
+                    {{ render(controller("CoreBundle:WebsitePortal:link")) }}
+                    
                 </section>
                 
             </aside>

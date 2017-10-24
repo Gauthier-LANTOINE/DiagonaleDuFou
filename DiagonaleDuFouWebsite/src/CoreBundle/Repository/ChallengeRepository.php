@@ -2,6 +2,8 @@
 
 namespace CoreBundle\Repository;
 
+use GL\WebsiteAdminBundle\Entity\Member;
+
 /**
  * ChallengeRepository
  *
@@ -16,11 +18,30 @@ class ChallengeRepository extends \Doctrine\ORM\EntityRepository
      * @param Member $memberChallenged
      * @return array
      */
-    public function getUnansweredChallenge($memberChallenged)
+    public function getUnansweredChallenge(Member $memberChallenged)
     {
         $result = $this->createQueryBuilder('c')
                        ->where('c.memberChallenged = :memberChallenged')
                        ->setParameter('memberChallenged',$memberChallenged)
+                       ->andWhere('c.challengeAccepted IS NULL')
+                       ->orderBy('c.date', 'DESC')
+                       ->getQuery()
+                       ->getResult();
+        
+        return $result;
+    }
+    
+    /**
+     * Récupère les défis lancés par le joueur passé en paramêtre
+     * 
+     * @param Member $memberChallenger
+     * @return array
+     */
+    public function getSendChallenge(Member $memberChallenger)
+    {
+        $result = $this->createQueryBuilder('c')
+                       ->where('c.memberChallenger = :memberChallenger')
+                       ->setParameter('memberChallenger',$memberChallenger)
                        ->andWhere('c.challengeAccepted IS NULL')
                        ->orderBy('c.date', 'DESC')
                        ->getQuery()

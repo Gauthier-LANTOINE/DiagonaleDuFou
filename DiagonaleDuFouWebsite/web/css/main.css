@@ -181,12 +181,31 @@ article
     
 }
 small
-{
-    
+{   
     margin-right: 20px;
 }
 
+.subtitle
+{
+    font-style : italic;
+    font-size: 1.4em;
+    margin-left: 5%;
+}
 
+.img-article
+{
+    max-height:300px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.txt-article
+{
+    padding: 5%;
+    font-size: 1.2em;
+}
 
 /*ADMIN*/
 
@@ -230,4 +249,9 @@ small
     overflow-y: scroll; 
     height:400px;
     margin-top: 20px;
+}
+
+.note-group-select-from-files
+{
+    display: none;
 }

@@ -62,6 +62,13 @@ core_challenge_decision_refuse:
     requirements:
         id: \d+
 
+core_challenge_drop_action:
+    path: /chess-game/challenge/drop/{id}
+    defaults: 
+        _controller: CoreBundle:Chess:dropChallenge
+    requirements:
+        id: \d+
+
 core_play_game:
     path: /chess-game/play-game/{id}
     defaults: 

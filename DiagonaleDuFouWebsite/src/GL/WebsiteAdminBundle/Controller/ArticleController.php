@@ -22,7 +22,10 @@ class ArticleController extends Controller {
         if ($action == "validate") {
             $listArticles = $em->getRepository('GLWebsiteAdminBundle:Articles')->findByPublished(FALSE);
         } else {
-            $listArticles = $em->getRepository('GLWebsiteAdminBundle:Articles')->findAll();
+            $listArticles = $em->getRepository('GLWebsiteAdminBundle:Articles')->findBy(
+                        array(),
+                        array('id'=>'desc')
+                    );
         }
 
 

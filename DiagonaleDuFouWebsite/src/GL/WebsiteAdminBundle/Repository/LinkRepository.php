@@ -2,6 +2,8 @@
 
 namespace GL\WebsiteAdminBundle\Repository;
 
+use GL\WebsiteAdminBundle\Entity\Link;
+
 /**
  * LinkRepository
  *
@@ -10,4 +12,57 @@ namespace GL\WebsiteAdminBundle\Repository;
  */
 class LinkRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * 
+     * @return type
+     */
+    public function getNumberOfLink()
+    {
+        return $this->createQueryBuilder('l') 
+                    ->select('COUNT(l)')
+                    ->getQuery()
+                    ->getSingleScalarResult();
+    }
+    
+    /**
+     * Teste si l'ordre est déjà attribué
+     * 
+     * @param Link $newLink
+     * @return boolean
+     */
+    public function isOrderAllreadyExist(Link $link)
+    {
+        $result = $this->findByOrder($link->getOrder());
+        
+        if($result === NULL){
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
+    public function getLinksFromTheOrder($order)
+    {
+        return $this->createQueryBuilder('l')
+                    ->where('l.order >= :linkOrder')
+                    ->setParameter('linkOrder',$order)
+                    ->orderBy('l.order', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
+    
+    public function getLinksToModifyOrder($minOrder,$maxOrder,$idModifyLink)
+    {
+        return $this->createQueryBuilder('l')
+                    ->where('l.order <= :maxOrder')
+                    ->setParameter('maxOrder',$maxOrder)
+                    ->andWhere('l.order >= :minOrder')
+                    ->setParameter('minOrder',$minOrder)
+                    ->andWhere('l.id  !=  :idModifyLink')
+                    ->setParameter('idModifyLink',$idModifyLink)
+                    ->orderBy('l.order', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

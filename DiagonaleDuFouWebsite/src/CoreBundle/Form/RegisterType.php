@@ -16,7 +16,8 @@ class RegisterType extends AbstractType {
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('user', UserType::class);
+        $builder->remove('user')
+                ->add('user', UserType::class);
     }
 
     /**

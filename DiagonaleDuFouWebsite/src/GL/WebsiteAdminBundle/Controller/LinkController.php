@@ -5,7 +5,8 @@ namespace GL\WebsiteAdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use GL\WebsiteAdminBundle\Entity\Link;
-use GL\WebsiteAdminBundle\Form\LinkType;
+use GL\WebsiteAdminBundle\Form\AddLinkType;
+use GL\WebsiteAdminBundle\Form\UpdateLinkType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -19,7 +20,9 @@ class LinkController extends Controller {
     public function addAction(Request $request) {
 
         $link = new Link();
-        $form = $this->get('form.factory')->create(LinkType::class, $link);
+        $form = $this->get('form.factory')->create(AddLinkType::class, $link, array(
+            'entity_manager' => $this->get('doctrine.orm.entity_manager')
+        ));
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
@@ -45,11 +48,15 @@ class LinkController extends Controller {
      */
     public function editAction(Link $link, Request $request) {
 
-        $form = $this->get('form.factory')->create(LinkType::class, $link);
+        $form = $this->get('form.factory')->create(UpdateLinkType::class, $link, array(
+            'entity_manager' => $this->get('doctrine.orm.entity_manager')
+        ));
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+            $linkService = $this->container->get('gl_website_admin.service.link_service');
+            $linkService->reorderLink($link);
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('notice', 'Lien bien modifié.');

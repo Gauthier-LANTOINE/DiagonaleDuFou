@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use GL\UserBundle\Form\UserRoleType;
 
 class MemberType extends AbstractType
 {
@@ -45,6 +46,7 @@ class MemberType extends AbstractType
                     'placeholder' => '-- Choix du Pays',
                     'required'=> false
                 ))
+                ->add('user', UserRoleType::class )
                 ->add('save', SubmitType::class);
     }
     

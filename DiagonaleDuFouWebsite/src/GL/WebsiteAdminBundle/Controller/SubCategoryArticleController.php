@@ -62,6 +62,11 @@ class SubCategoryArticleController extends Controller {
         ));
     }
 
+    /**
+     * 
+     * @param type $action
+     * @return 
+     */
     public function listAction($action) {
 
         $em = $this->getDoctrine()->getManager();

@@ -10,3 +10,16 @@ services:
         class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
         arguments: 
             - "@exercise_html_purifier.custom"
+            
+            
+    gl_website_admin.doctrine_listener.link_listener:
+        class: GL\WebsiteAdminBundle\DoctrineListener\LinkListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            
+    gl_website_admin.service.link_service:
+        class: GL\WebsiteAdminBundle\Services\LinkService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+   

@@ -18,6 +18,7 @@
                     <th class="text-center">Id</th>
                     <th class="text-center">Libellé</th>
                     <th class="text-center">URL</th>
+                    <th class="text-center">Ordre d'affichage</th>
                     <th class="text-center">Image</th>
                     <th class="text-center">Action</th>
                 </tr>
@@ -28,6 +29,7 @@
                         <td >{{ link.id }}</td>
                         <td>{{ link.name }}</td>
                         <td>{{ link.url }}</td>
+                        <td>{{ link.order }}</td>
                         <td>{{ link.image.imageName }}</td>
                         {% if action == 'edit' %}
                             <td>

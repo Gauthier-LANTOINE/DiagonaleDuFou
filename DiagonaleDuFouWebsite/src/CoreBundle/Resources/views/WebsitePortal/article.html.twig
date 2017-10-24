@@ -4,17 +4,29 @@
 
 {% block core_body %}
     <article class="well">
-        
 
-        <h1 class="text-center">{{ article.title }}</h1>
+
+        <h1 class="text-center article-title">{{ article.title }}</h1>
         
-        <p>
+        {% if article.image.id is defined %}
+            <div class="center-block">
+                <img class="img img-responsive img-article " alt="{{ article.title }}" src="{{asset('img/' ~ article.image.imageName)}}">
+            </div>
+        {% elseif article.subCategory.category.image.id is defined %}
+            <div class="center-block">
+                <img class="img img-responsive img-article " alt="{{ article.title }}" src="{{asset('img/'~article.subCategory.category.image.imageName)}}">
+            </div>
+            
+        {% endif %}
+
+        <hr>
+        <p class="subtitle">
             {{ article.subTitle }}
         </p>
-        
-        <p>
+        <hr>
+        <div class="txt-article">
             {{ article.content|purify('custom') }}
-        </p>
+        </div>
 
     </article>
 {% endblock %}

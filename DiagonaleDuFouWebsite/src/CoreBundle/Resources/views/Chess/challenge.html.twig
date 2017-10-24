@@ -48,6 +48,37 @@
             </tbody>
         </table>
     </div>
+    <h3 class="text-center">Défis envoyés</h3>
+    <div class="list-chess">
+        <table class="table table-bordered table-striped text-center table-admin ">
+            <thead>
+                <tr>
+                    <th class="text-center">Numéro Défi</th>
+                    <th class="text-center">Adversaire</th>
+                    <th class="text-center">Couleur</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for challenge in listChallengesSend %}
+                    <tr>
+                        <td>{{ challenge.id }}</td>
+                        <td>{{ challenge.memberChallenged.firstName }} {{ challenge.memberChallenged.lastName }}</td>
+                        <td>
+                            {{ challenge.challengerColor }} 
+                        </td>
+                        <td>
+                            <a href="{{ path('core_challenge_drop_action', {'id': challenge.id}) }}">
+                                <button class="btn btn-danger">Annuler</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
     <hr> 
     <h3 class="text-center">Lancer défi</h3>
     <h4>Choix adversaire</h4>

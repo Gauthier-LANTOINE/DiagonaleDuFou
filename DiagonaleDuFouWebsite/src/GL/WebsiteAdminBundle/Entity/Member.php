@@ -136,7 +136,7 @@ class Member {
     /**
      * Libellé de la voie
      * 
-     * @Assert\Regex("/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/")
+     * @Assert\Regex("/^([a-z'àâéèêôùûçÀÂÉÈÔÙÛÇ\s-]{1,100})$/")
      * @Assert\Length(min=2, minMessage="La voie doit faire au moins 2 caractères")
      * @Assert\Length(max=100, maxMessage="La voie ne peut pas faire plus de 100 caractères")
      * @ORM\Column(name="voie", type="string", length=100, nullable=true)
@@ -155,7 +155,7 @@ class Member {
     /**
      * Nom de la ville
      * 
-     * @Assert\Regex("/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/")
+     * @Assert\Regex("/^([a-z'àâéèêôùûçÀÂÉÈÔÙÛÇ\s-]{1,50})$/")
      * @Assert\Length(min=2, minMessage="La ville doit faire au moins 2 caractères")
      * @Assert\Length(max=50, maxMessage="La ville ne peut pas faire plus de 50 caractères")
      * @ORM\Column(name="city", type="string", length=50, nullable=true)

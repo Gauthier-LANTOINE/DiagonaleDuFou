@@ -101,6 +101,10 @@ class EventController extends Controller
         ));
     }
     
+    /**
+     * Action de controleur permettant d'afficher un tableau avec les 5 futures événements
+     * 
+     */
     public function listFutureEventIndexAction() {
         
         $em = $this->getDoctrine()->getManager();
