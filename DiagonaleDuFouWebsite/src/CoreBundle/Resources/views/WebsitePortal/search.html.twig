@@ -1,12 +1,10 @@
 {% extends "CoreBundle::layout.html.twig" %}
 
-{% block title %}{{ parent() }} - {{ subCategoryArticle.category.name }} - {{ subCategoryArticle.name }}{% endblock %}
+{% block title %}{{ parent() }} - Recherche{% endblock %}
 
 {% block core_body %}
-<h1 class="text-center subcategory" >{{ subCategoryArticle.name }}</h1>
+
     <div class="row">
-        
-        
         
         {% for article in listArticles %}
 
@@ -43,7 +41,7 @@
     <ul class="pagination">
             {% for p in range(1, nbPages) %}
                 <li{% if p == page %} class="active"{% endif %}>
-                    <a href="{{ path('core_sub_category_article', {'page': p,'subCategory': subCategoryArticle.slug, 'category':subCategoryArticle.category.slug}) }}">{{ p }}</a>
+                    <a href="{{ path('core_article_search_page', {'search': search,'page': p }) }}">{{ p }}</a>
                 </li>
             {% endfor %}
         </ul>        

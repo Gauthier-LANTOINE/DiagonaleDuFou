@@ -39,6 +39,24 @@ class LinkListener {
         }
     }
 
+    public function preRemove(LifecycleEventArgs $args) {
+
+        $link = $args->getObject();
+
+
+        if (!$link instanceof Link) {
+            return;
+        }
+
+        $repository = $args->getEntityManager()->getRepository('GLWebsiteAdminBundle:Link');
+
+        $links = $repository->getLinksFromTheOrder($link->getOrder());
+
+        foreach ($links as $linkToChangeOrder) {
+            $linkToChangeOrder->setOrder($linkToChangeOrder->getOrder() - 1);
+        }
+    }
+
     public function preUpdate(PreUpdateEventArgs $args) {
 
 //        $entity = $args->getObject();
@@ -75,6 +93,5 @@ class LinkListener {
 //            }
 //        }
     }
-    
 
 }

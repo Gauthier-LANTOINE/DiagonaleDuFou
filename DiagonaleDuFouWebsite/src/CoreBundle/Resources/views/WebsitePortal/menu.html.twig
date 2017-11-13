@@ -35,6 +35,17 @@
                           <li><a href="{{ path('gl_website_admin_homepage') }}">Administration</a></li>
                           {% endif %}
                       </ul>
+                      
+                              <form action="{{ path('core_article_search' ) }}" method="POST" class="navbar-form navbar-left">
+                                <div class="form-group">
+                                    <input type="text" name="search" placeholder="Article recherché" class="form-control">
+                                </div>
+                               
+                                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                                
+
+                            </form>
+                         
                       <ul class="nav navbar-nav navbar-right">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <li><a>Bienvenue {{ app.user.username }}</a></li>

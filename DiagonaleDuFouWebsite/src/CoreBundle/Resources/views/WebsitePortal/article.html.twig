@@ -3,9 +3,7 @@
 {% block title %}{{ parent() }} - {{ article.title }}{% endblock %}
 
 {% block core_body %}
-    <article class="well">
-
-
+    <article class="well col-lg-12">
         <h1 class="text-center article-title">{{ article.title }}</h1>
         
         {% if article.image.id is defined %}
@@ -27,6 +25,5 @@
         <div class="txt-article">
             {{ article.content|purify('custom') }}
         </div>
-
     </article>
 {% endblock %}

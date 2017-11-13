@@ -17,6 +17,7 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: preRemove }
             
     gl_website_admin.service.link_service:
         class: GL\WebsiteAdminBundle\Services\LinkService

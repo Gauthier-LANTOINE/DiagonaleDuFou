@@ -42,5 +42,21 @@ class ArticlesRepository extends \Doctrine\ORM\EntityRepository {
 
         return new Paginator($query, true);
     }
+    
+    public function getArticlesByTitle($page, $nbPerPage, $title) {
+        
+        $query = $this->createQueryBuilder('a')
+                ->where('a.title LIKE :title')
+                ->setParameter('title','%'.$title.'%')
+                ->orderBy('a.publicationDate', 'DESC')
+                ->getQuery()
+        ;
+
+        $query  ->setFirstResult(($page - 1) * $nbPerPage)
+                ->setMaxResults($nbPerPage)
+        ;
+
+        return new Paginator($query, true);
+    }
 
 }

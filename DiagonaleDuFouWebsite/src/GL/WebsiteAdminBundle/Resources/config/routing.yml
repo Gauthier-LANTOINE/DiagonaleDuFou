@@ -37,7 +37,7 @@ gl_website_article_validate:
         _controller: GLWebsiteAdminBundle:Article:validate
     requirements:
         id: \d+
-
+        
 gl_website_member_list:
     path:     /admin/member/list/{action}
     defaults:  

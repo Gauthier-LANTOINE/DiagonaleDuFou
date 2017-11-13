@@ -8,6 +8,7 @@ use GL\WebsiteAdminBundle\Entity\Articles;
 use GL\WebsiteAdminBundle\Entity\SubCategoryArticle;
 use GL\WebsiteAdminBundle\Entity\Member;
 use CoreBundle\Form\RegisterType;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpFoundation\Request;
 
 class WebsitePortalController extends Controller {
@@ -87,6 +88,76 @@ class WebsitePortalController extends Controller {
     }
 
     /**
+     * Affiche les articles recherchés
+     * 
+     */
+    public function searchAction(Request $request) {
+
+        if ($request->isMethod('POST') !== TRUE) {
+            throw new BadRequestHttpException("Mauvaise requête");
+        }
+        
+        $search = $request->request->get('search');
+
+        $listArticles = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('GLWebsiteAdminBundle:Articles')
+                ->getArticlesByTitle(1, 4, $search);
+
+
+        $nbPages = ceil(count($listArticles) / 4);
+
+
+        if ($nbPages == 0) {
+            throw $this->createNotFoundException("Il n'existe aucun résultat pour cette recherche");
+        }
+
+
+        return $this->render('CoreBundle:WebsitePortal:search.html.twig', array(
+                    'listArticles' => $listArticles,
+                    'nbPages' => $nbPages,
+                    'page' => 1,
+                    'search' => $search
+        ));
+
+    }
+
+    /**
+     * Affiche les articles recherchés celon la page
+     * 
+     */
+    public function searchPageAction($search, $page) {
+
+        //aucune page n'existe en dessous de 1
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
+        }
+
+        $listArticles = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('GLWebsiteAdminBundle:Articles')
+                ->getArticlesByTitle($page, 4, $search);
+
+
+        $nbPages = ceil(count($listArticles) / 4);
+
+
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
+        }
+
+
+        return $this->render('CoreBundle:WebsitePortal:search.html.twig', array(
+                    'listArticles' => $listArticles,
+                    'nbPages' => $nbPages,
+                    'page' => $page,
+                    'search' => $search
+        ));
+    }
+
+    /**
      * Affiche le formulaire d'inscription
      * 
      * @param Request $request
@@ -128,8 +199,7 @@ class WebsitePortalController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $listLinks = $em->getRepository('GLWebsiteAdminBundle:Link')->findBy(
-                array(),
-                array('order' => 'asc')
+                array(), array('order' => 'asc')
         );
 
 
