@@ -34,7 +34,8 @@
         "vich/uploader-bundle": "^1.4",
         "stof/doctrine-extensions-bundle": "^1.2",
         "friendsofsymfony/user-bundle": "~2.0",
-        "ryanhs/chess.php": "^1.0"
+        "ryanhs/chess.php": "^1.0",
+        "coresphere/console-bundle": "^0.5.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
