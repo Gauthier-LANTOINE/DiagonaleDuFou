@@ -37,6 +37,8 @@ framework:
 
 # Twig Configuration
 twig:
+    globals:
+        webmaster_mail: "%mailer_host%"
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:

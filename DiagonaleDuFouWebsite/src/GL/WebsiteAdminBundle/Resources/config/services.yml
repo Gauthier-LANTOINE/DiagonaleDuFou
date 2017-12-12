@@ -23,4 +23,10 @@ services:
         class: GL\WebsiteAdminBundle\Services\LinkService
         arguments:
             - "@doctrine.orm.entity_manager"
+            
+    gl_website_admin.email.registration_mailer:
+        class: GL\WebsiteAdminBundle\Email\RegistrationMailer
+        arguments:
+            - "@mailer"
+            - [%mailer_user%]
    

@@ -80,7 +80,7 @@ class EventController extends Controller
      * @ParamConverter("event", options={"mapping": {"id": "id"}})
      * @Security("has_role('ROLE_AUTHOR')")
      */
-    public function removeAction(CategoryEvent $event, Request $request) {
+    public function removeAction(Event $event, Request $request) {
 
         $form = $this->get('form.factory')->create();
 

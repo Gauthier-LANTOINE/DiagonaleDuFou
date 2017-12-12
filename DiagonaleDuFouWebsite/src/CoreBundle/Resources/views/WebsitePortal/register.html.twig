@@ -12,7 +12,7 @@
     {% endfor %}
     <div class="jumbotron">
         <p>Ce formulaire n'est à remplir que si vous souhaitez vous inscrire réellement à l'association la diagonale du fou.</p>
-        <p>La validation du compte ce fait manuellement par un administrateur du site, vous recevrez un email de confirmation lors de sa validation.</p>
+        <p>La validation du compte se fait manuellement par un administrateur du site, vous recevrez un email de confirmation lors de sa validation.</p>
     </div>
     {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
     
@@ -35,7 +35,7 @@
     {{ form_row(form.numLicence, { 'label': 'Numéro de licence FFE' }) }}
     
     {{ form_row(form.allowImageRights, { 'label': 'J\'autorise l\'association la diagonale du fou en vertu de l\'article 9 du code civil
- la publication des photos éventuelles prise de moi-même et/ou de mon (mes) enfant(s), membre(s) de l\'association' }) }}
+ la publication des photos éventuelles prises de moi-même et/ou de mon (mes) enfant(s), membre(s) de l\'association' }) }}
   
     <h4>Adresse</h4>
     
@@ -54,7 +54,7 @@
     <div class="form-group">
     {{ form_row(form.save, { 'label': 'Enregistrer' }) }} 
     </div>
-    <p>Les champs avec une * sont obligatoire</p>
+    <p>Les champs avec une * sont obligatoires</p>
     {{ form_end(form) }}
 </article>
     {%endblock%}

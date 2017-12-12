@@ -171,11 +171,15 @@ class WebsitePortalController extends Controller {
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
+            $registrationMailer= $this->get('gl_website_admin.email.registration_mailer');
+            
             $member->getUser()->setEmail($form->get('email')->getData());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($member);
             $em->flush();
+            
+            $registrationMailer->sendMemberRegistrationConfirmation($member);
 
             $request->getSession()->getFlashBag()
                     ->add('notice', 'Votre compte à été créé ,'

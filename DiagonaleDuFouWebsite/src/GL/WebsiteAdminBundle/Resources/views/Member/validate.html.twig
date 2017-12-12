@@ -83,6 +83,13 @@
             {{ member.user.registerDate|date("d/m/Y") }}
         </p>
 
+        <form action="{{ path('gl_website_member_invalidate', {'id': member.id}) }}" method="post">
+    
+            <input type="submit" value="Supprimer" class="btn btn-danger" />
+
+            {{ form_rest(form) }}
+        </form>
+        
         <form action="{{ path('gl_website_member_validate', {'id': member.id}) }}" method="post">
             <a href="{{ path('gl_website_member_list', {'action': 'validate'}) }}" class="btn btn-default">
                 <i class="glyphicon glyphicon-chevron-left"></i>

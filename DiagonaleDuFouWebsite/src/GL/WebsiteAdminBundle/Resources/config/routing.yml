@@ -73,6 +73,14 @@ gl_website_member_validate:
         _controller: GLWebsiteAdminBundle:Member:validate
     requirements:
         id: \d+
+        
+gl_website_member_invalidate:
+    
+    path: /admin/member/invalidate/{id}
+    defaults:
+        _controller: GLWebsiteAdminBundle:Member:invalidate
+    requirements:
+        id: \d+
 
 gl_website_member_remove:
     

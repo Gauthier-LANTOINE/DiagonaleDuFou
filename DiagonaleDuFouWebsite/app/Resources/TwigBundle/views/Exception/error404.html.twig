@@ -1,0 +1,10 @@
+{% extends "CoreBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Erreur 404}{% endblock %}
+
+{% block core_body %}
+    <h1 class="text-center">Erreur 404: Page introuvable</h1>
+    
+    <div class="bg-danger col-lg-12">
+        <h2>La page que vous avez demandé n'existe pas ou plus. Vous pouvez revenir sur la page d'accueil <a href="{{ path('core_homepage') }}">ici</a></h2>
+    </div>
+{% endblock %}

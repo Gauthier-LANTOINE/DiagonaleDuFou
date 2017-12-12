@@ -1,0 +1,10 @@
+{% extends "CoreBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Erreur {{ status_code }} {% endblock %}
+
+{% block core_body %}
+    <h1 class="text-center">Une erreur est survenue: Erreur {{ status_code }}</h1>
+    
+    <div class="bg-danger col-lg-12">
+        <h2>Le serveur à retourné une erreur est n'est pas en mesure de traiter votre requête. Si le problème persiste, vous pouvez contacter le webmaster à l'adresse suivante : {{ webmaster_mail }} </h2>
+    </div>
+{% endblock %}

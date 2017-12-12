@@ -6,6 +6,13 @@
 
 {% block glwebsiteadmin_body %}
     <section class="well">
+        
+        {% for message in app.session.flashbag.get('notice') %}
+            <div class="jumbotron">      
+                <p class="text-center">{{ message }}</p>
+            </div>    
+        {% endfor %}
+        
         <h1 class="text-center">Membre</h1>
 
         <h3>Prénom</h3>
